@@ -10,9 +10,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --canvas: #f6f4f0;
+      --canvas: #f5f0e8;
       --surface: #ffffff;
-      --surface-soft: #fbfaf7;
+      --surface-soft: #fcfaf5;
       --graphite-900: #0e0f11;
       --graphite-800: #1a1c20;
       --graphite-700: #2a2d35;
@@ -21,6 +21,10 @@
       --line: rgba(14, 15, 17, 0.1);
       --amber: #e8a020;
       --amber-dark: #d18d1a;
+      --amber-soft: rgba(232, 160, 32, 0.12);
+      --teal-soft: rgba(42, 167, 145, 0.14);
+      --blue-soft: rgba(96, 126, 230, 0.14);
+      --rose-soft: rgba(236, 142, 115, 0.14);
       --green: #10b981;
       --red: #ef4444;
       --shadow-lg: 0 24px 80px rgba(14, 15, 17, 0.08);
@@ -42,7 +46,11 @@
 
     body {
       font-family: "Inter", sans-serif;
-      background: var(--canvas);
+      background:
+        radial-gradient(circle at top left, rgba(232, 160, 32, 0.14), transparent 30%),
+        radial-gradient(circle at 85% 10%, rgba(96, 126, 230, 0.12), transparent 28%),
+        radial-gradient(circle at 25% 65%, rgba(42, 167, 145, 0.08), transparent 26%),
+        linear-gradient(180deg, #f8f2e8 0%, #f6f1e9 40%, #f5efe6 100%);
       color: var(--graphite-900);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
@@ -329,7 +337,7 @@
       max-width: 46ch;
       color: var(--graphite-500);
       line-height: 1.8;
-      font-size: 0.98rem;
+      font-size: 1.05rem;
       margin-bottom: 32px;
     }
 
@@ -703,7 +711,10 @@
     }
 
     .proof-strip {
-      background: var(--surface);
+      background:
+        radial-gradient(circle at 12% 25%, var(--blue-soft), transparent 24%),
+        radial-gradient(circle at 88% 78%, var(--amber-soft), transparent 26%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(252, 248, 241, 0.9));
       border-top: 1px solid var(--line);
       border-bottom: 1px solid var(--line);
     }
@@ -734,7 +745,7 @@
     }
 
     .proof-label {
-      font-size: 0.76rem;
+      font-size: 0.8rem;
       color: var(--graphite-500);
       text-transform: uppercase;
       letter-spacing: 0.09em;
@@ -743,6 +754,31 @@
     .section {
       padding: var(--section) 0;
       position: relative;
+    }
+
+    #why {
+      background:
+        radial-gradient(circle at 14% 18%, var(--rose-soft), transparent 24%),
+        radial-gradient(circle at 82% 30%, rgba(96, 126, 230, 0.08), transparent 24%);
+    }
+
+    #services {
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0)),
+        radial-gradient(circle at 86% 18%, var(--teal-soft), transparent 26%);
+    }
+
+    #credentials {
+      background:
+        radial-gradient(circle at 12% 78%, var(--amber-soft), transparent 22%),
+        radial-gradient(circle at 88% 16%, rgba(96, 126, 230, 0.1), transparent 24%);
+    }
+
+    #pricing {
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0)),
+        radial-gradient(circle at 82% 22%, var(--rose-soft), transparent 22%),
+        radial-gradient(circle at 18% 84%, var(--teal-soft), transparent 24%);
     }
 
     .scan-line {
@@ -801,7 +837,7 @@
       color: var(--graphite-500);
       max-width: 42ch;
       line-height: 1.8;
-      font-size: 0.96rem;
+      font-size: 1.03rem;
     }
 
     .problem-stack {
@@ -873,7 +909,7 @@
     .integration-copy {
       color: var(--graphite-500);
       line-height: 1.8;
-      font-size: 0.94rem;
+      font-size: 1.02rem;
     }
 
     .problem-card .emphasis {
@@ -908,6 +944,7 @@
       color: rgba(255, 255, 255, 0.62);
       max-width: 43ch;
       line-height: 1.8;
+      font-size: 1.02rem;
     }
 
     .workflow-board {
@@ -1062,7 +1099,7 @@
     .about-card h3,
     .contact-card h3 {
       font-family: "Space Grotesk", sans-serif;
-      font-size: 1.16rem;
+      font-size: 1.22rem;
       font-weight: 500;
       letter-spacing: -0.03em;
       margin-bottom: 12px;
@@ -1100,7 +1137,7 @@
 
     .credential-sub {
       font-family: "IBM Plex Mono", monospace;
-      font-size: 0.68rem;
+      font-size: 0.74rem;
       color: var(--graphite-500);
       text-transform: uppercase;
       letter-spacing: 0.12em;
@@ -1134,22 +1171,26 @@
       height: 78px;
       display: grid;
       place-items: center;
-      background: var(--surface-soft);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 243, 234, 0.9));
       border: 1px solid var(--line);
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1.5rem;
-      font-weight: 600;
-      letter-spacing: -0.05em;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+      overflow: hidden;
+    }
+
+    .integration-mark svg {
+      width: 42px;
+      height: 42px;
+      display: block;
     }
 
     .integration-name {
       font-family: "Space Grotesk", sans-serif;
-      font-size: 1rem;
+      font-size: 1.08rem;
       font-weight: 500;
     }
 
     .integration-copy {
-      font-size: 0.84rem;
+      font-size: 0.98rem;
       line-height: 1.7;
     }
 
@@ -1165,6 +1206,8 @@
       display: flex;
       flex-direction: column;
       min-height: 100%;
+      position: relative;
+      padding-top: 32px;
     }
 
     .price-card.featured {
@@ -1185,7 +1228,6 @@
     .price-badge {
       display: inline-flex;
       align-self: flex-start;
-      margin-bottom: 14px;
       padding: 6px 8px;
       background: rgba(232, 160, 32, 0.12);
       color: var(--amber-dark);
@@ -1194,6 +1236,9 @@
       font-weight: 600;
       letter-spacing: 0.12em;
       text-transform: uppercase;
+      position: absolute;
+      top: 18px;
+      right: 18px;
     }
 
     .price-number {
@@ -1221,7 +1266,7 @@
       position: relative;
       padding-left: 16px;
       color: var(--graphite-900);
-      font-size: 0.92rem;
+      font-size: 0.98rem;
       line-height: 1.7;
     }
 
@@ -1751,7 +1796,7 @@
     <section class="proof-strip">
       <div class="proof-grid">
         <div class="proof-cell">
-          <span class="proof-value" data-counter data-target="20" data-suffix="+">20+</span>
+          <span class="proof-value" data-counter data-target="15" data-suffix="+">15+</span>
           <span class="proof-label mono">Combined years of experience</span>
         </div>
         <div class="proof-cell">
@@ -1931,9 +1976,9 @@
         <div class="credentials-grid">
           <article class="credential-card reveal-up">
             <div class="credential-top">
-              <div class="credential-mark">CPA</div>
+              <div class="credential-mark">CA</div>
               <div>
-                <h3>CPA Canada context</h3>
+                <h3>CA context</h3>
                 <div class="credential-sub">Canadian standards and filings</div>
               </div>
             </div>
@@ -1965,22 +2010,45 @@
 
         <div class="integrations-grid">
           <article class="integration-tile reveal-up">
-            <div class="integration-mark">QB</div>
+            <div class="integration-mark" aria-hidden="true">
+              <svg viewBox="0 0 48 48" role="img" aria-label="QuickBooks logo">
+                <circle cx="24" cy="24" r="20" fill="#2ca01c"></circle>
+                <path d="M19 15h10c3.31 0 6 2.69 6 6v6c0 3.31-2.69 6-6 6H19c-3.31 0-6-2.69-6-6v-6c0-3.31 2.69-6 6-6Z" fill="none" stroke="#fff" stroke-linejoin="round" stroke-width="2.6"></path>
+                <path d="M21 24h6.8c2.32 0 4.2 1.88 4.2 4.2S30.12 32.4 27.8 32.4H21" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2.6"></path>
+                <path d="M27 24h-6.8c-2.32 0-4.2-1.88-4.2-4.2s1.88-4.2 4.2-4.2H27" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2.6"></path>
+              </svg>
+            </div>
             <div class="integration-name">QuickBooks</div>
             <div class="integration-copy">Certified workflows for ongoing bookkeeping and reporting.</div>
           </article>
           <article class="integration-tile reveal-up">
-            <div class="integration-mark">XR</div>
+            <div class="integration-mark" aria-hidden="true">
+              <svg viewBox="0 0 48 48" role="img" aria-label="Xero logo">
+                <circle cx="24" cy="24" r="20" fill="#13b5ea"></circle>
+                <path d="m18 17 12 14" stroke="#fff" stroke-linecap="round" stroke-width="3.4"></path>
+                <path d="m30 17-12 14" stroke="#fff" stroke-linecap="round" stroke-width="3.4"></path>
+              </svg>
+            </div>
             <div class="integration-name">Xero</div>
             <div class="integration-copy">Good fit for UK cloud bookkeeping and VAT reporting.</div>
           </article>
           <article class="integration-tile reveal-up">
-            <div class="integration-mark">WV</div>
+            <div class="integration-mark" aria-hidden="true">
+              <svg viewBox="0 0 48 48" role="img" aria-label="Wave logo">
+                <rect x="6" y="6" width="36" height="36" rx="12" fill="#f75b4f"></rect>
+                <path d="M12 19.5c3.4 0 3.4 9 6.8 9s3.4-9 6.8-9 3.4 9 6.8 9 3.4-9 6.8-9" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+              </svg>
+            </div>
             <div class="integration-name">Wave</div>
             <div class="integration-copy">Useful for simpler operating setups and smaller businesses.</div>
           </article>
           <article class="integration-tile reveal-up">
-            <div class="integration-mark">SG</div>
+            <div class="integration-mark" aria-hidden="true">
+              <svg viewBox="0 0 48 48" role="img" aria-label="Sage logo">
+                <rect x="6" y="6" width="36" height="36" rx="11" fill="#00c389"></rect>
+                <path d="M31.6 16.8h-10a3.6 3.6 0 1 0 0 7.2h4.8a3.6 3.6 0 1 1 0 7.2H16.2" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.2"></path>
+              </svg>
+            </div>
             <div class="integration-name">Sage</div>
             <div class="integration-copy">Handled where legacy or specific client workflows need it.</div>
           </article>
