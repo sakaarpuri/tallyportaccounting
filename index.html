@@ -1,0 +1,2300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tallyport Accounting</title>
+  <meta name="description" content="Chartered accountant-led bookkeeping, payroll, VAT, GST/HST, and reporting support for freelancers, contractors, and small businesses in Canada and the UK.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --canvas: #f6f4f0;
+      --surface: #ffffff;
+      --surface-soft: #fbfaf7;
+      --graphite-900: #0e0f11;
+      --graphite-800: #1a1c20;
+      --graphite-700: #2a2d35;
+      --graphite-500: #5c5f66;
+      --graphite-300: #b5b6bb;
+      --line: rgba(14, 15, 17, 0.1);
+      --amber: #e8a020;
+      --amber-dark: #d18d1a;
+      --green: #10b981;
+      --red: #ef4444;
+      --shadow-lg: 0 24px 80px rgba(14, 15, 17, 0.08);
+      --shadow-md: 0 10px 30px rgba(14, 15, 17, 0.06);
+      --container: min(1080px, calc(100vw - 220px));
+      --section: clamp(5rem, 8vw, 9rem);
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background: var(--canvas);
+      color: var(--graphite-900);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.03;
+      mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.68' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      z-index: 999;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    .container {
+      width: var(--container);
+      margin: 0 auto;
+    }
+
+    .mono,
+    .eyebrow,
+    .micro,
+    .metric-label,
+    .proof-text,
+    .nav-link,
+    .nav-button,
+    .pill,
+    .field label {
+      font-family: "IBM Plex Mono", monospace;
+    }
+
+    .display,
+    h1,
+    h2,
+    h3,
+    .brand-wordmark {
+      font-family: "Space Grotesk", sans-serif;
+    }
+
+    .site-nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 50;
+      padding: 18px 0;
+      transition: background 240ms ease, border-color 240ms ease, backdrop-filter 240ms ease;
+      border-bottom: 1px solid transparent;
+    }
+
+    .site-nav.scrolled {
+      background: rgba(255, 255, 255, 0.86);
+      backdrop-filter: blur(10px);
+      border-bottom-color: var(--line);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      position: relative;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      background: var(--graphite-900);
+      color: var(--canvas);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.86rem;
+      font-weight: 600;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    .brand-copy {
+      min-width: 0;
+    }
+
+    .brand-copy span {
+      display: block;
+      color: var(--graphite-500);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      white-space: nowrap;
+    }
+
+    .brand-wordmark {
+      display: block;
+      font-size: 1.05rem;
+      font-weight: 600;
+      white-space: nowrap;
+      letter-spacing: -0.03em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-link {
+      position: relative;
+      font-size: 0.73rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--graphite-900);
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -6px;
+      width: 0;
+      height: 1px;
+      background: var(--amber);
+      transition: width 180ms ease, left 180ms ease;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+      left: 0;
+    }
+
+    .nav-button,
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: 1px solid transparent;
+      transition: transform 220ms var(--ease), box-shadow 220ms var(--ease), background 220ms var(--ease), border-color 220ms ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .nav-button:hover,
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .nav-button {
+      padding: 14px 22px;
+      background: linear-gradient(180deg, var(--amber), var(--amber-dark));
+      color: var(--graphite-900);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 4px 18px rgba(232, 160, 32, 0.22);
+    }
+
+    .nav-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.7);
+      font-size: 1rem;
+      color: var(--graphite-900);
+    }
+
+    .hero {
+      padding: 96px 0 56px;
+      min-height: 78vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: auto auto 0 0;
+      width: 54vw;
+      height: 54vw;
+      background: radial-gradient(circle, rgba(232, 160, 32, 0.09), transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-sweep {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1px;
+      height: 100%;
+      background: var(--amber);
+      opacity: 0.15;
+      transform: translateX(-100vw);
+      animation: sweep 1.8s linear forwards;
+      animation-delay: 0.25s;
+    }
+
+    .hero-grid {
+      width: var(--container);
+      max-width: 100%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(420px, 1.05fr);
+      gap: 36px;
+      align-items: end;
+      position: relative;
+      z-index: 1;
+      padding-inline: 20px;
+    }
+
+    .hero-copy {
+      padding-left: 12px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 24px;
+      color: var(--amber);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(2.9rem, 5.8vw, 5.4rem);
+      font-weight: 400;
+      line-height: 1.04;
+      letter-spacing: -0.05em;
+      max-width: 10.5ch;
+      margin-bottom: 22px;
+    }
+
+    h1 .accent {
+      color: var(--amber);
+      font-weight: 500;
+    }
+
+    .hero-copy p {
+      max-width: 46ch;
+      color: var(--graphite-500);
+      line-height: 1.8;
+      font-size: 0.98rem;
+      margin-bottom: 32px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+
+    .button {
+      min-height: 56px;
+      padding: 0 28px;
+      font-size: 0.74rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-family: "IBM Plex Mono", monospace;
+    }
+
+    .button.primary {
+      background: linear-gradient(180deg, var(--graphite-800), var(--graphite-900));
+      color: var(--surface);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 6px 20px rgba(14, 15, 17, 0.16);
+    }
+
+    .button.secondary {
+      background: var(--surface);
+      color: var(--graphite-900);
+      border-color: var(--line);
+      box-shadow: 0 4px 14px rgba(14, 15, 17, 0.04);
+    }
+
+    .hero-proof {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      border-top: 1px solid var(--line);
+      padding-top: 18px;
+    }
+
+    .proof-stack {
+      display: flex;
+      margin-right: 2px;
+    }
+
+    .proof-stack span {
+      width: 30px;
+      height: 30px;
+      border: 1px solid var(--canvas);
+      margin-left: -8px;
+      display: block;
+    }
+
+    .proof-stack span:first-child { margin-left: 0; background: var(--graphite-500); }
+    .proof-stack span:nth-child(2) { background: var(--graphite-900); }
+    .proof-stack span:nth-child(3) { background: var(--amber); }
+
+    .proof-text {
+      color: var(--graphite-500);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.6;
+    }
+
+    .proof-text strong {
+      color: var(--graphite-900);
+      font-weight: 600;
+    }
+
+    .hero-panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: transform 300ms var(--ease);
+      max-height: min(72vh, 620px);
+    }
+
+    .panel-header,
+    .panel-body,
+    .panel-footer {
+      background: var(--surface);
+    }
+
+    .panel-header {
+      border-bottom: 1px solid var(--line);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      background: rgba(246, 244, 240, 0.55);
+    }
+
+    .panel-nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .panel-brand {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.98rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .panel-tab {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--graphite-500);
+    }
+
+    .panel-tab.active {
+      color: var(--graphite-900);
+    }
+
+    .panel-user {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--graphite-500);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .panel-avatar {
+      width: 26px;
+      height: 26px;
+      display: grid;
+      place-items: center;
+      background: var(--graphite-900);
+      color: var(--canvas);
+      font-size: 0.72rem;
+    }
+
+    .panel-body {
+      padding: 20px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .panel-top {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .panel-top h3 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.12rem;
+      font-weight: 500;
+      margin-bottom: 6px;
+      letter-spacing: -0.03em;
+    }
+
+    .micro {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--graphite-500);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .micro.tag {
+      padding: 6px 8px;
+      border: 1px solid var(--line);
+      background: var(--surface-soft);
+    }
+
+    .panel-total {
+      text-align: right;
+    }
+
+    .panel-total .metric-label {
+      display: block;
+      color: var(--graphite-500);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .panel-total .metric-value {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 1.6rem;
+      font-weight: 500;
+      letter-spacing: -0.04em;
+    }
+
+    .spark-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .spark-card {
+      border: 1px solid var(--line);
+      padding: 14px;
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 10px;
+      transition: border-color 180ms ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .spark-card:hover {
+      border-color: rgba(232, 160, 32, 0.42);
+    }
+
+    .spark-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.96rem;
+      font-weight: 500;
+      margin-bottom: 14px;
+    }
+
+    .spark-label,
+    .spark-change,
+    .transaction-type,
+    .status-copy,
+    .pill {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .spark-label {
+      color: var(--graphite-500);
+    }
+
+    .spark-change.down { color: var(--green); }
+    .spark-change.up { color: var(--red); }
+
+    .spark-value {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.92rem;
+      font-weight: 500;
+    }
+
+    .spark-meter {
+      margin-top: 12px;
+      width: 100%;
+      height: 5px;
+      background: rgba(14, 15, 17, 0.08);
+      overflow: hidden;
+    }
+
+    .spark-fill {
+      width: var(--fill, 0%);
+      height: 100%;
+      background: linear-gradient(90deg, var(--amber), var(--amber-dark));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 900ms var(--ease);
+    }
+
+    .spark-fill.visible {
+      transform: scaleX(1);
+    }
+
+    .transaction-list {
+      display: grid;
+      gap: 2px;
+    }
+
+    .transaction-list-title {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--graphite-500);
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 10px;
+      margin-bottom: 4px;
+    }
+
+    .transaction-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 10px 8px;
+      transition: background 180ms ease;
+      font-size: 0.82rem;
+    }
+
+    .transaction-row:hover {
+      background: var(--surface-soft);
+    }
+
+    .transaction-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      flex: 0 0 auto;
+    }
+
+    .dot.green { background: var(--green); }
+    .dot.amber { background: var(--amber); }
+    .dot.red { background: var(--red); }
+
+    .transaction-name {
+      min-width: 110px;
+      font-weight: 500;
+    }
+
+    .transaction-type {
+      color: var(--graphite-500);
+      border: 1px solid var(--line);
+      padding: 2px 5px;
+    }
+
+    .transaction-amount {
+      font-family: "IBM Plex Mono", monospace;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .transaction-amount.red {
+      color: var(--red);
+    }
+
+    .panel-footer {
+      background: var(--graphite-900);
+      color: rgba(255, 255, 255, 0.7);
+      padding: 11px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .status-inline {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status-pulse {
+      width: 7px;
+      height: 7px;
+      background: var(--green);
+      animation: pulse 1.4s infinite;
+    }
+
+    .proof-strip {
+      background: var(--surface);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .proof-grid {
+      width: var(--container);
+      max-width: 100%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .proof-cell {
+      padding: 34px;
+      border-right: 1px solid var(--line);
+    }
+
+    .proof-cell:last-child {
+      border-right: 0;
+    }
+
+    .proof-value {
+      display: block;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .proof-label {
+      font-size: 0.76rem;
+      color: var(--graphite-500);
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+    }
+
+    .section {
+      padding: var(--section) 0;
+      position: relative;
+    }
+
+    .scan-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: rgba(14, 15, 17, 0.1);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 1.1s var(--ease);
+    }
+
+    .section.visible .scan-line {
+      transform: scaleX(1);
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.94fr) minmax(0, 1.06fr);
+      gap: 34px;
+      align-items: start;
+    }
+
+    .section-intro {
+      position: sticky;
+      top: 110px;
+    }
+
+    .section-kicker {
+      display: inline-block;
+      margin-bottom: 22px;
+      color: var(--amber);
+      font-size: 0.72rem;
+      font-family: "IBM Plex Mono", monospace;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -0.05em;
+      margin-bottom: 18px;
+      max-width: 10.5ch;
+    }
+
+    .section-intro p {
+      color: var(--graphite-500);
+      max-width: 42ch;
+      line-height: 1.8;
+      font-size: 0.96rem;
+    }
+
+    .problem-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .problem-card,
+    .service-card,
+    .credential-card,
+    .price-card,
+    .about-card,
+    .contact-card,
+    .integration-tile {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      box-shadow: 0 8px 26px rgba(14, 15, 17, 0.04);
+    }
+
+    .problem-card {
+      padding: 28px;
+      position: relative;
+      transition: box-shadow 220ms ease, transform 220ms var(--ease);
+    }
+
+    .problem-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--amber);
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 220ms ease;
+    }
+
+    .problem-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .problem-card:hover::before {
+      transform: scaleY(1);
+    }
+
+    .problem-card.offset-1 { margin-left: 18px; }
+    .problem-card.offset-2 { margin-left: 36px; }
+
+    .card-label {
+      display: block;
+      margin-bottom: 14px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .problem-card p,
+    .service-card p,
+    .credential-card p,
+    .price-card p,
+    .about-card p,
+    .contact-card p,
+    .integration-copy {
+      color: var(--graphite-500);
+      line-height: 1.8;
+      font-size: 0.94rem;
+    }
+
+    .problem-card .emphasis {
+      font-family: "IBM Plex Mono", monospace;
+      color: var(--graphite-900);
+      font-size: 0.95rem;
+      margin: 0 2px;
+    }
+
+    .workflow-band {
+      background: var(--graphite-900);
+      color: var(--surface);
+      overflow: hidden;
+    }
+
+    .workflow-band .scan-line {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .workflow-wrap {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+      gap: 44px;
+      align-items: center;
+    }
+
+    .workflow-wrap .section-kicker {
+      color: var(--amber);
+    }
+
+    .workflow-wrap p {
+      color: rgba(255, 255, 255, 0.62);
+      max-width: 43ch;
+      line-height: 1.8;
+    }
+
+    .workflow-board {
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 34px;
+      position: relative;
+      background: var(--graphite-800);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.24);
+    }
+
+    .workflow-line {
+      position: absolute;
+      top: 50%;
+      left: 54px;
+      right: 54px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(-50%);
+    }
+
+    .workflow-token {
+      position: absolute;
+      top: 50%;
+      left: 54px;
+      transform: translate(0, -50%);
+      height: 38px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 14px;
+      background: var(--amber);
+      color: var(--graphite-900);
+      box-shadow: 0 0 20px rgba(232, 160, 32, 0.28);
+      z-index: 2;
+      opacity: 0;
+      transition: transform 800ms var(--ease), opacity 300ms ease;
+      pointer-events: none;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .workflow-token.visible {
+      opacity: 1;
+    }
+
+    .workflow-token-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--graphite-900);
+    }
+
+    .workflow-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 22px;
+      min-height: 220px;
+      z-index: 1;
+    }
+
+    .workflow-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      min-height: 220px;
+    }
+
+    .workflow-step .step-num,
+    .workflow-step .step-note {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .workflow-step .step-num {
+      color: rgba(255, 255, 255, 0.52);
+      margin-bottom: 30px;
+    }
+
+    .workflow-icon {
+      width: 52px;
+      height: 52px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.03);
+      display: grid;
+      place-items: center;
+      margin: auto 0 28px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.82rem;
+      color: rgba(255, 255, 255, 0.86);
+    }
+
+    .workflow-step .step-note {
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .workflow-metrics {
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+    }
+
+    .workflow-metrics strong {
+      display: block;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .workflow-metrics span {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(255, 255, 255, 0.56);
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .service-card {
+      padding: 24px;
+    }
+
+    .pill {
+      display: inline-flex;
+      padding: 6px 8px;
+      color: var(--graphite-500);
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      font-size: 0.66rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .service-card h3,
+    .credential-card h3,
+    .price-card h3,
+    .about-card h3,
+    .contact-card h3 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.16rem;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+
+    .credentials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 38px;
+    }
+
+    .credential-card {
+      padding: 24px;
+    }
+
+    .credential-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .credential-mark {
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+    }
+
+    .credential-sub {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.68rem;
+      color: var(--graphite-500);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .integrations-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 34px;
+    }
+
+    .integration-tile {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 12px;
+      transition: transform 220ms var(--ease), box-shadow 220ms ease, border-color 220ms ease;
+    }
+
+    .integration-tile:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(232, 160, 32, 0.32);
+    }
+
+    .integration-mark {
+      width: 78px;
+      height: 78px;
+      display: grid;
+      place-items: center;
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.05em;
+    }
+
+    .integration-name {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .integration-copy {
+      font-size: 0.84rem;
+      line-height: 1.7;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 36px;
+    }
+
+    .price-card {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+
+    .price-card.featured {
+      background: rgba(255, 255, 255, 0.65);
+      box-shadow: var(--shadow-md);
+    }
+
+    .price-plan {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.72rem;
+      color: var(--graphite-900);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 10px;
+    }
+
+    .price-badge {
+      display: inline-flex;
+      align-self: flex-start;
+      margin-bottom: 14px;
+      padding: 6px 8px;
+      background: rgba(232, 160, 32, 0.12);
+      color: var(--amber-dark);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.66rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .price-number {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 2.8rem;
+      font-weight: 500;
+      letter-spacing: -0.05em;
+      margin-bottom: 14px;
+    }
+
+    .price-number sup {
+      font-size: 1rem;
+      vertical-align: super;
+    }
+
+    .price-list {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      margin: 20px 0 24px;
+      flex: 1 1 auto;
+    }
+
+    .price-list li {
+      position: relative;
+      padding-left: 16px;
+      color: var(--graphite-900);
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+
+    .price-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 7px;
+      height: 7px;
+      background: var(--amber);
+    }
+
+    .footer-note {
+      margin-top: 16px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.7rem;
+      color: var(--graphite-500);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-align: center;
+    }
+
+    .split-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 34px;
+    }
+
+    .about-card,
+    .contact-card {
+      padding: 28px;
+    }
+
+    .about-points,
+    .contact-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .about-point,
+    .contact-item {
+      display: flex;
+      gap: 12px;
+      align-items: start;
+      padding: 14px;
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+    }
+
+    .about-index,
+    .contact-key {
+      flex: 0 0 auto;
+      min-width: 44px;
+      padding-top: 2px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.7rem;
+      color: var(--graphite-500);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .contact-card form {
+      display: grid;
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field label {
+      font-size: 0.68rem;
+      color: var(--graphite-500);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      border: 1px solid rgba(14, 15, 17, 0.18);
+      background: var(--surface-soft);
+      color: var(--graphite-900);
+      padding: 14px 16px;
+      outline: none;
+      transition: border-color 180ms ease, background 180ms ease;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: rgba(232, 160, 32, 0.6);
+      background: var(--surface);
+    }
+
+    .field textarea {
+      resize: vertical;
+      min-height: 130px;
+    }
+
+    footer {
+      background: var(--graphite-900);
+      color: var(--surface);
+      padding: 80px 0 28px;
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    footer::before {
+      content: "TALLYPORT";
+      position: absolute;
+      top: 34px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: min(19vw, 220px);
+      line-height: 1;
+      opacity: 0.02;
+      pointer-events: none;
+      letter-spacing: -0.08em;
+    }
+
+    .footer-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 28px;
+      margin-bottom: 54px;
+    }
+
+    .footer-heading {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(255, 255, 255, 0.5);
+      margin-bottom: 14px;
+    }
+
+    .footer-list {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .footer-list a {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.74rem;
+      color: rgba(255, 255, 255, 0.86);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .footer-list a:hover {
+      color: var(--amber);
+    }
+
+    .footer-bottom {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .footer-bottom a {
+      color: var(--amber);
+    }
+
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
+    }
+
+    .reveal-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+
+    @keyframes sweep {
+      0% { transform: translateX(-100vw); opacity: 0.15; }
+      100% { transform: translateX(100vw); opacity: 0; }
+    }
+
+    @media (max-width: 1100px) {
+      :root {
+        --container: min(1180px, calc(100vw - 112px));
+      }
+
+      .hero-grid,
+      .section-grid,
+      .workflow-wrap,
+      .split-grid,
+      .pricing-grid,
+      .credentials-grid,
+      .integrations-grid,
+      .service-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-intro {
+        position: static;
+      }
+
+      .hero-panel {
+        max-height: none;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .nav-toggle {
+        display: inline-flex;
+      }
+
+      .nav-links,
+      .nav-cta {
+        display: none;
+      }
+
+      .site-nav.open .nav-links {
+        display: flex;
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 18px;
+        background: rgba(255, 255, 255, 0.94);
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow-md);
+      }
+
+      .site-nav.open .nav-cta {
+        display: inline-flex;
+        margin-top: 2px;
+      }
+
+      .proof-grid,
+      .spark-grid,
+      .field-row,
+      .workflow-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .proof-cell {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .proof-cell:last-child {
+        border-bottom: 0;
+      }
+
+      .workflow-line {
+        display: none;
+      }
+
+      .workflow-step {
+        min-height: auto;
+        padding: 12px 0;
+      }
+
+      .workflow-icon {
+        margin: 0 0 18px;
+      }
+
+      .problem-card.offset-1,
+      .problem-card.offset-2 {
+        margin-left: 0;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container {
+        width: min(calc(100vw - 36px), 1180px);
+      }
+
+      .hero {
+        padding-top: 102px;
+        min-height: auto;
+      }
+
+      .hero-grid,
+      .hero-copy {
+        padding-inline: 0;
+      }
+
+      h1 {
+        font-size: clamp(2.5rem, 14vw, 4rem);
+      }
+
+      h2 {
+        max-width: none;
+      }
+
+      .hero-actions,
+      .hero-proof {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .button,
+      .nav-button {
+        width: 100%;
+      }
+
+      .panel-header,
+      .panel-body,
+      .panel-footer,
+      .problem-card,
+      .service-card,
+      .credential-card,
+      .price-card,
+      .about-card,
+      .contact-card,
+      .integration-tile,
+      .workflow-board {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .panel-top {
+        flex-direction: column;
+        align-items: start;
+      }
+
+      .panel-total {
+        text-align: left;
+      }
+
+      .transaction-type,
+      .panel-user span {
+        display: none;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="site-nav" id="site-nav">
+    <div class="container nav-inner">
+      <a href="#top" class="brand" aria-label="Tallyport Accounting home">
+        <span class="brand-mark">TP</span>
+        <span class="brand-copy">
+          <span>Canada + UK</span>
+          <strong class="brand-wordmark">Tallyport Accounting</strong>
+        </span>
+      </a>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a class="nav-link" href="#services">Services</a></li>
+        <li><a class="nav-link" href="#workflow">Process</a></li>
+        <li><a class="nav-link" href="#pricing">Pricing</a></li>
+        <li><a class="nav-link" href="#credentials">Credentials</a></li>
+      </ul>
+
+      <a class="nav-button nav-cta" href="#contact">Book a Call</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">≡</button>
+    </div>
+  </nav>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-sweep" aria-hidden="true"></div>
+      <div class="container hero-grid">
+        <div class="hero-copy reveal-up" id="hero-copy">
+          <span class="eyebrow">[01] Accountant-led clarity</span>
+          <h1>Clean books, <span class="accent">faster closes,</span> calmer business finances.</h1>
+          <p>
+            Tallyport gives freelancers, contractors, and small businesses a proper finance rhythm:
+            reconciled books, cleaner reporting, payroll and tax deadlines handled on time, and real
+            visibility across Canada and the UK.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#contact" class="button primary">Book a Free Call</a>
+            <a href="#services" class="button secondary">See Services</a>
+          </div>
+
+          <div class="hero-proof">
+            <div class="proof-stack" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
+            <p class="proof-text">
+              Trusted by founders who want <strong>qualified accountants</strong>, not a mess hidden in spreadsheets until filing week.
+            </p>
+          </div>
+        </div>
+
+        <div class="hero-panel reveal-up" id="hero-panel">
+          <div class="panel-header">
+            <div class="panel-nav">
+              <span class="panel-brand">Tallyport</span>
+              <span class="panel-tab active">Overview</span>
+              <span class="panel-tab">Reporting</span>
+              <span class="panel-tab">Compliance</span>
+            </div>
+            <div class="panel-user">
+              <span class="panel-avatar">CA</span>
+              <span>Qualified team</span>
+            </div>
+          </div>
+
+          <div class="panel-body">
+            <div class="panel-top">
+              <div>
+                <h3>Month-end preview</h3>
+                <div class="micro">
+                  <span class="micro tag">March cycle</span>
+                  <span class="micro">Canada and UK books</span>
+                </div>
+              </div>
+              <div class="panel-total">
+                <span class="metric-label">Books status</span>
+                <span class="metric-value">On track</span>
+              </div>
+            </div>
+
+            <div class="spark-grid">
+              <div class="spark-card">
+                <div>
+                  <div class="spark-title">Reconciliations</div>
+                  <span class="spark-label">Current month</span>
+                  <div class="spark-meter"><div class="spark-fill" data-fill style="--fill: 94%;"></div></div>
+                </div>
+                <div style="text-align:right">
+                  <span class="spark-change down">Done</span>
+                  <div class="spark-value">94%</div>
+                </div>
+              </div>
+              <div class="spark-card">
+                <div>
+                  <div class="spark-title">Upcoming filings</div>
+                  <span class="spark-label">Priority queue</span>
+                  <div class="spark-meter"><div class="spark-fill" data-fill style="--fill: 78%;"></div></div>
+                </div>
+                <div style="text-align:right">
+                  <span class="spark-change up">3 items</span>
+                  <div class="spark-value">VAT / GST</div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="transaction-list-title">Recent finance tasks</div>
+              <div class="transaction-list">
+                <div class="transaction-row">
+                  <div class="transaction-left">
+                    <span class="dot green"></span>
+                    <span class="transaction-name">Payroll run prepared</span>
+                    <span class="transaction-type">Payroll</span>
+                  </div>
+                  <span class="transaction-amount">Ready</span>
+                </div>
+                <div class="transaction-row">
+                  <div class="transaction-left">
+                    <span class="dot amber"></span>
+                    <span class="transaction-name">VAT / GST return check</span>
+                    <span class="transaction-type">Compliance</span>
+                  </div>
+                  <span class="transaction-amount">Review</span>
+                </div>
+                <div class="transaction-row">
+                  <div class="transaction-left">
+                    <span class="dot red"></span>
+                    <span class="transaction-name">Backlog cleanup quote</span>
+                    <span class="transaction-type">Catch-up</span>
+                  </div>
+                  <span class="transaction-amount red">Pending</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-footer">
+            <div class="status-inline">
+              <span class="status-pulse"></span>
+              <span class="status-copy">All systems operational</span>
+            </div>
+            <span class="status-copy">Response target: 24 business hours</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="proof-strip">
+      <div class="proof-grid">
+        <div class="proof-cell">
+          <span class="proof-value" data-counter data-target="20" data-suffix="+">0</span>
+          <span class="proof-label mono">Combined years of experience</span>
+        </div>
+        <div class="proof-cell">
+          <span class="proof-value" data-counter data-target="2">0</span>
+          <span class="proof-label mono">Countries served, Canada and UK</span>
+        </div>
+        <div class="proof-cell">
+          <span class="proof-value" data-counter data-target="24" data-suffix="h">0</span>
+          <span class="proof-label mono">Typical response target on business days</span>
+        </div>
+        <div class="proof-cell">
+          <span class="proof-value">Fixed</span>
+          <span class="proof-label mono">Monthly pricing, not drifting hourly bills</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="why">
+      <div class="scan-line"></div>
+      <div class="container section-grid">
+        <div class="section-intro reveal-up">
+          <span class="section-kicker">[02] The reality</span>
+          <h2>Most owners do not need more accounting jargon. They need a cleaner system.</h2>
+          <p>
+            Good finance support should remove ambiguity. The problem is usually not effort.
+            It is late visibility, broken process, and books that get touched only when a deadline gets scary.
+          </p>
+        </div>
+
+        <div class="problem-stack">
+          <article class="problem-card reveal-up">
+            <span class="card-label">Books without rhythm</span>
+            <p>
+              Transactions pile up, reconciliations slip, and reporting gets delayed until the owner is effectively
+              steering with last month’s map.
+            </p>
+          </article>
+
+          <article class="problem-card offset-1 reveal-up">
+            <span class="card-label">Compliance that appears too late</span>
+            <p>
+              Payroll, VAT, GST/HST, and year-end work become urgent because nobody was holding the sequence together
+              early enough.
+            </p>
+          </article>
+
+          <article class="problem-card offset-2 reveal-up">
+            <span class="card-label">Reporting that says too little</span>
+            <p>
+              A profit and loss file is not enough. Owners need context, action, and someone who notices the
+              <span class="emphasis">actual issue</span> before it grows.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section workflow-band" id="workflow">
+      <div class="scan-line"></div>
+      <div class="container workflow-wrap">
+        <div class="reveal-up">
+          <span class="section-kicker">[03] Working rhythm</span>
+          <h2>Clean process beats heroic cleanup.</h2>
+          <p>
+            Tallyport’s value is not just “doing the books.” It is turning finance operations into a repeatable system:
+            gather, reconcile, review, report, and file before the month-end scramble begins.
+          </p>
+        </div>
+
+        <div class="reveal-up">
+          <div class="workflow-board">
+            <div class="workflow-line" aria-hidden="true"></div>
+            <div class="workflow-token" id="workflow-token" aria-hidden="true">
+              <span class="workflow-token-dot"></span>
+              <span>Client records</span>
+            </div>
+            <div class="workflow-grid">
+              <div class="workflow-step">
+                <span class="step-num">1. Submitted</span>
+                <div class="workflow-icon">IN</div>
+                <span class="step-note">Bank feeds, invoices, payroll inputs</span>
+              </div>
+              <div class="workflow-step">
+                <span class="step-num">2. Reconciled</span>
+                <div class="workflow-icon">RC</div>
+                <span class="step-note">Categorised and matched correctly</span>
+              </div>
+              <div class="workflow-step">
+                <span class="step-num">3. Reviewed</span>
+                <div class="workflow-icon">RV</div>
+                <span class="step-note">Exceptions surfaced early</span>
+              </div>
+              <div class="workflow-step">
+                <span class="step-num">4. Reported</span>
+                <div class="workflow-icon">RP</div>
+                <span class="step-note">Ready for owner decisions and filing</span>
+              </div>
+            </div>
+
+            <div class="workflow-metrics">
+              <div>
+                <strong>Monthly</strong>
+                <span>Reporting cadence</span>
+              </div>
+              <div>
+                <strong>Cross-border</strong>
+                <span>CRA and HMRC context</span>
+              </div>
+              <div>
+                <strong>Catch-up ready</strong>
+                <span>Backlog cleanup support</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="scan-line"></div>
+      <div class="container">
+        <div class="reveal-up">
+          <span class="section-kicker">[04] Services</span>
+          <h2>What Tallyport actually handles.</h2>
+          <p style="max-width:58ch;color:var(--graphite-500);line-height:1.8">
+            The services are structured around making the finance function dependable, not around inflating the page with filler.
+          </p>
+        </div>
+
+        <div class="service-grid" style="margin-top:34px">
+          <article class="service-card reveal-up">
+            <span class="pill">Core</span>
+            <h3>Bookkeeping and reconciliations</h3>
+            <p>Bank reconciliations, transaction categorisation, accounts payable, accounts receivable, and current records across QuickBooks Online, Xero, Wave, and Sage.</p>
+          </article>
+          <article class="service-card reveal-up">
+            <span class="pill">Compliance</span>
+            <h3>GST/HST and VAT filing</h3>
+            <p>Returns prepared from clean books, with Canadian and UK compliance work handled before the deadline energy gets ugly.</p>
+          </article>
+          <article class="service-card reveal-up">
+            <span class="pill">Payroll</span>
+            <h3>Payroll processing</h3>
+            <p>Payslips, remittances, RTI submissions, and year-end slips handled with the boring consistency payroll deserves.</p>
+          </article>
+          <article class="service-card reveal-up">
+            <span class="pill">Reporting</span>
+            <h3>Monthly financial reporting</h3>
+            <p>P&amp;L, balance sheet, cash flow, and owner-friendly commentary so you know what matters, not just what changed.</p>
+          </article>
+          <article class="service-card reveal-up">
+            <span class="pill">Year-End</span>
+            <h3>Cleanup and closing support</h3>
+            <p>Backlog recovery, year-end preparation, and books that are ready for tax filing instead of “almost there.”</p>
+          </article>
+          <article class="service-card reveal-up">
+            <span class="pill">Advisory</span>
+            <h3>Cash flow and planning support</h3>
+            <p>Budgeting, visibility, and practical financial advice for owners who want the numbers to help guide decisions.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="credentials">
+      <div class="scan-line"></div>
+      <div class="container">
+        <div class="reveal-up">
+          <span class="section-kicker">[05] Credentials</span>
+          <h2>Trust signals that actually matter.</h2>
+          <p style="max-width:58ch;color:var(--graphite-500);line-height:1.8">
+            The Aura reference does this well: trust is not a vague paragraph, it is structured proof.
+            So Tallyport should show professional credibility quickly and cleanly.
+          </p>
+        </div>
+
+        <div class="credentials-grid">
+          <article class="credential-card reveal-up">
+            <div class="credential-top">
+              <div class="credential-mark">CPA</div>
+              <div>
+                <h3>CPA Canada context</h3>
+                <div class="credential-sub">Canadian standards and filings</div>
+              </div>
+            </div>
+            <p>Professional accounting support for Canadian small businesses needing accurate books, GST/HST handling, and clean reporting.</p>
+          </article>
+
+          <article class="credential-card reveal-up">
+            <div class="credential-top">
+              <div class="credential-mark">AC</div>
+              <div>
+                <h3>UK compliance familiarity</h3>
+                <div class="credential-sub">VAT, HMRC, payroll workflows</div>
+              </div>
+            </div>
+            <p>Useful for London and UK clients who need MTD-aware VAT work, payroll support, and ongoing accounting structure.</p>
+          </article>
+
+          <article class="credential-card reveal-up">
+            <div class="credential-top">
+              <div class="credential-mark">QB</div>
+              <div>
+                <h3>Cloud accounting stack</h3>
+                <div class="credential-sub">QuickBooks, Xero, Wave, Sage</div>
+              </div>
+            </div>
+            <p>Modern remote workflows, real-time visibility, and less friction than the old spreadsheet-and-email circus.</p>
+          </article>
+        </div>
+
+        <div class="integrations-grid">
+          <article class="integration-tile reveal-up">
+            <div class="integration-mark">QB</div>
+            <div class="integration-name">QuickBooks</div>
+            <div class="integration-copy">Certified workflows for ongoing bookkeeping and reporting.</div>
+          </article>
+          <article class="integration-tile reveal-up">
+            <div class="integration-mark">XR</div>
+            <div class="integration-name">Xero</div>
+            <div class="integration-copy">Good fit for UK cloud bookkeeping and VAT reporting.</div>
+          </article>
+          <article class="integration-tile reveal-up">
+            <div class="integration-mark">WV</div>
+            <div class="integration-name">Wave</div>
+            <div class="integration-copy">Useful for simpler operating setups and smaller businesses.</div>
+          </article>
+          <article class="integration-tile reveal-up">
+            <div class="integration-mark">SG</div>
+            <div class="integration-name">Sage</div>
+            <div class="integration-copy">Handled where legacy or specific client workflows need it.</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="pricing">
+      <div class="scan-line"></div>
+      <div class="container">
+        <div class="reveal-up">
+          <span class="section-kicker">[06] Pricing</span>
+          <h2>Fixed monthly pricing, clearer scope.</h2>
+          <p style="max-width:58ch;color:var(--graphite-500);line-height:1.8">
+            Still simple, but now presented more like a proper finance product. Cleaner hierarchy, less brochure energy.
+          </p>
+        </div>
+
+        <div class="pricing-grid">
+          <article class="price-card reveal-up">
+            <div class="price-plan">Starter</div>
+            <div class="price-number"><sup>£</sup>120</div>
+            <p>For freelancers and sole traders who need clean books, regular reporting, and filing support without overcomplicating the setup.</p>
+            <ul class="price-list">
+              <li>Monthly bank reconciliation</li>
+              <li>Transaction categorisation</li>
+              <li>Quarterly VAT or GST filing</li>
+              <li>Basic monthly P&amp;L</li>
+              <li>Email support</li>
+              <li>Annual self-assessment or T1 support</li>
+            </ul>
+            <a href="#contact" class="button secondary">Choose Starter</a>
+          </article>
+
+          <article class="price-card featured reveal-up">
+            <div class="price-badge">Most Popular</div>
+            <div class="price-plan">Growth</div>
+            <div class="price-number"><sup>£</sup>220</div>
+            <p>For growing businesses that need stronger reporting, payroll, and tighter operational visibility without hiring internally too early.</p>
+            <ul class="price-list">
+              <li>Everything in Starter</li>
+              <li>Accounts payable and receivable</li>
+              <li>Payroll up to 5 employees</li>
+              <li>Full monthly reporting pack</li>
+              <li>Priority support</li>
+              <li>Corporate tax return support</li>
+              <li>Year-end preparation</li>
+            </ul>
+            <a href="#contact" class="button primary">Choose Growth</a>
+          </article>
+
+          <article class="price-card reveal-up">
+            <div class="price-plan">Premium</div>
+            <div class="price-number"><sup>£</sup>380</div>
+            <p>For established businesses that want finance support to be proactive, visible, and more strategic month to month.</p>
+            <ul class="price-list">
+              <li>Everything in Growth</li>
+              <li>Payroll up to 15 employees</li>
+              <li>Cash flow forecasting</li>
+              <li>Budget versus actual reporting</li>
+              <li>Quarterly strategy calls</li>
+              <li>Financial planning support</li>
+              <li>Dedicated account manager</li>
+            </ul>
+            <a href="#contact" class="button secondary">Choose Premium</a>
+          </article>
+        </div>
+
+        <div class="footer-note">Catch-up bookkeeping available from £95 per month of backlog, with rush turnaround available when needed.</div>
+      </div>
+    </section>
+
+    <section class="section" id="about-contact">
+      <div class="scan-line"></div>
+      <div class="container split-grid">
+        <article class="about-card reveal-up">
+          <span class="section-kicker">[07] About</span>
+          <h3>Tallyport is built for owners who want finance work done properly and explained clearly.</h3>
+          <p>
+            The business was designed around a simple standard: keep the books current, make the reports readable,
+            handle compliance before it becomes a crisis, and work like the owner’s time is expensive, because it is.
+          </p>
+
+          <div class="about-points">
+            <div class="about-point">
+              <span class="about-index">01</span>
+              <p>Chartered accountant-led support, not generic back-office churn.</p>
+            </div>
+            <div class="about-point">
+              <span class="about-index">02</span>
+              <p>Cross-border understanding for Canada and UK workflows.</p>
+            </div>
+            <div class="about-point">
+              <span class="about-index">03</span>
+              <p>Better structure for ongoing work and catch-up situations alike.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="contact-card reveal-up" id="contact">
+          <span class="section-kicker">[08] Contact</span>
+          <h3>Book a free 20-minute discovery call.</h3>
+          <p>
+            We will talk through your current setup, what is messy, what is urgent, and which level of support fits best.
+          </p>
+
+          <div class="contact-list">
+            <div class="contact-item">
+              <span class="contact-key">Email</span>
+              <p>hello [at] tallyportaccounting.com</p>
+            </div>
+            <div class="contact-item">
+              <span class="contact-key">Serving</span>
+              <p>Canada except Quebec, plus London and the wider UK.</p>
+            </div>
+            <div class="contact-item">
+              <span class="contact-key">Speed</span>
+              <p>Response target within 24 business hours during normal operating periods.</p>
+            </div>
+          </div>
+
+          <form>
+            <div class="field-row">
+              <div class="field">
+                <label for="first-name">First name</label>
+                <input id="first-name" type="text" placeholder="Sarah">
+              </div>
+              <div class="field">
+                <label for="last-name">Last name</label>
+                <input id="last-name" type="text" placeholder="Johnson">
+              </div>
+            </div>
+            <div class="field">
+              <label for="email">Email address</label>
+              <input id="email" type="email" placeholder="sarah@yourbusiness.com">
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="business-type">Business type</label>
+                <select id="business-type">
+                  <option value="">Select your business type</option>
+                  <option>Freelancer / Self-employed</option>
+                  <option>Contractor</option>
+                  <option>Small business, 1 to 10 employees</option>
+                  <option>Growing business, 10+ employees</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="location">Location</label>
+                <select id="location">
+                  <option value="">Where are you based?</option>
+                  <option>Canada - Ontario</option>
+                  <option>Canada - British Columbia</option>
+                  <option>Canada - Alberta</option>
+                  <option>Canada - Other</option>
+                  <option>London, UK</option>
+                  <option>Other UK</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="message">What do you need help with?</label>
+              <textarea id="message" placeholder="Tell us about your bookkeeping, payroll, filings, or any backlog you need cleaned up."></textarea>
+            </div>
+            <button type="button" class="button primary">Book My Discovery Call</button>
+          </form>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-heading">Platform</div>
+          <ul class="footer-list">
+            <li><a href="#services">Services</a></li>
+            <li><a href="#workflow">Process</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">Trust</div>
+          <ul class="footer-list">
+            <li><a href="#credentials">Credentials</a></li>
+            <li><a href="#about-contact">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">Coverage</div>
+          <ul class="footer-list">
+            <li><a href="#contact">Canada</a></li>
+            <li><a href="#contact">United Kingdom</a></li>
+            <li><a href="#pricing">Catch-up Work</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">Tallyport</div>
+          <p style="font-size:0.84rem;line-height:1.8;color:rgba(255,255,255,0.72)">
+            Chartered accountant-led bookkeeping, payroll, compliance, and reporting support for small businesses that want fewer surprises.
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>Tallyport Accounting © 2026.</span>
+        <a href="#contact">Book a call →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById("site-nav");
+    const navToggle = document.getElementById("nav-toggle");
+    const heroPanel = document.getElementById("hero-panel");
+    const heroCopy = document.getElementById("hero-copy");
+    const workflowBoard = document.querySelector(".workflow-board");
+    const workflowToken = document.getElementById("workflow-token");
+
+    navToggle.addEventListener("click", () => {
+      const open = nav.classList.toggle("open");
+      navToggle.setAttribute("aria-expanded", String(open));
+    });
+
+    window.addEventListener("scroll", () => {
+      nav.classList.toggle("scrolled", window.scrollY > 36);
+    });
+
+    window.addEventListener("mousemove", (event) => {
+      if (!heroPanel || window.innerWidth < 1100) return;
+      const rect = heroPanel.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - 0.5;
+      const y = (event.clientY - rect.top) / rect.height - 0.5;
+      heroPanel.style.transform = `rotateX(${(-y * 2).toFixed(2)}deg) rotateY(${(x * 2).toFixed(2)}deg)`;
+    });
+
+    window.addEventListener("mouseleave", () => {
+      if (heroPanel) heroPanel.style.transform = "rotateX(0deg) rotateY(0deg)";
+    });
+
+    window.addEventListener("load", () => {
+      window.setTimeout(() => heroCopy?.classList.add("visible"), 80);
+      window.setTimeout(() => heroPanel?.classList.add("visible"), 220);
+      window.setTimeout(() => {
+        document.querySelectorAll("[data-fill]").forEach((bar, index) => {
+          window.setTimeout(() => bar.classList.add("visible"), index * 140);
+        });
+      }, 340);
+    });
+
+    function animateCounter(el) {
+      const target = Number(el.dataset.target || "0");
+      const suffix = el.dataset.suffix || "";
+      const prefix = el.dataset.prefix || "";
+      const duration = 700;
+      const start = performance.now();
+
+      function step(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const value = Math.round(target * eased);
+        el.textContent = `${prefix}${value}${suffix}`;
+        if (progress < 1) requestAnimationFrame(step);
+      }
+
+      requestAnimationFrame(step);
+    }
+
+    function animateWorkflow() {
+      if (!workflowBoard || !workflowToken || workflowBoard.dataset.animated === "true" || window.innerWidth < 861) {
+        return;
+      }
+
+      const steps = Array.from(workflowBoard.querySelectorAll(".workflow-step .workflow-icon"));
+      if (!steps.length) return;
+
+      workflowBoard.dataset.animated = "true";
+
+      const boardRect = workflowBoard.getBoundingClientRect();
+      const tokenRect = workflowToken.getBoundingClientRect();
+      const y = boardRect.height / 2 - tokenRect.height / 2;
+
+      workflowToken.classList.add("visible");
+      workflowToken.style.transform = `translate(0px, ${y}px)`;
+
+      steps.forEach((step, index) => {
+        window.setTimeout(() => {
+          const stepRect = step.getBoundingClientRect();
+          const x = stepRect.left - boardRect.left + stepRect.width / 2 - tokenRect.width / 2;
+          workflowToken.style.transform = `translate(${x}px, ${y}px)`;
+        }, 320 + index * 780);
+      });
+
+      window.setTimeout(() => {
+        workflowToken.classList.remove("visible");
+      }, 320 + steps.length * 780 + 420);
+    }
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".section, .hero, .proof-strip").forEach((section) => {
+      sectionObserver.observe(section);
+    });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.16 });
+
+    document.querySelectorAll(".reveal-up").forEach((item, index) => {
+      item.style.transitionDelay = `${Math.min(index * 60, 280)}ms`;
+      revealObserver.observe(item);
+    });
+
+    const motionObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
+        if (entry.target.matches(".proof-strip")) {
+          entry.target.querySelectorAll("[data-counter]").forEach((counter) => {
+            if (counter.dataset.animated === "true") return;
+            counter.dataset.animated = "true";
+            animateCounter(counter);
+          });
+        }
+
+        if (entry.target.matches("#workflow")) {
+          animateWorkflow();
+        }
+
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".proof-strip, #workflow").forEach((el) => motionObserver.observe(el));
+  </script>
+</body>
+</html>
