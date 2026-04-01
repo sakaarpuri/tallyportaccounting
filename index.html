@@ -23,6 +23,7 @@
       --sage-soft: rgba(111, 143, 114, 0.18);
       --clay: #d1a289;
       --clay-soft: rgba(209, 162, 137, 0.18);
+      --berry: #b07b8a;
       --berry-soft: rgba(177, 125, 138, 0.16);
       --shadow-lg: 0 32px 90px rgba(25, 24, 21, 0.12);
       --shadow-md: 0 16px 40px rgba(25, 24, 21, 0.08);
@@ -167,7 +168,7 @@
 
     .brand-copy span {
       display: block;
-      color: var(--ink-soft);
+      color: var(--sage);
       font-size: 0.66rem;
       text-transform: uppercase;
       letter-spacing: 0.14em;
@@ -206,7 +207,7 @@
       bottom: -7px;
       width: 0;
       height: 1px;
-      background: var(--gold);
+      background: var(--sage);
       transition: width 180ms ease, left 180ms ease;
     }
 
@@ -857,7 +858,7 @@
 
     .task-dot.green { background: var(--sage); }
     .task-dot.gold { background: var(--clay); }
-    .task-dot.red { background: #d46858; }
+    .task-dot.red { background: var(--berry); }
 
     .task-name {
       font-weight: 500;
@@ -882,7 +883,7 @@
       white-space: nowrap;
     }
 
-    .task-status.red { color: #d46858; }
+    .task-status.red { color: var(--berry); }
 
     .hero-panel-footer {
       display: flex;
@@ -891,7 +892,7 @@
       gap: 14px;
       padding-top: 15px;
       padding-bottom: 16px;
-      background: #1f1b18;
+      background: linear-gradient(180deg, #5f7d63, #4f6953);
       color: rgba(255, 250, 244, 0.76);
       font-family: "IBM Plex Mono", monospace;
       font-size: 0.66rem;
@@ -1111,7 +1112,7 @@
       position: absolute;
       inset: 0 auto 0 0;
       width: 4px;
-      background: linear-gradient(180deg, var(--gold), rgba(212, 162, 76, 0));
+      background: linear-gradient(180deg, var(--sage), rgba(111, 143, 114, 0));
     }
 
     .card-label,
@@ -1169,7 +1170,8 @@
     .visual-card.gold {
       background:
         linear-gradient(180deg, rgba(255, 250, 244, 0.82), rgba(255, 250, 244, 0.92)),
-        radial-gradient(circle at top right, rgba(210, 171, 103, 0.24), transparent 30%);
+        radial-gradient(circle at top right, rgba(111, 143, 114, 0.18), transparent 26%),
+        radial-gradient(circle at bottom left, rgba(209, 162, 137, 0.22), transparent 30%);
     }
 
     .visual-card.clay {
@@ -1247,14 +1249,14 @@
       border-radius: 24px;
       display: grid;
       place-items: center;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(245, 239, 233, 0.92));
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(238, 233, 225, 0.92));
       border: 1px solid rgba(25, 24, 21, 0.08);
       font-family: "IBM Plex Mono", monospace;
       font-size: 1.12rem;
       font-weight: 600;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--ink);
+      color: var(--sage);
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
     }
 
@@ -1578,8 +1580,8 @@
       right: 20px;
       padding: 6px 8px;
       border-radius: 999px;
-      background: var(--sage-soft);
-      color: #4e6952;
+      background: var(--clay-soft);
+      color: #8f6654;
       font-weight: 600;
     }
 
@@ -1626,7 +1628,7 @@
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: var(--gold);
+      background: var(--sage);
     }
 
     .footer-note {
@@ -1720,8 +1722,8 @@
     .field textarea:focus,
     .field select:focus {
       outline: none;
-      border-color: rgba(212, 162, 76, 0.58);
-      box-shadow: 0 0 0 4px rgba(212, 162, 76, 0.12);
+      border-color: rgba(111, 143, 114, 0.58);
+      box-shadow: 0 0 0 4px rgba(111, 143, 114, 0.12);
     }
 
     footer {
@@ -1733,8 +1735,8 @@
     .footer-shell {
       border-radius: 30px;
       background:
-        linear-gradient(180deg, rgba(35, 40, 33, 0.96), rgba(28, 31, 28, 0.98)),
-        radial-gradient(circle at top right, rgba(111, 143, 114, 0.18), transparent 30%);
+        linear-gradient(180deg, rgba(108, 135, 111, 0.96), rgba(84, 108, 88, 0.98)),
+        radial-gradient(circle at top right, rgba(209, 162, 137, 0.18), transparent 30%);
       color: rgba(248, 244, 239, 0.88);
       padding: 34px 34px 20px;
       box-shadow: var(--shadow-lg);
