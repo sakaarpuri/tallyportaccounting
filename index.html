@@ -1,3063 +1,733 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tallyport Accounting</title>
   <meta name="description" content="Chartered accountant-led bookkeeping, payroll, VAT, GST/HST, and reporting support for freelancers, contractors, and small businesses in Canada and the UK.">
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ["Inter", "sans-serif"],
+            serif: ["Playfair Display", "serif"],
+          },
+          colors: {
+            brand: {
+              DEFAULT: "#91181a",
+              light: "#f4e8e8",
+            },
+            neutral: {
+              50: "#fcfaf8",
+              100: "#f5f5f5",
+              200: "#e5e5e5",
+              800: "#2d2d2d",
+              900: "#1a1a1a",
+            }
+          }
+        }
+      }
+    };
+  </script>
   <style>
-    :root {
-      --canvas: #f2eee7;
-      --canvas-deep: #e7dfd4;
-      --surface: rgba(252, 249, 244, 0.92);
-      --surface-strong: #fffaf5;
-      --ink: #191815;
-      --ink-soft: #59554f;
-      --line: rgba(25, 24, 21, 0.1);
-      --gold: #d2ab67;
-      --gold-soft: rgba(210, 171, 103, 0.18);
-      --sage: #6f8f72;
-      --sage-soft: rgba(111, 143, 114, 0.18);
-      --clay: #d1a289;
-      --clay-soft: rgba(209, 162, 137, 0.18);
-      --berry: #b07b8a;
-      --berry-soft: rgba(177, 125, 138, 0.16);
-      --shadow-lg: 0 32px 90px rgba(25, 24, 21, 0.12);
-      --shadow-md: 0 16px 40px rgba(25, 24, 21, 0.08);
-      --shadow-sm: 0 8px 18px rgba(25, 24, 21, 0.05);
-      --container: min(1180px, calc(100vw - 72px));
-      --section: clamp(5rem, 8vw, 8.5rem);
-      --ease: cubic-bezier(0.16, 1, 0.3, 1);
-      --radius-xl: 34px;
-      --radius-lg: 24px;
-      --radius-md: 18px;
+    .stroke-1-5 { stroke-width: 1.5px; }
+    .bg-pattern {
+      background-image: radial-gradient(#e5e5e5 1px, transparent 1px);
+      background-size: 24px 24px;
     }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: "Inter", sans-serif;
-      color: var(--ink);
-      background:
-        radial-gradient(circle at 10% 10%, rgba(111, 143, 114, 0.18), transparent 24%),
-        radial-gradient(circle at 88% 10%, rgba(209, 162, 137, 0.18), transparent 24%),
-        radial-gradient(circle at 22% 68%, rgba(210, 171, 103, 0.14), transparent 22%),
-        radial-gradient(circle at 88% 84%, rgba(177, 125, 138, 0.14), transparent 28%),
-        linear-gradient(180deg, #f8f5ef 0%, var(--canvas) 42%, var(--canvas-deep) 100%);
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0.028;
-      mix-blend-mode: multiply;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.68' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      z-index: 100;
-    }
-
-    img,
-    svg {
-      display: block;
-      max-width: 100%;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button,
-    input,
-    textarea,
-    select {
-      font: inherit;
-    }
-
-    .container {
-      width: var(--container);
-      margin: 0 auto;
-    }
-
-    .mono,
-    .eyebrow,
-    .nav-link,
-    .nav-button,
-    .button,
-    .pill,
-    .metric-label,
-    .caption,
-    .field label,
-    .footer-heading,
-    .footer-list a {
-      font-family: "IBM Plex Mono", monospace;
-    }
-
-    h1,
-    h2,
-    h3,
-    .brand-wordmark,
-    .display {
-      font-family: "Space Grotesk", sans-serif;
-    }
-
-    .site-nav {
-      position: fixed;
-      inset: 0 0 auto 0;
-      z-index: 80;
-      padding: 18px 0;
-      transition: background 240ms ease, border-color 240ms ease, backdrop-filter 240ms ease, box-shadow 240ms ease;
-      border-bottom: 1px solid transparent;
-    }
-
-    .site-nav.scrolled {
-      background: rgba(248, 244, 239, 0.84);
-      backdrop-filter: blur(18px);
-      border-bottom-color: rgba(25, 24, 21, 0.08);
-      box-shadow: 0 8px 24px rgba(25, 24, 21, 0.04);
-    }
-
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      min-height: 52px;
-      position: relative;
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 0;
-    }
-
-    .brand-mark {
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
-      border-radius: 14px;
-      background: linear-gradient(145deg, var(--ink), #36312b);
-      color: #f8f4ef;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-    }
-
-    .brand-copy {
-      min-width: 0;
-    }
-
-    .brand-copy span {
-      display: block;
-      color: var(--sage);
-      font-size: 0.66rem;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      white-space: nowrap;
-    }
-
-    .brand-wordmark {
-      display: block;
-      font-size: 1.02rem;
-      font-weight: 600;
-      letter-spacing: -0.03em;
-      white-space: nowrap;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      list-style: none;
-    }
-
-    .nav-link {
-      position: relative;
-      font-size: 0.76rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink);
-      opacity: 0.9;
-    }
-
-    .nav-link::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      bottom: -7px;
-      width: 0;
-      height: 1px;
-      background: var(--sage);
-      transition: width 180ms ease, left 180ms ease;
-    }
-
-    .nav-link:hover::after {
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .illustration-card svg,
+    .hero-dashboard svg,
+    .integration-logo svg {
       width: 100%;
-      left: 0;
-    }
-
-    .nav-button,
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      border: 1px solid transparent;
-      border-radius: 999px;
-      white-space: nowrap;
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-      transition: transform 220ms var(--ease), box-shadow 220ms var(--ease), border-color 220ms ease, background 220ms ease;
-    }
-
-    .nav-button:hover,
-    .button:hover {
-      transform: translateY(-2px);
-    }
-
-    .nav-button {
-      padding: 14px 20px;
-      background: linear-gradient(180deg, #86a589, #6f8f72);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 8px 20px rgba(111, 143, 114, 0.24);
-      color: #f8f5ef;
-      font-size: 0.68rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-
-    .button {
-      min-height: 54px;
-      padding: 0 26px;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-
-    .button.primary {
-      background: linear-gradient(180deg, #86a589, #6f8f72);
-      color: #f8f5ef;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 12px 26px rgba(111, 143, 114, 0.24);
-    }
-
-    .button.secondary {
-      background: rgba(255, 250, 244, 0.76);
-      color: var(--ink);
-      border-color: rgba(25, 24, 21, 0.12);
-      box-shadow: var(--shadow-sm);
-      backdrop-filter: blur(12px);
-    }
-
-    .button::after,
-    .nav-button::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
-      transform: translateX(-120%);
-      transition: transform 420ms var(--ease);
-      pointer-events: none;
-    }
-
-    .button:hover::after,
-    .nav-button:hover::after {
-      transform: translateX(120%);
-    }
-
-    .nav-toggle {
-      display: none;
-      width: 44px;
-      height: 44px;
-      align-items: center;
-      justify-content: center;
-      border-radius: 14px;
-      border: 1px solid rgba(25, 24, 21, 0.12);
-      background: rgba(255, 250, 244, 0.72);
-      color: var(--ink);
-      font-size: 1rem;
-      backdrop-filter: blur(12px);
-    }
-
-    .hero {
-      position: relative;
-      padding: 134px 0 84px;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      top: 10%;
-      right: -12%;
-      width: 42vw;
-      height: 42vw;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(111, 143, 114, 0.22), transparent 68%);
-      pointer-events: none;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      left: -8%;
-      bottom: -12%;
-      width: 34vw;
-      height: 34vw;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(209, 162, 137, 0.2), transparent 70%);
-      pointer-events: none;
-    }
-
-    .hero-grid {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      grid-template-columns: minmax(0, 0.84fr) minmax(0, 1.16fr);
-      gap: 42px;
-      align-items: center;
-    }
-
-    .hero-copy {
-      max-width: 560px;
-    }
-
-    .eyebrow,
-    .section-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 22px;
-      color: var(--ink-soft);
-      font-size: 0.7rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-
-    .eyebrow::before,
-    .section-kicker::before {
-      content: "";
-      width: 28px;
-      height: 1px;
-      background: rgba(25, 24, 21, 0.18);
-    }
-
-    h1 {
-      font-size: clamp(3.2rem, 6.3vw, 6rem);
-      line-height: 0.96;
-      letter-spacing: -0.06em;
-      font-weight: 500;
-      margin-bottom: 24px;
-      max-width: 8.5ch;
-      text-wrap: balance;
-    }
-
-    h1 .accent {
-      color: var(--sage);
-      font-weight: 600;
-    }
-
-    .hero-copy p {
-      max-width: 48ch;
-      font-size: 1.05rem;
-      line-height: 1.8;
-      color: var(--ink-soft);
-      margin-bottom: 32px;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-bottom: 34px;
-    }
-
-    .hero-proof {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      padding-top: 20px;
-      border-top: 1px solid rgba(25, 24, 21, 0.1);
-      max-width: 470px;
-    }
-
-    .proof-stack {
-      display: flex;
-      gap: 6px;
-      flex: 0 0 auto;
-    }
-
-    .proof-stack span {
-      width: 16px;
-      height: 34px;
-      border-radius: 10px;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
-    }
-
-    .proof-stack span:first-child { background: var(--ink); }
-    .proof-stack span:nth-child(2) { background: var(--clay); }
-    .proof-stack span:nth-child(3) { background: var(--sage); }
-
-    .proof-text {
-      font-size: 0.72rem;
-      line-height: 1.8;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-    }
-
-    .proof-text strong {
-      color: var(--ink);
-      font-weight: 600;
-    }
-
-    .hero-media {
-      position: relative;
-      min-height: 720px;
-    }
-
-    .hero-main-card,
-    .hero-side-card {
-      position: absolute;
-      border-radius: var(--radius-xl);
-      background: var(--surface);
-      border: 1px solid rgba(25, 24, 21, 0.08);
-      box-shadow: var(--shadow-lg);
-      backdrop-filter: blur(18px);
-      overflow: hidden;
-    }
-
-    .hero-main-card {
-      inset: auto 8px 40px auto;
-      width: 392px;
-      z-index: 4;
-    }
-
-    .hero-side-card {
-      width: 230px;
-      z-index: 2;
-      box-shadow: 0 24px 46px rgba(25, 24, 21, 0.08);
-    }
-
-    .hero-side-card.top {
-      top: 28px;
-      right: 10px;
-      transform: rotate(4deg);
-      animation: driftOne 8s ease-in-out infinite;
-    }
-
-    .hero-side-card.bottom {
-      bottom: 18px;
-      left: 22px;
-      transform: rotate(-6deg);
-      animation: driftTwo 9s ease-in-out infinite;
-    }
-
-    .hero-feature-card {
-      position: absolute;
-      inset: 0 132px 82px 0;
-      z-index: 2;
-      border-radius: 40px;
-      overflow: hidden;
-      background:
-        linear-gradient(180deg, rgba(255, 249, 241, 0.72), rgba(255, 249, 241, 0.94)),
-        radial-gradient(circle at top left, rgba(111, 143, 114, 0.22), transparent 34%),
-        radial-gradient(circle at bottom right, rgba(209, 162, 137, 0.24), transparent 32%);
-      border: 1px solid rgba(25, 24, 21, 0.08);
-      box-shadow: var(--shadow-lg);
-      backdrop-filter: blur(18px);
-    }
-
-    .hero-feature-inner {
       height: 100%;
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-      padding: 28px;
-      gap: 18px;
-      position: relative;
-    }
-
-    .hero-feature-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .hero-feature-head strong {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1.18rem;
-      font-weight: 600;
-      letter-spacing: -0.03em;
-    }
-
-    .hero-feature-copy {
-      max-width: 250px;
-      color: var(--ink-soft);
-      line-height: 1.75;
-      font-size: 0.96rem;
-    }
-
-    .hero-portrait-wrap {
-      position: absolute;
-      inset: 118px 156px 112px 34px;
-      border-radius: 34px;
-      background: rgba(255, 255, 255, 0.45);
-      border: 1px solid rgba(255, 255, 255, 0.32);
-      display: grid;
-      place-items: center;
-      overflow: hidden;
-    }
-
-    .hero-bottom-strip {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      align-self: end;
-      margin-top: auto;
-    }
-
-    .hero-strip-card {
-      padding: 14px 16px;
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.68);
-      border: 1px solid rgba(25, 24, 21, 0.08);
-    }
-
-    .hero-strip-card strong {
       display: block;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1rem;
-      font-weight: 600;
-      letter-spacing: -0.03em;
-      margin-bottom: 6px;
-    }
-
-    .hero-strip-card span {
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-      line-height: 1.7;
-    }
-
-    .hero-blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(0.5px);
-      opacity: 0.82;
-      pointer-events: none;
-    }
-
-    .hero-blob.one {
-      width: 170px;
-      height: 170px;
-      top: 28px;
-      left: 64px;
-      background: radial-gradient(circle, rgba(209, 162, 137, 0.58), rgba(209, 162, 137, 0));
-    }
-
-    .hero-blob.two {
-      width: 220px;
-      height: 220px;
-      right: 12px;
-      bottom: 34px;
-      background: radial-gradient(circle, rgba(111, 143, 114, 0.42), rgba(111, 143, 114, 0));
-    }
-
-    .media-sheen {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.24), transparent 35%, rgba(255, 255, 255, 0.08) 60%, transparent);
-      pointer-events: none;
-    }
-
-    .hero-panel-header,
-    .hero-panel-body,
-    .hero-panel-footer {
-      padding-inline: 24px;
-    }
-
-    .hero-panel-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding-top: 22px;
-      padding-bottom: 18px;
-      border-bottom: 1px solid rgba(25, 24, 21, 0.08);
-      background: rgba(239, 232, 223, 0.84);
-    }
-
-    .hero-panel-brand {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-    }
-
-    .hero-panel-brand strong {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1rem;
-      font-weight: 600;
-      letter-spacing: -0.03em;
-      text-transform: uppercase;
-    }
-
-    .hero-panel-tabs {
-      display: flex;
-      gap: 16px;
-      color: var(--ink-soft);
-      font-size: 0.68rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .hero-panel-tabs span:first-child {
-      color: var(--ink);
-    }
-
-    .hero-panel-user {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--ink-soft);
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .hero-panel-avatar {
-      width: 32px;
-      height: 32px;
-      display: grid;
-      place-items: center;
-      border-radius: 10px;
-      background: var(--ink);
-      color: #f8f4ef;
-      font-size: 0.74rem;
-      font-weight: 600;
-    }
-
-    .hero-panel-body {
-      padding-top: 26px;
-      padding-bottom: 22px;
-      display: grid;
-      gap: 22px;
-      background: rgba(255, 250, 244, 0.92);
-    }
-
-    .hero-panel-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      align-items: end;
-    }
-
-    .hero-panel-top h3 {
-      font-size: 1.68rem;
-      font-weight: 500;
-      letter-spacing: -0.04em;
-      margin-bottom: 8px;
-    }
-
-    .micro-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .micro-tag,
-    .micro-copy {
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.66rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-    }
-
-    .micro-tag {
-      padding: 8px 10px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.74);
-      border: 1px solid rgba(25, 24, 21, 0.08);
-    }
-
-    .metric-panel {
-      text-align: right;
-      min-width: 140px;
-    }
-
-    .metric-label {
-      display: block;
-      font-size: 0.66rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-      margin-bottom: 4px;
-    }
-
-    .metric-value {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1.82rem;
-      font-weight: 600;
-      letter-spacing: -0.05em;
-    }
-
-    .hero-stat-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .mini-stat {
-      padding: 18px;
-      border-radius: var(--radius-md);
-      border: 1px solid rgba(25, 24, 21, 0.08);
-      background: rgba(255, 255, 255, 0.8);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
-    }
-
-    .mini-stat-top {
-      display: flex;
-      align-items: start;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-
-    .mini-stat h4 {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1.12rem;
-      font-weight: 500;
-      letter-spacing: -0.03em;
-      margin-bottom: 10px;
-    }
-
-    .mini-stat small {
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.66rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-    }
-
-    .mini-stat .status-down {
-      color: var(--sage);
-    }
-
-    .mini-stat .status-up {
-      color: #d46858;
-    }
-
-    .progress-bar {
-      margin-top: 12px;
-      height: 6px;
-      border-radius: 999px;
-      background: rgba(25, 24, 21, 0.08);
-      overflow: hidden;
-    }
-
-    .progress-bar span {
-      display: block;
-      height: 100%;
-      width: var(--fill, 0%);
-      border-radius: inherit;
-      background: linear-gradient(90deg, #7fa083, #d2ab67);
-      transform-origin: left;
-      transform: scaleX(0);
-      transition: transform 900ms var(--ease);
-    }
-
-    .visible .progress-bar span {
-      transform: scaleX(1);
-    }
-
-    .task-block {
-      border-top: 1px solid rgba(25, 24, 21, 0.08);
-      padding-top: 18px;
-    }
-
-    .task-title {
-      display: inline-flex;
-      align-items: center;
-      min-height: 1.2em;
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-      margin-bottom: 14px;
-    }
-
-    .task-title::after {
-      content: "";
-      width: 1px;
-      height: 1.08em;
-      margin-left: 5px;
-      background: currentColor;
-      opacity: 0;
-    }
-
-    .task-title.typing::after {
-      opacity: 1;
-      animation: blink 860ms steps(1) infinite;
-    }
-
-    .task-list {
-      display: grid;
-      gap: 10px;
-    }
-
-    .task-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      padding: 8px 0;
-      font-size: 0.98rem;
-    }
-
-    .task-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 0;
-    }
-
-    .task-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      flex: 0 0 auto;
-    }
-
-    .task-dot.green { background: var(--sage); }
-    .task-dot.gold { background: var(--clay); }
-    .task-dot.red { background: var(--berry); }
-
-    .task-name {
-      font-weight: 500;
-    }
-
-    .task-tag {
-      padding: 5px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(25, 24, 21, 0.08);
-      background: rgba(255, 255, 255, 0.84);
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.63rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-    }
-
-    .task-status {
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.82rem;
-      letter-spacing: 0.04em;
-      white-space: nowrap;
-    }
-
-    .task-status.red { color: var(--berry); }
-
-    .hero-panel-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      padding-top: 15px;
-      padding-bottom: 16px;
-      background: linear-gradient(180deg, #5f7d63, #4f6953);
-      color: rgba(255, 250, 244, 0.76);
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.66rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .hero-panel-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .hero-panel-status span:first-child {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--sage);
-      animation: pulse 1.5s infinite;
-    }
-
-    .side-card-body {
-      padding: 18px;
-      display: grid;
-      gap: 14px;
-      height: 100%;
-    }
-
-    .side-card-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .side-card-top strong {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1rem;
-      font-weight: 600;
-      letter-spacing: -0.03em;
-    }
-
-    .side-pill {
-      padding: 6px 8px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.72);
-      border: 1px solid rgba(25, 24, 21, 0.08);
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-    }
-
-    .side-card-copy {
-      color: var(--ink-soft);
-      line-height: 1.75;
-      font-size: 0.88rem;
-    }
-
-    .portrait-illustration,
-    .ops-illustration,
-    .paperwork-illustration,
-    .founder-illustration {
-      width: 100%;
-      height: auto;
-    }
-
-    .proof-strip {
-      padding: 0 0 var(--section);
-    }
-
-    .proof-shell {
-      border-radius: 30px;
-      border: 1px solid rgba(25, 24, 21, 0.08);
-      background: rgba(255, 250, 244, 0.72);
-      box-shadow: var(--shadow-md);
-      overflow: hidden;
-      backdrop-filter: blur(14px);
-    }
-
-    .proof-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-
-    .proof-cell {
-      padding: 28px 30px;
-      border-right: 1px solid rgba(25, 24, 21, 0.08);
-    }
-
-    .proof-cell:last-child {
-      border-right: 0;
-    }
-
-    .proof-value {
-      display: block;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(2rem, 3vw, 2.9rem);
-      font-weight: 600;
-      letter-spacing: -0.05em;
-      margin-bottom: 8px;
-    }
-
-    .proof-label {
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-      line-height: 1.8;
-    }
-
-    .section {
-      position: relative;
-      padding: var(--section) 0;
-    }
-
-    .scan-line {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 1px;
-      background: rgba(25, 24, 21, 0.08);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 1.1s var(--ease);
-    }
-
-    .visible .scan-line {
-      transform: scaleX(1);
-    }
-
-    .section-grid,
-    .workflow-layout,
-    .about-contact-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 0.94fr) minmax(0, 1.06fr);
-      gap: 40px;
-      align-items: start;
-    }
-
-    h2 {
-      font-size: clamp(2.2rem, 4.2vw, 4rem);
-      line-height: 1.02;
-      letter-spacing: -0.06em;
-      font-weight: 500;
-      max-width: 10.2ch;
-      margin-bottom: 18px;
-    }
-
-    .section-copy,
-    .section-intro p,
-    .workflow-intro p,
-    .pricing-intro p,
-    .credentials-intro p,
-    .services-intro p,
-    .about-copy p,
-    .contact-copy p {
-      color: var(--ink-soft);
-      font-size: 1rem;
-      line-height: 1.85;
-      max-width: 60ch;
-    }
-
-    .issue-stack,
-    .service-grid,
-    .trust-grid,
-    .pricing-grid,
-    .about-points,
-    .contact-list {
-      display: grid;
-      gap: 18px;
-    }
-
-    .issue-stack {
-      margin-top: 24px;
-    }
-
-    .issue-card,
-    .service-card,
-    .trust-card,
-    .price-card,
-    .about-card,
-    .contact-card,
-    .visual-card,
-    .workflow-card,
-    .integration-card,
-    .quote-card {
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(25, 24, 21, 0.08);
-      background: rgba(255, 250, 244, 0.76);
-      box-shadow: var(--shadow-md);
-      backdrop-filter: blur(14px);
-    }
-
-    .issue-card,
-    .service-card,
-    .trust-card,
-    .price-card,
-    .about-card,
-    .contact-card,
-    .workflow-card,
-    .integration-card,
-    .quote-card {
-      padding: 24px;
-    }
-
-    .issue-card {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .issue-card::before {
-      content: "";
-      position: absolute;
-      inset: 0 auto 0 0;
-      width: 4px;
-      background: linear-gradient(180deg, var(--sage), rgba(111, 143, 114, 0));
-    }
-
-    .card-label,
-    .pill {
-      display: inline-flex;
-      padding: 7px 10px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.72);
-      border: 1px solid rgba(25, 24, 21, 0.08);
-      color: var(--ink-soft);
-      font-size: 0.64rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-
-    .issue-card p,
-    .service-card p,
-    .trust-card p,
-    .price-card p,
-    .about-card p,
-    .contact-card p,
-    .workflow-sidebar p,
-    .integration-card p,
-    .quote-card p {
-      color: var(--ink-soft);
-      line-height: 1.8;
-      font-size: 0.98rem;
-    }
-
-    .issue-card .emphasis {
-      color: var(--ink);
-      font-weight: 600;
-    }
-
-    .why-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
-      gap: 40px;
-      align-items: center;
-    }
-
-    .visual-card {
-      padding: 22px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .visual-card.sage {
-      background:
-        linear-gradient(180deg, rgba(255, 250, 244, 0.8), rgba(255, 250, 244, 0.92)),
-        radial-gradient(circle at top left, rgba(111, 143, 114, 0.24), transparent 30%);
-    }
-
-    .visual-card.gold {
-      background:
-        linear-gradient(180deg, rgba(255, 250, 244, 0.82), rgba(255, 250, 244, 0.92)),
-        radial-gradient(circle at top right, rgba(111, 143, 114, 0.18), transparent 26%),
-        radial-gradient(circle at bottom left, rgba(209, 162, 137, 0.22), transparent 30%);
-    }
-
-    .visual-card.clay {
-      background:
-        linear-gradient(180deg, rgba(255, 250, 244, 0.82), rgba(255, 250, 244, 0.92)),
-        radial-gradient(circle at bottom right, rgba(209, 162, 137, 0.24), transparent 30%);
-    }
-
-    .visual-card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-
-    .visual-card-header strong {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1.1rem;
-      font-weight: 600;
-      letter-spacing: -0.03em;
-    }
-
-    .quote-card {
-      margin-top: 18px;
-      display: grid;
-      gap: 10px;
-    }
-
-    .quote-card strong {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1.18rem;
-      font-weight: 600;
-      letter-spacing: -0.03em;
-    }
-
-    .workflow-band {
-      background:
-        linear-gradient(180deg, rgba(255, 251, 246, 0.36), rgba(255, 251, 246, 0)),
-        radial-gradient(circle at 86% 14%, rgba(111, 143, 114, 0.24), transparent 24%),
-        radial-gradient(circle at 18% 88%, rgba(209, 162, 137, 0.18), transparent 26%);
-    }
-
-    .workflow-card {
-      padding: 26px;
-      display: grid;
-      gap: 20px;
-    }
-
-    .workflow-rail {
-      display: grid;
-      gap: 16px;
-    }
-
-    .workflow-step {
-      display: grid;
-      grid-template-columns: 84px minmax(0, 1fr);
-      gap: 18px;
-      align-items: center;
-      padding: 16px;
-      border-radius: var(--radius-md);
-      background: rgba(255, 255, 255, 0.7);
-      border: 1px solid rgba(25, 24, 21, 0.06);
-      transition: transform 220ms var(--ease), box-shadow 220ms var(--ease);
-    }
-
-    .workflow-step:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .workflow-icon {
-      width: 84px;
-      height: 84px;
-      border-radius: 24px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(238, 233, 225, 0.92));
-      border: 1px solid rgba(25, 24, 21, 0.08);
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 1.12rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--sage);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
-    }
-
-    .workflow-step-meta {
-      display: grid;
-      gap: 8px;
-    }
-
-    .step-num {
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.66rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-    }
-
-    .step-note {
-      color: var(--ink);
-      font-size: 1rem;
-      line-height: 1.75;
-      font-weight: 500;
-    }
-
-    .workflow-sidebar {
-      display: grid;
-      gap: 18px;
-    }
-
-    .workflow-metrics {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .workflow-metrics div {
-      padding: 18px;
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.74);
-      border: 1px solid rgba(25, 24, 21, 0.08);
-    }
-
-    .workflow-metrics strong {
-      display: block;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1.2rem;
-      font-weight: 600;
-      letter-spacing: -0.03em;
-      margin-bottom: 6px;
-    }
-
-    .workflow-metrics span {
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-      line-height: 1.7;
-    }
-
-    .services-intro,
-    .credentials-intro,
-    .pricing-intro {
-      margin-bottom: 34px;
-    }
-
-    .service-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      align-items: stretch;
-    }
-
-    .service-card h3,
-    .trust-card h3,
-    .price-card h3,
-    .about-card h3,
-    .contact-card h3 {
-      font-size: 1.3rem;
-      font-weight: 500;
-      letter-spacing: -0.04em;
-      margin-bottom: 12px;
-    }
-
-    .service-visual {
-      grid-column: span 2;
-      grid-row: span 2;
-      min-height: 100%;
-      display: grid;
-      gap: 18px;
-      align-content: start;
-      padding: 24px;
-    }
-
-    .service-visual-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      align-items: start;
-    }
-
-    .service-visual-top h3 {
-      font-size: 1.72rem;
-      margin-bottom: 8px;
-    }
-
-    .service-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 4px;
-    }
-
-    .service-badges span {
-      padding: 7px 10px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.72);
-      border: 1px solid rgba(25, 24, 21, 0.08);
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-    }
-
-    .service-visual-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 18px;
-      align-items: stretch;
-    }
-
-    .software-stack,
-    .deadline-stack {
-      border-radius: 20px;
-      border: 1px solid rgba(25, 24, 21, 0.08);
-      background: rgba(255, 255, 255, 0.72);
-      padding: 18px;
-      display: grid;
-      gap: 16px;
-    }
-
-    .stack-title {
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.66rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-    }
-
-    .software-list {
-      display: grid;
-      gap: 12px;
-    }
-
-    .software-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 12px;
-      border-radius: 14px;
-      background: rgba(245, 239, 233, 0.62);
-      border: 1px solid rgba(25, 24, 21, 0.05);
-    }
-
-    .software-row strong {
-      font-size: 0.95rem;
-      font-weight: 600;
-      letter-spacing: -0.03em;
-    }
-
-    .software-mark {
-      width: 38px;
-      height: 38px;
-      flex: 0 0 auto;
-      border-radius: 12px;
-      display: grid;
-      place-items: center;
-      background: rgba(255, 255, 255, 0.84);
-      border: 1px solid rgba(25, 24, 21, 0.08);
-    }
-
-    .deadline-stack ul {
-      list-style: none;
-      display: grid;
-      gap: 12px;
-    }
-
-    .deadline-stack li {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid rgba(25, 24, 21, 0.08);
-      color: var(--ink-soft);
-      font-size: 0.94rem;
-    }
-
-    .deadline-stack li:last-child {
-      border-bottom: 0;
-      padding-bottom: 0;
-    }
-
-    .deadline-stack strong {
-      color: var(--ink);
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .trust-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 0.96fr) minmax(0, 1.04fr);
-      gap: 24px;
-      align-items: start;
-    }
-
-    .trust-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .trust-card.region {
-      grid-column: span 2;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-      align-items: center;
-    }
-
-    .region-points {
-      display: grid;
-      gap: 10px;
-      color: var(--ink-soft);
-    }
-
-    .region-points div {
-      padding-left: 16px;
-      position: relative;
-      line-height: 1.8;
-      font-size: 0.96rem;
-    }
-
-    .region-points div::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0.82em;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--gold);
-    }
-
-    .integrations-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 18px;
-      margin-top: 24px;
-    }
-
-    .integration-card {
-      text-align: center;
-      display: grid;
-      gap: 12px;
-      justify-items: center;
-    }
-
-    .integration-mark {
-      width: 76px;
-      height: 76px;
-      display: grid;
-      place-items: center;
-      border-radius: 22px;
-      background: rgba(255, 255, 255, 0.84);
-      border: 1px solid rgba(25, 24, 21, 0.08);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.62);
-    }
-
-    .integration-name {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1.08rem;
-      font-weight: 500;
-      letter-spacing: -0.03em;
-    }
-
-    .integration-card p {
-      font-size: 0.9rem;
-      line-height: 1.8;
-    }
-
-    .pricing-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      align-items: stretch;
-    }
-
-    .price-card {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      min-height: 100%;
-    }
-
-    .price-card.featured {
-      background:
-        linear-gradient(180deg, rgba(255, 250, 244, 0.92), rgba(255, 250, 244, 0.78)),
-        radial-gradient(circle at top right, rgba(111, 143, 114, 0.18), transparent 36%),
-        radial-gradient(circle at bottom left, rgba(209, 162, 137, 0.16), transparent 34%);
-      transform: translateY(-10px);
-    }
-
-    .price-badge,
-    .price-plan {
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.66rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .price-badge {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      padding: 6px 8px;
-      border-radius: 999px;
-      background: var(--clay-soft);
-      color: #8f6654;
-      font-weight: 600;
-    }
-
-    .price-plan {
-      color: var(--ink-soft);
-      margin-bottom: 14px;
-    }
-
-    .price-number {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 3rem;
-      font-weight: 600;
-      letter-spacing: -0.06em;
-      margin-bottom: 16px;
-    }
-
-    .price-number sup {
-      font-size: 1rem;
-      vertical-align: super;
-      margin-right: 3px;
-    }
-
-    .price-list {
-      list-style: none;
-      display: grid;
-      gap: 12px;
-      margin: 22px 0 24px;
-      flex: 1 1 auto;
-    }
-
-    .price-list li {
-      position: relative;
-      padding-left: 18px;
-      color: var(--ink);
-      font-size: 0.95rem;
-      line-height: 1.75;
-    }
-
-    .price-list li::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0.78em;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--sage);
-    }
-
-    .footer-note {
-      margin-top: 22px;
-      color: var(--ink-soft);
-      font-size: 0.96rem;
-      line-height: 1.8;
-    }
-
-    .about-card,
-    .contact-card {
-      display: grid;
-      gap: 18px;
-      align-content: start;
-      min-height: 100%;
-    }
-
-    .about-top {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 200px;
-      gap: 20px;
-      align-items: center;
-    }
-
-    .about-points {
-      margin-top: 2px;
-    }
-
-    .about-point,
-    .contact-item {
-      display: grid;
-      grid-template-columns: 56px minmax(0, 1fr);
-      gap: 14px;
-      align-items: start;
-    }
-
-    .about-index,
-    .contact-key {
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-      padding-top: 3px;
-    }
-
-    .contact-card form {
-      display: grid;
-      gap: 16px;
-      margin-top: 6px;
-    }
-
-    .field-row {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .field {
-      display: grid;
-      gap: 8px;
-    }
-
-    .field label {
-      font-size: 0.66rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-    }
-
-    .field input,
-    .field textarea,
-    .field select {
-      width: 100%;
-      border-radius: 16px;
-      border: 1px solid rgba(25, 24, 21, 0.1);
-      background: rgba(255, 255, 255, 0.82);
-      padding: 14px 16px;
-      color: var(--ink);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
-      transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
-      appearance: none;
-    }
-
-    .field textarea {
-      min-height: 128px;
-      resize: vertical;
-    }
-
-    .field input:focus,
-    .field textarea:focus,
-    .field select:focus {
-      outline: none;
-      border-color: rgba(111, 143, 114, 0.58);
-      box-shadow: 0 0 0 4px rgba(111, 143, 114, 0.12);
-    }
-
-    footer {
-      padding: 24px 0 42px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .footer-shell {
-      border-radius: 30px;
-      background:
-        linear-gradient(180deg, rgba(108, 135, 111, 0.96), rgba(84, 108, 88, 0.98)),
-        radial-gradient(circle at top right, rgba(209, 162, 137, 0.18), transparent 30%);
-      color: rgba(248, 244, 239, 0.88);
-      padding: 34px 34px 20px;
-      box-shadow: var(--shadow-lg);
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 24px;
-      margin-bottom: 26px;
-    }
-
-    .footer-heading {
-      font-size: 0.66rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-      color: rgba(248, 244, 239, 0.58);
-    }
-
-    .footer-list {
-      list-style: none;
-      display: grid;
-      gap: 10px;
-    }
-
-    .footer-list a,
-    .footer-shell p,
-    .footer-bottom {
-      color: rgba(248, 244, 239, 0.82);
-      font-size: 0.92rem;
-      line-height: 1.8;
-    }
-
-    .footer-bottom {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
-    }
-
-    .reveal-up {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.75s var(--ease), transform 0.75s var(--ease);
-    }
-
-    .reveal-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .float-card {
-      transition: transform 240ms var(--ease), box-shadow 240ms var(--ease);
-    }
-
-    .float-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 42px rgba(25, 24, 21, 0.12);
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 0.86; }
-      50% { transform: scale(1.35); opacity: 0.45; }
-    }
-
-    @keyframes blink {
-      0%, 49% { opacity: 1; }
-      50%, 100% { opacity: 0; }
-    }
-
-    @keyframes driftOne {
-      0%, 100% { transform: rotate(-5deg) translateY(0); }
-      50% { transform: rotate(-3deg) translateY(-10px); }
-    }
-
-    @keyframes driftTwo {
-      0%, 100% { transform: rotate(5deg) translateY(0); }
-      50% { transform: rotate(3deg) translateY(10px); }
-    }
-
-    @media (max-width: 1180px) {
-      .hero-media {
-        min-height: 680px;
-      }
-
-      .hero-feature-card {
-        inset: 0 112px 74px 0;
-      }
-
-      .hero-main-card {
-        right: 0;
-        bottom: 34px;
-      }
-
-      .hero-side-card.top {
-        right: 0;
-      }
-    }
-
-    @media (max-width: 1100px) {
-      :root {
-        --container: min(1120px, calc(100vw - 56px));
-      }
-
-      .hero-grid,
-      .section-grid,
-      .why-layout,
-      .workflow-layout,
-      .trust-layout,
-      .about-contact-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        min-height: auto;
-      }
-
-      .hero-copy {
-        max-width: 100%;
-      }
-
-      h1 {
-        max-width: 10ch;
-      }
-
-      .hero-media {
-        min-height: 720px;
-      }
-
-      .hero-feature-card {
-        inset: 0 102px 96px 0;
-      }
-
-      .hero-main-card {
-        right: 0;
-        bottom: 48px;
-      }
-
-      .hero-side-card.top {
-        right: 24px;
-      }
-
-      .hero-side-card.bottom {
-        left: 14px;
-      }
-
-      .service-grid,
-      .pricing-grid,
-      .footer-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .service-visual {
-        grid-column: span 2;
-      }
-
-      .integrations-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 860px) {
-      :root {
-        --container: min(100vw - 32px, 1180px);
-      }
-
-      .site-nav {
-        padding: 14px 0;
-      }
-
-      .nav-toggle {
-        display: inline-flex;
-      }
-
-      .nav-links,
-      .nav-cta {
-        display: none;
-      }
-
-      .site-nav.open .nav-links {
-        display: grid;
-        position: absolute;
-        top: calc(100% + 10px);
-        left: 0;
-        right: 0;
-        gap: 14px;
-        padding: 18px;
-        border-radius: 22px;
-        background: rgba(248, 244, 239, 0.96);
-        border: 1px solid rgba(25, 24, 21, 0.08);
-        box-shadow: var(--shadow-md);
-      }
-
-      .site-nav.open .nav-cta {
-        display: inline-flex;
-        margin-top: 8px;
-      }
-
-      .hero {
-        padding-top: 108px;
-        padding-bottom: 56px;
-      }
-
-      h1 {
-        font-size: clamp(2.7rem, 15vw, 4.6rem);
-        max-width: none;
-      }
-
-      .hero-actions,
-      .hero-proof {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .button,
-      .nav-button {
-        width: 100%;
-      }
-
-      .hero-media {
-        min-height: auto;
-        display: grid;
-        gap: 16px;
-      }
-
-      .hero-feature-card,
-      .hero-main-card,
-      .hero-side-card {
-        position: relative;
-        inset: auto;
-        width: 100%;
-        transform: none !important;
-        animation: none;
-      }
-
-      .hero-side-card.top,
-      .hero-side-card.bottom {
-        right: auto;
-        left: auto;
-        top: auto;
-        bottom: auto;
-      }
-
-      .hero-portrait-wrap {
-        position: relative;
-        inset: auto;
-        min-height: 280px;
-      }
-
-      .proof-grid,
-      .workflow-metrics,
-      .service-grid,
-      .trust-grid,
-      .pricing-grid,
-      .footer-grid,
-      .field-row {
-        grid-template-columns: 1fr;
-      }
-
-      .proof-cell {
-        border-right: 0;
-        border-bottom: 1px solid rgba(25, 24, 21, 0.08);
-      }
-
-      .proof-cell:last-child {
-        border-bottom: 0;
-      }
-
-      .workflow-step {
-        grid-template-columns: 64px minmax(0, 1fr);
-      }
-
-      .workflow-icon {
-        width: 64px;
-        height: 64px;
-        font-size: 0.9rem;
-      }
-
-      .service-visual {
-        grid-column: auto;
-        grid-row: auto;
-      }
-
-      .service-visual-grid,
-      .trust-card.region,
-      .about-top {
-        grid-template-columns: 1fr;
-      }
-
-      .about-point,
-      .contact-item {
-        grid-template-columns: 44px minmax(0, 1fr);
-      }
-
-      .hero-panel-header,
-      .hero-panel-body,
-      .hero-panel-footer,
-      .issue-card,
-      .service-card,
-      .trust-card,
-      .price-card,
-      .about-card,
-      .contact-card,
-      .visual-card,
-      .workflow-card,
-      .integration-card,
-      .quote-card {
-        padding-left: 18px;
-        padding-right: 18px;
-      }
-
-      .hero-panel-top,
-      .hero-panel-footer {
-        flex-direction: column;
-        align-items: start;
-      }
-
-      .metric-panel {
-        text-align: left;
-      }
     }
   </style>
 </head>
-<body>
-  <nav class="site-nav" id="site-nav">
-    <div class="container nav-inner">
-      <a href="#top" class="brand" aria-label="Tallyport Accounting home">
-        <span class="brand-mark">TP</span>
-        <span class="brand-copy">
-          <span>Canada + UK</span>
-          <strong class="brand-wordmark">Tallyport Accounting</strong>
-        </span>
+<body class="bg-white text-neutral-800 font-sans antialiased text-lg selection:bg-brand selection:text-white">
+
+  <nav class="w-full px-6 py-6 md:px-12 flex items-center justify-between z-50 relative bg-white/80 backdrop-blur-md sticky top-0 border-b border-neutral-100">
+    <a href="#top" class="flex items-center gap-2">
+      <div class="w-9 h-9 rounded-full bg-brand text-white flex items-center justify-center text-xs font-semibold tracking-[0.14em]">TP</div>
+      <div>
+        <div class="text-[0.6rem] uppercase tracking-[0.24em] text-neutral-500">Canada + UK</div>
+        <div class="font-serif font-medium text-xl tracking-tight text-neutral-900">Tallyport Accounting</div>
+      </div>
+    </a>
+
+    <div class="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-600">
+      <a href="#services" class="hover:text-brand transition-colors">Services</a>
+      <a href="#workflow" class="hover:text-brand transition-colors">Process</a>
+      <a href="#credentials" class="hover:text-brand transition-colors">Credentials</a>
+      <a href="#pricing" class="hover:text-brand transition-colors">Pricing</a>
+      <a href="#contact" class="hover:text-brand transition-colors">Contact</a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="#contact" class="hidden lg:block text-sm font-medium text-neutral-600 hover:text-brand transition-colors">Book a call</a>
+      <a href="#contact" class="bg-white border border-neutral-200 text-neutral-800 px-5 py-2.5 rounded-full text-sm font-medium hover:border-neutral-300 transition-all flex items-center gap-2 shadow-sm">
+        Discovery Call
       </a>
-
-      <ul class="nav-links" id="nav-links">
-        <li><a class="nav-link" href="#services">Services</a></li>
-        <li><a class="nav-link" href="#workflow">Process</a></li>
-        <li><a class="nav-link" href="#pricing">Pricing</a></li>
-        <li><a class="nav-link" href="#credentials">Credentials</a></li>
-      </ul>
-
-      <a class="nav-button nav-cta" href="#contact">Book a Call</a>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">≡</button>
     </div>
   </nav>
 
   <main id="top">
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-copy reveal-up">
-          <span class="eyebrow">Accountant-led clarity</span>
-          <h1>Clean books, <span class="accent">faster closes,</span> calmer finances.</h1>
-          <p>
-            Tallyport gives freelancers, contractors, and small businesses a proper finance rhythm:
-            reconciled books, cleaner reporting, payroll and tax deadlines handled on time, and real
-            visibility across Canada and the UK.
-          </p>
+    <header class="pt-20 pb-16 md:pt-32 md:pb-24 px-6 md:px-12 text-center max-w-5xl mx-auto flex flex-col items-center">
+      <h1 class="font-serif text-5xl md:text-7xl font-medium tracking-tight text-neutral-900 leading-tight mb-6 max-w-4xl">
+        Clean books, faster closes, calmer finances.
+      </h1>
+      <p class="text-neutral-600 text-lg md:text-xl mb-10 max-w-3xl font-medium">
+        Bookkeeping <span class="mx-2 opacity-50">•</span> Payroll <span class="mx-2 opacity-50">•</span> VAT / GST-HST <span class="mx-2 opacity-50">•</span> Reporting
+      </p>
 
-          <div class="hero-actions">
-            <a href="#contact" class="button primary">Book a Free Call</a>
-            <a href="#services" class="button secondary">See Services</a>
+      <p class="text-neutral-600 text-base md:text-lg mb-10 max-w-2xl">
+        Tallyport gives freelancers, contractors, and small businesses a proper finance rhythm:
+        reconciled books, cleaner reporting, payroll and tax deadlines handled on time, and real visibility across Canada and the UK.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center gap-4 mb-20">
+        <a href="#contact" class="bg-brand text-white px-8 py-3.5 rounded-full text-base font-medium hover:bg-brand/90 transition-all shadow-md w-full sm:w-auto">
+          Book a Free Call
+        </a>
+        <a href="#services" class="bg-neutral-50 text-neutral-800 border border-neutral-200 px-8 py-3.5 rounded-full text-base font-medium hover:bg-neutral-100 transition-all flex items-center justify-center gap-2 w-full sm:w-auto">
+          View Services
+        </a>
+      </div>
+
+      <div class="w-full flex justify-center items-end gap-2 md:gap-4 overflow-hidden relative pt-10">
+        <div class="w-1/5 md:w-44 aspect-[3/4] rounded-t-[40px] rounded-b-xl overflow-hidden translate-y-12 opacity-80 shadow-sm border border-neutral-100 bg-neutral-50 illustration-card">
+          <svg viewBox="0 0 260 340" aria-hidden="true">
+            <rect width="260" height="340" fill="#f6efe9"></rect>
+            <circle cx="194" cy="76" r="36" fill="#f4e8e8"></circle>
+            <rect x="28" y="46" width="96" height="18" rx="9" fill="#e9d5d5"></rect>
+            <rect x="28" y="78" width="140" height="12" rx="6" fill="#eadfd7"></rect>
+            <rect x="28" y="100" width="126" height="12" rx="6" fill="#eadfd7"></rect>
+            <circle cx="132" cy="168" r="52" fill="#d8b19b"></circle>
+            <path d="M86 314c0-56 34-94 82-94s82 38 82 94v18H86Z" fill="#2d2d2d"></path>
+            <path d="M98 158c6-42 28-68 58-68 27 0 50 20 58 56-20 12-66 24-116 12Z" fill="#1a1a1a"></path>
+            <rect x="24" y="278" width="128" height="34" rx="17" fill="#fff" stroke="#e5e5e5"></rect>
+            <text x="42" y="299" fill="#91181a" font-family="Inter, sans-serif" font-size="12" font-weight="500">Owner-ready reports</text>
+          </svg>
+        </div>
+
+        <div class="w-1/5 md:w-52 aspect-[3/4] rounded-t-[50px] rounded-b-xl overflow-hidden translate-y-6 opacity-90 shadow-md border border-neutral-100 bg-white illustration-card">
+          <svg viewBox="0 0 280 360" aria-hidden="true">
+            <rect width="280" height="360" fill="#fbfaf8"></rect>
+            <rect x="28" y="28" width="224" height="304" rx="28" fill="#ffffff" stroke="#ece7e3"></rect>
+            <rect x="54" y="66" width="106" height="10" rx="5" fill="#e5e5e5"></rect>
+            <rect x="54" y="88" width="148" height="10" rx="5" fill="#f0e3e3"></rect>
+            <rect x="54" y="132" width="172" height="72" rx="18" fill="#f4e8e8"></rect>
+            <rect x="54" y="224" width="76" height="76" rx="18" fill="#efe3d4"></rect>
+            <rect x="146" y="224" width="80" height="76" rx="18" fill="#ebefe8"></rect>
+            <text x="70" y="168" fill="#91181a" font-family="Inter, sans-serif" font-size="14" font-weight="600">Month-end pack</text>
+            <text x="68" y="257" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="12">VAT / GST</text>
+            <text x="160" y="257" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="12">Payroll</text>
+          </svg>
+        </div>
+
+        <div class="w-1/4 md:w-64 aspect-[3/4] rounded-t-[60px] rounded-b-xl overflow-hidden z-10 shadow-lg border-2 border-white relative bg-white hero-dashboard">
+          <svg viewBox="0 0 320 420" aria-hidden="true">
+            <rect width="320" height="420" fill="#ffffff"></rect>
+            <rect x="0" y="0" width="320" height="58" fill="#fcfaf8"></rect>
+            <text x="24" y="35" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="12" font-weight="600">TALLYPORT</text>
+            <text x="24" y="86" fill="#2d2d2d" font-family="Playfair Display, serif" font-size="24" font-weight="500">Month-end preview</text>
+            <text x="24" y="120" fill="#737373" font-family="Inter, sans-serif" font-size="10">MARCH CYCLE</text>
+            <rect x="24" y="138" width="128" height="92" rx="20" fill="#fcfaf8" stroke="#e5e5e5"></rect>
+            <rect x="168" y="138" width="128" height="92" rx="20" fill="#fcfaf8" stroke="#e5e5e5"></rect>
+            <text x="40" y="170" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="14" font-weight="600">Reconciliations</text>
+            <text x="184" y="170" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="14" font-weight="600">Upcoming filings</text>
+            <rect x="40" y="196" width="82" height="6" rx="3" fill="#eadfd7"></rect>
+            <rect x="40" y="196" width="62" height="6" rx="3" fill="#91181a"></rect>
+            <rect x="184" y="196" width="82" height="6" rx="3" fill="#eadfd7"></rect>
+            <rect x="184" y="196" width="58" height="6" rx="3" fill="#91181a"></rect>
+            <text x="252" y="170" fill="#91181a" font-family="Inter, sans-serif" font-size="11" font-weight="600">3 ITEMS</text>
+            <text x="236" y="111" fill="#737373" font-family="Inter, sans-serif" font-size="10">BOOKS STATUS</text>
+            <text x="236" y="136" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="20" font-weight="600">On track</text>
+            <text x="24" y="270" fill="#737373" font-family="Inter, sans-serif" font-size="10" letter-spacing="2">RECENT FINANCE TASKS</text>
+            <circle cx="28" cy="302" r="4" fill="#9ba492"></circle>
+            <text x="42" y="307" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="12">Payroll run prepared</text>
+            <circle cx="28" cy="336" r="4" fill="#e6b17e"></circle>
+            <text x="42" y="341" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="12">VAT / GST return check</text>
+            <circle cx="28" cy="370" r="4" fill="#b07b8a"></circle>
+            <text x="42" y="375" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="12">Backlog cleanup quote</text>
+            <rect x="0" y="392" width="320" height="28" fill="#1a1a1a"></rect>
+            <text x="24" y="410" fill="#f5f5f5" font-family="Inter, sans-serif" font-size="10">ALL SYSTEMS OPERATIONAL</text>
+          </svg>
+          <div class="absolute inset-0 bg-brand/5"></div>
+        </div>
+
+        <div class="w-1/5 md:w-52 aspect-[3/4] rounded-t-[50px] rounded-b-xl overflow-hidden translate-y-6 opacity-90 shadow-md border border-neutral-100 bg-white illustration-card">
+          <svg viewBox="0 0 280 360" aria-hidden="true">
+            <rect width="280" height="360" fill="#fbfaf8"></rect>
+            <rect x="26" y="28" width="228" height="304" rx="28" fill="#ffffff" stroke="#ece7e3"></rect>
+            <text x="48" y="72" fill="#91181a" font-family="Playfair Display, serif" font-size="24">Working rhythm</text>
+            <rect x="48" y="100" width="184" height="54" rx="20" fill="#f5f5f5"></rect>
+            <rect x="48" y="172" width="184" height="54" rx="20" fill="#f4e8e8"></rect>
+            <rect x="48" y="244" width="184" height="54" rx="20" fill="#eef2ee"></rect>
+            <text x="68" y="133" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="13" font-weight="600">Submitted</text>
+            <text x="68" y="205" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="13" font-weight="600">Reconciled</text>
+            <text x="68" y="277" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="13" font-weight="600">Reported</text>
+            <circle cx="208" cy="126" r="15" fill="#e6b17e"></circle>
+            <circle cx="208" cy="198" r="15" fill="#9ba492"></circle>
+            <circle cx="208" cy="270" r="15" fill="#a9b5c2"></circle>
+          </svg>
+        </div>
+
+        <div class="w-1/5 md:w-44 aspect-[3/4] rounded-t-[40px] rounded-b-xl overflow-hidden translate-y-12 opacity-80 shadow-sm border border-neutral-100 bg-neutral-50 illustration-card">
+          <svg viewBox="0 0 260 340" aria-hidden="true">
+            <rect width="260" height="340" fill="#f8f4ef"></rect>
+            <rect x="30" y="34" width="200" height="272" rx="28" fill="#fff" stroke="#e5e5e5"></rect>
+            <text x="54" y="78" fill="#91181a" font-family="Playfair Display, serif" font-size="22">Cloud stack</text>
+            <rect x="52" y="100" width="156" height="42" rx="18" fill="#f5f5f5"></rect>
+            <rect x="52" y="154" width="156" height="42" rx="18" fill="#eef2ee"></rect>
+            <rect x="52" y="208" width="156" height="42" rx="18" fill="#f4e8e8"></rect>
+            <rect x="52" y="262" width="156" height="28" rx="14" fill="#fcfaf8"></rect>
+            <text x="70" y="126" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="12" font-weight="600">QuickBooks / Xero</text>
+            <text x="70" y="180" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="12" font-weight="600">Wave / Sage</text>
+            <text x="70" y="234" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="12" font-weight="600">VAT / GST-HST</text>
+            <text x="78" y="280" fill="#737373" font-family="Inter, sans-serif" font-size="10">Current and owner-ready</text>
+          </svg>
+        </div>
+      </div>
+    </header>
+
+    <section class="py-12 px-6 md:px-12 max-w-6xl mx-auto">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="rounded-[2rem] border border-neutral-100 bg-neutral-50 p-6 text-center">
+          <div class="font-serif text-4xl text-neutral-900 mb-2">15+</div>
+          <div class="text-sm text-neutral-600">Combined years of experience</div>
+        </div>
+        <div class="rounded-[2rem] border border-neutral-100 bg-neutral-50 p-6 text-center">
+          <div class="font-serif text-4xl text-neutral-900 mb-2">2</div>
+          <div class="text-sm text-neutral-600">Countries served, Canada and UK</div>
+        </div>
+        <div class="rounded-[2rem] border border-neutral-100 bg-neutral-50 p-6 text-center">
+          <div class="font-serif text-4xl text-neutral-900 mb-2">24h</div>
+          <div class="text-sm text-neutral-600">Typical response target on business days</div>
+        </div>
+        <div class="rounded-[2rem] border border-neutral-100 bg-neutral-50 p-6 text-center">
+          <div class="font-serif text-4xl text-neutral-900 mb-2">Fixed</div>
+          <div class="text-sm text-neutral-600">Monthly pricing, not drifting hourly bills</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-24 md:py-32 px-6 overflow-hidden relative bg-neutral-50/50">
+      <div class="max-w-4xl mx-auto relative h-[540px] flex items-center justify-center">
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div class="w-[300px] h-[300px] rounded-full border border-brand/20 absolute translate-x-10 translate-y-10"></div>
+          <div class="w-[450px] h-[450px] rounded-full border border-neutral-200 absolute -translate-x-12 -translate-y-4"></div>
+          <div class="w-[600px] h-[600px] rounded-full border border-brand/10 absolute"></div>
+        </div>
+
+        <div class="text-center z-10 max-w-2xl">
+          <span class="inline-block border border-neutral-300 text-neutral-600 rounded-full px-4 py-1 text-sm font-medium mb-6 bg-white">The reality</span>
+          <h2 class="font-serif text-3xl md:text-5xl font-medium tracking-tight text-neutral-900 leading-tight">
+            Most owners do not need more accounting jargon. They need a cleaner system.
+          </h2>
+        </div>
+
+        <div class="absolute top-10 left-0 md:left-20 bg-white/90 backdrop-blur-sm shadow-sm border border-neutral-100 rounded-full px-5 py-2.5 flex items-center gap-3 text-sm font-medium z-20">
+          <div class="w-6 h-6 rounded-full bg-brand/10 flex items-center justify-center text-brand">
+            <i data-lucide="clock-3" class="w-3.5 h-3.5 stroke-1-5"></i>
+          </div>
+          Books without rhythm
+        </div>
+
+        <div class="absolute bottom-20 left-4 md:left-10 bg-white/90 backdrop-blur-sm shadow-sm border border-neutral-100 rounded-full px-5 py-2.5 flex items-center gap-3 text-sm font-medium z-20">
+          <div class="w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center text-orange-600">
+            <i data-lucide="alert-circle" class="w-3.5 h-3.5 stroke-1-5"></i>
+          </div>
+          Compliance that appears too late
+        </div>
+
+        <div class="absolute top-24 right-0 md:right-10 bg-white/90 backdrop-blur-sm shadow-sm border border-neutral-100 rounded-full px-5 py-2.5 flex items-center gap-3 text-sm font-medium z-20">
+          <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+            <i data-lucide="file-text" class="w-3.5 h-3.5 stroke-1-5"></i>
+          </div>
+          Reporting that says too little
+        </div>
+
+        <div class="absolute bottom-32 right-4 md:right-20 bg-white/90 backdrop-blur-sm shadow-sm border border-neutral-100 rounded-full px-5 py-2.5 flex items-center gap-3 text-sm font-medium z-20 max-w-[260px] text-left">
+          <div class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+            <i data-lucide="target" class="w-3.5 h-3.5 stroke-1-5"></i>
+          </div>
+          Good finance support should remove ambiguity, not add to it.
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="py-24 px-6 md:px-12 max-w-7xl mx-auto">
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <span class="inline-block border border-neutral-300 text-neutral-600 rounded-full px-4 py-1 text-sm font-medium mb-6 bg-white">Services</span>
+        <h2 class="font-serif text-3xl md:text-5xl font-medium tracking-tight text-neutral-900 leading-tight mb-5">
+          What Tallyport actually handles
+        </h2>
+        <p class="text-neutral-600">
+          The services are structured around making the finance function dependable, not around inflating the page with filler.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[300px]">
+        <article class="md:col-span-1 rounded-[2rem] relative overflow-hidden group bg-neutral-50 border border-neutral-100 p-8 flex flex-col justify-between">
+          <div>
+            <span class="inline-block border border-neutral-300 text-neutral-600 rounded-full px-4 py-1 text-xs font-medium mb-6 bg-white">Core</span>
+            <h3 class="font-serif text-2xl tracking-tight leading-snug text-neutral-900 mb-4">Bookkeeping and reconciliations</h3>
+            <p class="text-sm text-neutral-600">Bank reconciliations, transaction categorisation, accounts payable, accounts receivable, and current records across QuickBooks Online, Xero, Wave, and Sage.</p>
+          </div>
+          <div class="w-10 h-10 rounded-full border border-neutral-200 flex items-center justify-center text-brand self-end">
+            <i data-lucide="arrow-right" class="w-5 h-5 stroke-1-5"></i>
+          </div>
+        </article>
+
+        <article class="md:col-span-1 rounded-[2rem] bg-neutral-50 border border-neutral-100 p-8 flex flex-col items-center justify-center text-center">
+          <span class="text-xs font-medium tracking-wider uppercase text-neutral-500 mb-4 border border-neutral-200 rounded-full px-4 py-1.5 bg-white">Working scope</span>
+          <h3 class="font-serif text-3xl md:text-4xl tracking-tight font-medium text-neutral-900 leading-tight mb-4">
+            Built for owners who want cleaner finance operations
+          </h3>
+          <p class="text-sm text-neutral-600">Current books, readable reporting, and filings handled before the deadline energy gets ugly.</p>
+          <div class="mt-8 flex gap-4 text-brand/40">
+            <i data-lucide="receipt-text" class="w-8 h-8 stroke-1-5"></i>
+            <i data-lucide="landmark" class="w-8 h-8 stroke-1-5"></i>
+            <i data-lucide="briefcase-business" class="w-8 h-8 stroke-1-5"></i>
+          </div>
+        </article>
+
+        <article class="md:col-span-1 rounded-[2rem] relative overflow-hidden group bg-white border border-neutral-100 illustration-card">
+          <svg viewBox="0 0 500 500" class="w-full h-full">
+            <rect width="500" height="500" fill="#fcfaf8"></rect>
+            <rect x="40" y="48" width="420" height="404" rx="40" fill="#ffffff" stroke="#ece7e3"></rect>
+            <rect x="76" y="94" width="140" height="18" rx="9" fill="#f4e8e8"></rect>
+            <rect x="76" y="130" width="204" height="12" rx="6" fill="#e5e5e5"></rect>
+            <rect x="76" y="170" width="348" height="86" rx="30" fill="#f7f2ec"></rect>
+            <rect x="76" y="280" width="164" height="118" rx="28" fill="#eef2ee"></rect>
+            <rect x="260" y="280" width="164" height="118" rx="28" fill="#f4e8e8"></rect>
+            <text x="104" y="218" fill="#91181a" font-family="Playfair Display, serif" font-size="28">Cloud accounting stack</text>
+            <text x="108" y="330" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="18" font-weight="600">QuickBooks</text>
+            <text x="290" y="330" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="18" font-weight="600">Xero / Sage / Wave</text>
+          </svg>
+        </article>
+
+        <article class="md:col-span-1 rounded-[2rem] bg-[#e6b17e] p-8 flex flex-col justify-between group cursor-pointer transition-all hover:bg-[#dfa773] text-white">
+          <div>
+            <span class="inline-block border border-white/30 rounded-full px-4 py-1 text-xs font-medium mb-6 bg-white/10">Compliance</span>
+            <h3 class="font-serif text-2xl tracking-tight leading-snug">GST/HST and VAT filing</h3>
+            <p class="text-sm text-white/80 mt-4">Returns prepared from clean books, with Canadian and UK compliance work handled before the deadline energy gets ugly.</p>
+          </div>
+          <div class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center self-end">
+            <i data-lucide="arrow-right" class="w-5 h-5 stroke-1-5"></i>
+          </div>
+        </article>
+
+        <article class="md:col-span-1 rounded-[2rem] bg-[#9ba492] p-8 flex flex-col justify-between group cursor-pointer transition-all hover:bg-[#8f9886] text-white">
+          <div>
+            <span class="inline-block border border-white/30 rounded-full px-4 py-1 text-xs font-medium mb-6 bg-white/10">Payroll</span>
+            <h3 class="font-serif text-2xl tracking-tight leading-snug w-2/3">Payroll processing</h3>
+            <p class="text-sm text-white/80 mt-4">Payslips, remittances, RTI submissions, and year-end slips handled with the boring consistency payroll deserves.</p>
+          </div>
+          <div class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center self-end">
+            <i data-lucide="arrow-right" class="w-5 h-5 stroke-1-5"></i>
+          </div>
+        </article>
+
+        <article class="md:col-span-1 rounded-[2rem] bg-[#a9b5c2] p-8 flex flex-col justify-between group cursor-pointer transition-all hover:bg-[#9ca9b8] text-white">
+          <div>
+            <span class="inline-block border border-white/30 rounded-full px-4 py-1 text-xs font-medium mb-6 bg-white/10">Advisory</span>
+            <h3 class="font-serif text-2xl tracking-tight leading-snug">Cash flow and planning support</h3>
+            <p class="text-sm text-white/80 mt-4">Budgeting, visibility, and practical financial advice for owners who want the numbers to help guide decisions.</p>
+          </div>
+          <div class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center self-end">
+            <i data-lucide="arrow-right" class="w-5 h-5 stroke-1-5"></i>
+          </div>
+        </article>
+
+        <article class="md:col-span-3 rounded-[2rem] border border-neutral-100 bg-white p-8 md:p-10">
+          <div class="grid md:grid-cols-3 gap-8">
+            <div>
+              <span class="inline-block border border-neutral-300 text-neutral-600 rounded-full px-4 py-1 text-xs font-medium mb-5 bg-white">Additional support</span>
+              <h3 class="font-serif text-3xl tracking-tight text-neutral-900 mb-4">Reporting, cleanup, and year-end support stay in the same system.</h3>
+              <p class="text-neutral-600">Tallyport keeps the finance function connected instead of turning every issue into a separate scramble.</p>
+            </div>
+            <div class="space-y-5">
+              <div>
+                <h4 class="font-medium text-neutral-900 mb-2">Monthly financial reporting</h4>
+                <p class="text-sm text-neutral-600">P&amp;L, balance sheet, cash flow, and owner-friendly commentary so you know what matters, not just what changed.</p>
+              </div>
+              <div>
+                <h4 class="font-medium text-neutral-900 mb-2">Cleanup and closing support</h4>
+                <p class="text-sm text-neutral-600">Backlog recovery, year-end preparation, and books that are ready for tax filing instead of “almost there.”</p>
+              </div>
+            </div>
+            <div class="rounded-[1.5rem] bg-brand-light p-6">
+              <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-4">Software coverage</div>
+              <div class="space-y-3 text-sm text-neutral-700">
+                <div>QuickBooks Online</div>
+                <div>Xero</div>
+                <div>Wave</div>
+                <div>Sage</div>
+                <div>Canada and UK workflows</div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="workflow" class="py-24 px-6 md:px-12 max-w-6xl mx-auto">
+      <div class="bg-[#eaf1eb] rounded-[3rem] p-10 md:p-16">
+        <div class="flex flex-col md:flex-row justify-between items-start gap-12 mb-12">
+          <div class="max-w-2xl">
+            <span class="inline-block border border-neutral-300 text-neutral-600 rounded-full px-4 py-1 text-sm font-medium mb-6 bg-white">Working rhythm</span>
+            <h2 class="font-serif text-3xl md:text-5xl font-medium tracking-tight text-neutral-900 leading-tight mb-6">
+              Clean process beats heroic cleanup
+            </h2>
+            <p class="text-neutral-700">
+              Tallyport’s value is not just “doing the books.” It is turning finance operations into a repeatable system:
+              gather, reconcile, review, report, and file before the month-end scramble begins.
+            </p>
           </div>
 
-          <div class="hero-proof">
-            <div class="proof-stack" aria-hidden="true">
-              <span></span><span></span><span></span>
-            </div>
-            <p class="proof-text">
-              Trusted by founders who want <strong>qualified accountants</strong>, not a mess hidden in spreadsheets until filing week.
-            </p>
+          <div class="flex flex-wrap gap-3 max-w-md">
+            <span class="px-4 py-2 rounded-full bg-white text-sm font-medium text-neutral-700 border border-white/60 shadow-sm">Monthly reporting cadence</span>
+            <span class="px-4 py-2 rounded-full bg-white text-sm font-medium text-neutral-700 border border-white/60 shadow-sm">CRA and HMRC context</span>
+            <span class="px-4 py-2 rounded-full bg-white text-sm font-medium text-neutral-700 border border-white/60 shadow-sm">Catch-up ready</span>
+            <span class="px-4 py-2 rounded-full bg-white text-sm font-medium text-neutral-700 border border-white/60 shadow-sm">Owner-readable reporting</span>
           </div>
         </div>
 
-        <div class="hero-media reveal-up">
-          <div class="hero-blob one" aria-hidden="true"></div>
-          <div class="hero-blob two" aria-hidden="true"></div>
-
-          <article class="hero-feature-card float-card">
-            <div class="hero-feature-inner">
-              <div class="hero-feature-head">
-                <strong>Owner-ready finance support</strong>
-                <span class="side-pill">Main visual</span>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="rounded-[2rem] bg-white border border-white/60 shadow-sm p-8">
+            <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-6">Client records</div>
+            <div class="space-y-4">
+              <div class="rounded-[1.5rem] bg-neutral-50 border border-neutral-100 p-5">
+                <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-2">1. Submitted</div>
+                <div class="font-medium text-neutral-900 mb-1">IN</div>
+                <p class="text-sm text-neutral-600">Bank feeds, invoices, payroll inputs</p>
               </div>
-              <p class="hero-feature-copy">
-                Clean reporting, calmer month-end, and a more confident founder on the other side of the numbers.
-              </p>
+              <div class="rounded-[1.5rem] bg-neutral-50 border border-neutral-100 p-5">
+                <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-2">2. Reconciled</div>
+                <div class="font-medium text-neutral-900 mb-1">RC</div>
+                <p class="text-sm text-neutral-600">Categorised and matched correctly</p>
+              </div>
+              <div class="rounded-[1.5rem] bg-neutral-50 border border-neutral-100 p-5">
+                <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-2">3. Reviewed</div>
+                <div class="font-medium text-neutral-900 mb-1">RV</div>
+                <p class="text-sm text-neutral-600">Exceptions surfaced early</p>
+              </div>
+              <div class="rounded-[1.5rem] bg-neutral-50 border border-neutral-100 p-5">
+                <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-2">4. Reported</div>
+                <div class="font-medium text-neutral-900 mb-1">RP</div>
+                <p class="text-sm text-neutral-600">Ready for owner decisions and filing</p>
+              </div>
+            </div>
+          </div>
 
-              <div class="hero-portrait-wrap">
-                <svg class="portrait-illustration" viewBox="0 0 520 520" aria-hidden="true">
-                  <rect x="0" y="0" width="520" height="520" rx="54" fill="#f7f2ea"></rect>
-                  <circle cx="420" cy="86" r="52" fill="#dbe6dc"></circle>
-                  <circle cx="116" cy="104" r="34" fill="#efdac9"></circle>
-                  <rect x="52" y="74" width="148" height="24" rx="12" fill="#efe1d2"></rect>
-                  <rect x="52" y="116" width="216" height="16" rx="8" fill="#efe1d2"></rect>
-                  <rect x="52" y="146" width="192" height="16" rx="8" fill="#efe1d2"></rect>
-                  <path d="M152 430c0-80 50-136 124-136 73 0 124 56 124 136v28H152Z" fill="#2d2722"></path>
-                  <circle cx="276" cy="216" r="78" fill="#d8b19b"></circle>
-                  <path d="M210 210c8-68 42-110 92-110 46 0 86 36 98 92-38 24-108 44-190 18Z" fill="#26211d"></path>
-                  <rect x="44" y="416" width="190" height="56" rx="28" fill="#fffaf4" stroke="rgba(25,24,21,0.08)"></rect>
-                  <rect x="286" y="416" width="190" height="56" rx="28" fill="#fffaf4" stroke="rgba(25,24,21,0.08)"></rect>
-                  <text x="76" y="451" font-family="IBM Plex Mono, monospace" font-size="16" letter-spacing="1.4" fill="#59554f">MONTH-END READY</text>
-                  <text x="320" y="451" font-family="IBM Plex Mono, monospace" font-size="16" letter-spacing="1.4" fill="#59554f">CLEARER REPORTS</text>
+          <div class="rounded-[2rem] relative overflow-hidden bg-white border border-white/60 shadow-sm illustration-card">
+            <svg viewBox="0 0 500 500" class="w-full h-full">
+              <rect width="500" height="500" fill="#f9f7f4"></rect>
+              <rect x="34" y="38" width="432" height="424" rx="42" fill="#ffffff" stroke="#ece7e3"></rect>
+              <text x="64" y="86" fill="#91181a" font-family="Playfair Display, serif" font-size="28">Owner-ready outcome</text>
+              <rect x="64" y="116" width="134" height="14" rx="7" fill="#f4e8e8"></rect>
+              <path d="M92 336c54-12 94-40 130-92 24-34 54-52 98-58" fill="none" stroke="#91181a" stroke-width="8" stroke-linecap="round"></path>
+              <circle cx="232" cy="244" r="20" fill="#9ba492"></circle>
+              <circle cx="320" cy="206" r="20" fill="#e6b17e"></circle>
+              <circle cx="408" cy="186" r="20" fill="#a9b5c2"></circle>
+              <rect x="64" y="378" width="156" height="48" rx="24" fill="#eef2ee"></rect>
+              <rect x="246" y="378" width="190" height="48" rx="24" fill="#f4e8e8"></rect>
+              <text x="92" y="408" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="15" font-weight="600">Monthly reports</text>
+              <text x="276" y="408" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="15" font-weight="600">Filings before deadlines</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="credentials" class="py-24 px-6 md:px-12 max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[260px]">
+        <article class="md:col-span-2 rounded-[2rem] bg-neutral-50 border border-neutral-100 p-8 md:p-10 flex flex-col justify-between">
+          <div>
+            <span class="inline-block border border-neutral-300 text-neutral-600 rounded-full px-4 py-1 text-sm font-medium mb-6 bg-white">Credentials</span>
+            <h2 class="font-serif text-3xl md:text-5xl font-medium tracking-tight text-neutral-900 leading-tight mb-6 max-w-3xl">
+              Trust signals that actually matter.
+            </h2>
+            <p class="text-neutral-600 max-w-2xl">
+              Trust is not a vague paragraph. It is structured proof, software familiarity, and finance work that is current enough to be useful.
+            </p>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-4">
+            <div class="rounded-[1.5rem] bg-white border border-neutral-100 p-5">
+              <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-3">Canada</div>
+              <h3 class="font-serif text-2xl text-neutral-900 mb-2">CA context</h3>
+              <p class="text-sm text-neutral-600">Professional accounting support for Canadian small businesses needing accurate books, GST/HST handling, and clean reporting.</p>
+            </div>
+            <div class="rounded-[1.5rem] bg-white border border-neutral-100 p-5">
+              <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-3">United Kingdom</div>
+              <h3 class="font-serif text-2xl text-neutral-900 mb-2">UK compliance familiarity</h3>
+              <p class="text-sm text-neutral-600">Useful for London and UK clients who need MTD-aware VAT work, payroll support, and ongoing accounting structure.</p>
+            </div>
+            <div class="rounded-[1.5rem] bg-white border border-neutral-100 p-5">
+              <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-3">Cloud stack</div>
+              <h3 class="font-serif text-2xl text-neutral-900 mb-2">Current systems</h3>
+              <p class="text-sm text-neutral-600">Modern remote workflows, real-time visibility, and less friction than the old spreadsheet-and-email circus.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="rounded-[2rem] bg-brand-light p-8 flex flex-col justify-between">
+          <div>
+            <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-4">Coverage</div>
+            <h3 class="font-serif text-3xl text-neutral-900 tracking-tight mb-4">Canada and UK</h3>
+            <p class="text-sm text-neutral-700">Cross-border understanding for Canada and UK workflows, without turning it into a maze.</p>
+          </div>
+          <div class="text-sm text-neutral-700 space-y-2">
+            <div>CRA and GST/HST familiarity</div>
+            <div>HMRC, VAT, and payroll workflows</div>
+            <div>Catch-up and owner-ready reporting</div>
+          </div>
+        </article>
+
+        <article class="rounded-[2rem] bg-white border border-neutral-100 p-8 md:col-span-3">
+          <div class="text-center mb-8">
+            <span class="inline-block border border-neutral-300 text-neutral-600 rounded-full px-4 py-1 text-sm font-medium mb-4 bg-white">Software</span>
+            <h3 class="font-serif text-3xl text-neutral-900 tracking-tight">QuickBooks, Xero, Wave, and Sage</h3>
+          </div>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="rounded-[1.5rem] bg-neutral-50 border border-neutral-100 p-6 text-center integration-logo">
+              <div class="w-14 h-14 mx-auto mb-4">
+                <svg viewBox="0 0 48 48" aria-hidden="true">
+                  <circle cx="24" cy="24" r="20" fill="#2ca01c"></circle>
+                  <path d="M19 15h10c3.31 0 6 2.69 6 6v6c0 3.31-2.69 6-6 6H19c-3.31 0-6-2.69-6-6v-6c0-3.31 2.69-6 6-6Z" fill="none" stroke="#fff" stroke-linejoin="round" stroke-width="2.6"></path>
+                  <path d="M21 24h6.8c2.32 0 4.2 1.88 4.2 4.2S30.12 32.4 27.8 32.4H21" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2.6"></path>
+                  <path d="M27 24h-6.8c-2.32 0-4.2-1.88-4.2-4.2s1.88-4.2 4.2-4.2H27" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2.6"></path>
                 </svg>
               </div>
-
-              <div class="hero-bottom-strip">
-                <div class="hero-strip-card">
-                  <strong>Founder clarity</strong>
-                  <span>Readable reporting and fewer deadline surprises.</span>
-                </div>
-                <div class="hero-strip-card">
-                  <strong>Steady process</strong>
-                  <span>Books, payroll, VAT, GST / HST, and year-end moving in sequence.</span>
-                </div>
+              <div class="font-medium text-neutral-900 mb-2">QuickBooks</div>
+              <p class="text-sm text-neutral-600">Certified workflows for ongoing bookkeeping and reporting.</p>
+            </div>
+            <div class="rounded-[1.5rem] bg-neutral-50 border border-neutral-100 p-6 text-center integration-logo">
+              <div class="w-14 h-14 mx-auto mb-4">
+                <svg viewBox="0 0 48 48" aria-hidden="true">
+                  <circle cx="24" cy="24" r="20" fill="#13b5ea"></circle>
+                  <path d="m18 17 12 14" stroke="#fff" stroke-linecap="round" stroke-width="3.4"></path>
+                  <path d="m30 17-12 14" stroke="#fff" stroke-linecap="round" stroke-width="3.4"></path>
+                </svg>
               </div>
+              <div class="font-medium text-neutral-900 mb-2">Xero</div>
+              <p class="text-sm text-neutral-600">Good fit for UK cloud bookkeeping and VAT reporting.</p>
             </div>
-            <div class="media-sheen"></div>
-          </article>
-
-          <article class="hero-side-card top float-card">
-            <div class="side-card-body">
-              <div class="side-card-top">
-                <strong>Programs fit</strong>
-                <span class="side-pill">Coverage</span>
+            <div class="rounded-[1.5rem] bg-neutral-50 border border-neutral-100 p-6 text-center integration-logo">
+              <div class="w-14 h-14 mx-auto mb-4">
+                <svg viewBox="0 0 48 48" aria-hidden="true">
+                  <rect x="6" y="6" width="36" height="36" rx="12" fill="#f75b4f"></rect>
+                  <path d="M12 19.5c3.4 0 3.4 9 6.8 9s3.4-9 6.8-9 3.4 9 6.8 9 3.4-9 6.8-9" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+                </svg>
               </div>
-              <svg class="portrait-illustration" viewBox="0 0 240 180" aria-hidden="true">
-                <rect x="0" y="0" width="240" height="180" rx="26" fill="#f8f3ed"></rect>
-                <circle cx="172" cy="46" r="26" fill="#dbe6dc"></circle>
-                <rect x="22" y="32" width="84" height="18" rx="9" fill="#efe5db"></rect>
-                <rect x="22" y="62" width="132" height="12" rx="6" fill="#efe5db"></rect>
-                <rect x="22" y="82" width="114" height="12" rx="6" fill="#efe5db"></rect>
-                <path d="M153 140c0-26 16-44 39-44s39 18 39 44v8h-78Z" fill="#2e2823"></path>
-                <circle cx="191" cy="80" r="24" fill="#d9b29b"></circle>
-                <path d="M170 80c2-18 12-31 26-31 11 0 21 7 24 23-10 7-30 13-50 8Z" fill="#221f1a"></path>
-                <rect x="20" y="124" width="122" height="36" rx="18" fill="#fffaf4" stroke="rgba(25,24,21,0.08)"></rect>
-                <text x="40" y="146" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1.2" fill="#59554f">MONTHLY REVIEW READY</text>
-              </svg>
-              <p class="side-card-copy">For freelancers, contractors, and small businesses that want accounting support to feel organised and steady.</p>
+              <div class="font-medium text-neutral-900 mb-2">Wave</div>
+              <p class="text-sm text-neutral-600">Useful for simpler operating setups and smaller businesses.</p>
             </div>
-            <div class="media-sheen"></div>
-          </article>
-
-          <article class="hero-main-card float-card" id="hero-panel">
-            <div class="hero-panel-header">
-              <div class="hero-panel-brand">
-                <strong>Tallyport</strong>
-                <div class="hero-panel-tabs">
-                  <span>Overview</span>
-                  <span>Reporting</span>
-                  <span>Compliance</span>
-                </div>
+            <div class="rounded-[1.5rem] bg-neutral-50 border border-neutral-100 p-6 text-center integration-logo">
+              <div class="w-14 h-14 mx-auto mb-4">
+                <svg viewBox="0 0 48 48" aria-hidden="true">
+                  <rect x="6" y="6" width="36" height="36" rx="11" fill="#00c389"></rect>
+                  <path d="M31.6 16.8h-10a3.6 3.6 0 1 0 0 7.2h4.8a3.6 3.6 0 1 1 0 7.2H16.2" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.2"></path>
+                </svg>
               </div>
-              <div class="hero-panel-user">
-                <span class="hero-panel-avatar">CA</span>
-                <span>Qualified team</span>
-              </div>
-            </div>
-
-            <div class="hero-panel-body">
-              <div class="hero-panel-top">
-                <div>
-                  <h3>Month-end preview</h3>
-                  <div class="micro-row">
-                    <span class="micro-tag">March cycle</span>
-                    <span class="micro-copy">Canada and UK books</span>
-                  </div>
-                </div>
-                <div class="metric-panel">
-                  <span class="metric-label">Books status</span>
-                  <span class="metric-value">On track</span>
-                </div>
-              </div>
-
-              <div class="hero-stat-grid">
-                <article class="mini-stat">
-                  <div class="mini-stat-top">
-                    <div>
-                      <h4>Reconciliations</h4>
-                      <small>Current month</small>
-                    </div>
-                    <div style="text-align:right">
-                      <small class="status-down">Done</small>
-                      <div style="font-family:'IBM Plex Mono',monospace;font-size:1rem;font-weight:500;">94%</div>
-                    </div>
-                  </div>
-                  <div class="progress-bar"><span style="--fill: 94%;"></span></div>
-                </article>
-
-                <article class="mini-stat">
-                  <div class="mini-stat-top">
-                    <div>
-                      <h4>Upcoming filings</h4>
-                      <small>Priority queue</small>
-                    </div>
-                    <div style="text-align:right">
-                      <small class="status-up">3 items</small>
-                      <div style="font-family:'IBM Plex Mono',monospace;font-size:1rem;font-weight:500;">VAT / GST</div>
-                    </div>
-                  </div>
-                  <div class="progress-bar"><span style="--fill: 78%;"></span></div>
-                </article>
-              </div>
-
-              <div class="task-block">
-                <div class="task-title" data-typewriter="Recent finance tasks">Recent finance tasks</div>
-                <div class="task-list">
-                  <div class="task-row">
-                    <div class="task-left">
-                      <span class="task-dot green"></span>
-                      <span class="task-name">Payroll run prepared</span>
-                      <span class="task-tag">Payroll</span>
-                    </div>
-                    <span class="task-status">Ready</span>
-                  </div>
-                  <div class="task-row">
-                    <div class="task-left">
-                      <span class="task-dot gold"></span>
-                      <span class="task-name">VAT / GST return check</span>
-                      <span class="task-tag">Compliance</span>
-                    </div>
-                    <span class="task-status">Review</span>
-                  </div>
-                  <div class="task-row">
-                    <div class="task-left">
-                      <span class="task-dot red"></span>
-                      <span class="task-name">Backlog cleanup quote</span>
-                      <span class="task-tag">Catch-up</span>
-                    </div>
-                    <span class="task-status red">Pending</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="hero-panel-footer">
-              <span class="hero-panel-status"><span></span><span>All systems operational</span></span>
-              <span>Response target: 24 business hours</span>
-            </div>
-            <div class="media-sheen"></div>
-          </article>
-
-          <article class="hero-side-card bottom float-card">
-            <div class="side-card-body">
-              <div class="side-card-top">
-                <strong>Filing queue</strong>
-                <span class="side-pill">Priority</span>
-              </div>
-              <svg class="paperwork-illustration" viewBox="0 0 240 180" aria-hidden="true">
-                <rect x="0" y="0" width="240" height="180" rx="26" fill="#f7f2ec"></rect>
-                <rect x="30" y="26" width="108" height="128" rx="18" fill="#fffaf4" stroke="rgba(25,24,21,0.08)"></rect>
-                <rect x="48" y="52" width="72" height="8" rx="4" fill="#dbe6dc"></rect>
-                <rect x="48" y="70" width="58" height="8" rx="4" fill="#efe5db"></rect>
-                <rect x="48" y="88" width="64" height="8" rx="4" fill="#efe5db"></rect>
-                <rect x="48" y="106" width="56" height="8" rx="4" fill="#efe5db"></rect>
-                <rect x="132" y="44" width="78" height="88" rx="20" fill="#fffaf4" stroke="rgba(25,24,21,0.08)"></rect>
-                <circle cx="171" cy="72" r="20" fill="#d4a24c"></circle>
-                <path d="M160 72h22M171 61v22" stroke="#fffaf4" stroke-width="4" stroke-linecap="round"></path>
-                <rect x="148" y="108" width="46" height="8" rx="4" fill="#dbe6dc"></rect>
-                <text x="34" y="164" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1.4" fill="#59554f">VAT  /  GST  /  YEAR-END</text>
-              </svg>
-              <p class="side-card-copy">Returns, payroll, and year-end work organised before they turn into emergency admin.</p>
-            </div>
-            <div class="media-sheen"></div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="proof-strip">
-      <div class="container">
-        <div class="proof-shell reveal-up">
-          <div class="proof-grid">
-            <div class="proof-cell">
-              <span class="proof-value" data-counter data-target="15" data-suffix="+">15+</span>
-              <span class="proof-label">Combined years of experience</span>
-            </div>
-            <div class="proof-cell">
-              <span class="proof-value" data-counter data-target="2">2</span>
-              <span class="proof-label">Countries served, Canada and UK</span>
-            </div>
-            <div class="proof-cell">
-              <span class="proof-value" data-counter data-target="24" data-suffix="h">24h</span>
-              <span class="proof-label">Typical response target on business days</span>
-            </div>
-            <div class="proof-cell">
-              <span class="proof-value">Fixed</span>
-              <span class="proof-label">Monthly pricing, not drifting hourly bills</span>
+              <div class="font-medium text-neutral-900 mb-2">Sage</div>
+              <p class="text-sm text-neutral-600">Handled where legacy or specific client workflows need it.</p>
             </div>
           </div>
-        </div>
+        </article>
       </div>
     </section>
 
-    <section class="section" id="why">
-      <div class="scan-line"></div>
-      <div class="container why-layout">
-        <div class="reveal-up">
-          <span class="section-kicker">The reality</span>
-          <h2>Most owners do not need more accounting jargon. They need a cleaner system.</h2>
-          <p class="section-copy">
-            Good finance support should remove ambiguity. The problem is usually not effort.
-            It is late visibility, broken process, and books that get touched only when a deadline gets scary.
+    <section id="pricing" class="py-24 px-6 md:px-12 max-w-7xl mx-auto">
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <span class="inline-block border border-neutral-300 text-neutral-600 rounded-full px-4 py-1 text-sm font-medium mb-6 bg-white">Pricing</span>
+        <h2 class="font-serif text-3xl md:text-5xl font-medium tracking-tight text-neutral-900 leading-tight mb-5">
+          Fixed monthly pricing, clearer scope.
+        </h2>
+        <p class="text-neutral-600">
+          Still simple, but now presented in the exact theme language of the template, without changing the actual offer.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <article class="rounded-[2rem] border border-neutral-100 bg-white p-8 shadow-sm">
+          <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-4">Starter</div>
+          <div class="font-serif text-5xl text-neutral-900 mb-5">£120</div>
+          <p class="text-neutral-600 mb-6">For freelancers and sole traders who need clean books, regular reporting, and filing support without overcomplicating the setup.</p>
+          <ul class="space-y-3 text-sm text-neutral-700 mb-8">
+            <li>Monthly bank reconciliation</li>
+            <li>Transaction categorisation</li>
+            <li>Quarterly VAT or GST filing</li>
+            <li>Basic monthly P&amp;L</li>
+            <li>Email support</li>
+            <li>Annual self-assessment or T1 support</li>
+          </ul>
+          <a href="#contact" class="w-full inline-flex justify-center bg-neutral-50 text-neutral-800 border border-neutral-200 px-6 py-3 rounded-full text-sm font-medium hover:bg-neutral-100 transition-all">Choose Starter</a>
+        </article>
+
+        <article class="rounded-[2rem] border border-brand/20 bg-brand-light p-8 shadow-sm relative">
+          <div class="absolute top-6 right-6 text-xs uppercase tracking-[0.18em] text-brand font-medium">Most Popular</div>
+          <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-4">Growth</div>
+          <div class="font-serif text-5xl text-neutral-900 mb-5">£220</div>
+          <p class="text-neutral-700 mb-6">For growing businesses that need stronger reporting, payroll, and tighter operational visibility without hiring internally too early.</p>
+          <ul class="space-y-3 text-sm text-neutral-700 mb-8">
+            <li>Everything in Starter</li>
+            <li>Accounts payable and receivable</li>
+            <li>Payroll up to 5 employees</li>
+            <li>Full monthly reporting pack</li>
+            <li>Priority support</li>
+            <li>Corporate tax return support</li>
+            <li>Year-end preparation</li>
+          </ul>
+          <a href="#contact" class="w-full inline-flex justify-center bg-brand text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-brand/90 transition-all">Choose Growth</a>
+        </article>
+
+        <article class="rounded-[2rem] border border-neutral-100 bg-white p-8 shadow-sm">
+          <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-4">Premium</div>
+          <div class="font-serif text-5xl text-neutral-900 mb-5">£380</div>
+          <p class="text-neutral-600 mb-6">For established businesses that want finance support to be proactive, visible, and more strategic month to month.</p>
+          <ul class="space-y-3 text-sm text-neutral-700 mb-8">
+            <li>Everything in Growth</li>
+            <li>Payroll up to 15 employees</li>
+            <li>Cash flow forecasting</li>
+            <li>Budget versus actual reporting</li>
+            <li>Quarterly strategy calls</li>
+            <li>Financial planning support</li>
+            <li>Dedicated account manager</li>
+          </ul>
+          <a href="#contact" class="w-full inline-flex justify-center bg-neutral-50 text-neutral-800 border border-neutral-200 px-6 py-3 rounded-full text-sm font-medium hover:bg-neutral-100 transition-all">Choose Premium</a>
+        </article>
+      </div>
+
+      <p class="text-center text-neutral-600 text-base mt-8">Catch-up bookkeeping available from £95 per month of backlog, with rush turnaround available when needed.</p>
+    </section>
+
+    <section id="about" class="py-24 px-6 md:px-12 max-w-7xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-8">
+        <article class="rounded-[2.5rem] bg-neutral-50 border border-neutral-100 p-10">
+          <span class="inline-block border border-neutral-300 text-neutral-600 rounded-full px-4 py-1 text-sm font-medium mb-6 bg-white">About</span>
+          <h2 class="font-serif text-3xl md:text-5xl font-medium tracking-tight text-neutral-900 leading-tight mb-6">
+            Tallyport is built for owners who want finance work done properly and explained clearly.
+          </h2>
+          <p class="text-neutral-600 mb-8">
+            The business was designed around a simple standard: keep the books current, make the reports readable,
+            handle compliance before it becomes a crisis, and work like the owner’s time is expensive, because it is.
           </p>
-
-          <div class="quote-card reveal-up">
-            <strong>The right accounting setup should feel like relief, not another thing to manage.</strong>
-            <p>
-              Tallyport is built to bring that relief through rhythm, clean reporting, and work that is actually ready when the owner needs it.
-            </p>
-          </div>
-        </div>
-
-        <div>
-          <article class="visual-card sage reveal-up float-card">
-            <div class="visual-card-header">
-              <strong>Finance rhythm snapshot</strong>
-              <span class="pill">Visibility</span>
-            </div>
-            <svg class="ops-illustration" viewBox="0 0 640 410" aria-hidden="true">
-              <rect x="0" y="0" width="640" height="410" rx="32" fill="#f8f3ed"></rect>
-              <rect x="34" y="42" width="220" height="140" rx="24" fill="#fffaf4" stroke="rgba(25,24,21,0.08)"></rect>
-              <rect x="64" y="78" width="134" height="14" rx="7" fill="#dbe6dc"></rect>
-              <rect x="64" y="108" width="102" height="12" rx="6" fill="#efe5db"></rect>
-              <rect x="64" y="132" width="118" height="12" rx="6" fill="#efe5db"></rect>
-              <rect x="292" y="42" width="314" height="140" rx="24" fill="#fffaf4" stroke="rgba(25,24,21,0.08)"></rect>
-              <path d="M332 148c36-14 68-40 108-68 36-26 74-36 126-36" fill="none" stroke="#d4a24c" stroke-width="8" stroke-linecap="round"></path>
-              <circle cx="470" cy="104" r="18" fill="#7f9a85"></circle>
-              <circle cx="538" cy="82" r="18" fill="#d4a24c"></circle>
-              <rect x="34" y="214" width="572" height="156" rx="28" fill="#fffaf4" stroke="rgba(25,24,21,0.08)"></rect>
-              <rect x="64" y="250" width="122" height="84" rx="18" fill="#efe5db"></rect>
-              <rect x="210" y="250" width="122" height="84" rx="18" fill="#dbe6dc"></rect>
-              <rect x="356" y="250" width="96" height="84" rx="18" fill="#f5e3d6"></rect>
-              <rect x="476" y="250" width="96" height="84" rx="18" fill="#f1ece6"></rect>
-              <text x="84" y="296" font-family="IBM Plex Mono, monospace" font-size="18" letter-spacing="1.6" fill="#59554f">INVOICES</text>
-              <text x="229" y="296" font-family="IBM Plex Mono, monospace" font-size="18" letter-spacing="1.6" fill="#59554f">PAYROLL</text>
-              <text x="378" y="296" font-family="IBM Plex Mono, monospace" font-size="18" letter-spacing="1.6" fill="#59554f">VAT</text>
-              <text x="494" y="296" font-family="IBM Plex Mono, monospace" font-size="18" letter-spacing="1.6" fill="#59554f">REPORTS</text>
-            </svg>
-          </article>
-
-          <div class="issue-stack">
-            <article class="issue-card reveal-up float-card">
-              <span class="card-label">Books without rhythm</span>
-              <p>
-                Transactions pile up, reconciliations slip, and reporting gets delayed until the owner is effectively
-                steering with last month’s map.
-              </p>
-            </article>
-
-            <article class="issue-card reveal-up float-card">
-              <span class="card-label">Compliance that appears too late</span>
-              <p>
-                Payroll, VAT, GST/HST, and year-end work become urgent because nobody was holding the sequence together
-                early enough.
-              </p>
-            </article>
-
-            <article class="issue-card reveal-up float-card">
-              <span class="card-label">Reporting that says too little</span>
-              <p>
-                A profit and loss file is not enough. Owners need context, action, and someone who notices the
-                <span class="emphasis">actual issue</span> before it grows.
-              </p>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section workflow-band" id="workflow">
-      <div class="scan-line"></div>
-      <div class="container workflow-layout">
-        <div class="workflow-intro reveal-up">
-          <span class="section-kicker">Working rhythm</span>
-          <h2>Clean process beats heroic cleanup.</h2>
-          <p>
-            Tallyport’s value is not just “doing the books.” It is turning finance operations into a repeatable system:
-            gather, reconcile, review, report, and file before the month-end scramble begins.
-          </p>
-        </div>
-
-        <div class="workflow-sidebar">
-          <article class="workflow-card reveal-up">
-            <div class="visual-card-header">
-              <strong>Client records</strong>
-              <span class="pill">Working rhythm</span>
-            </div>
-
-            <div class="workflow-rail">
-              <div class="workflow-step">
-                <div class="workflow-icon">IN</div>
-                <div class="workflow-step-meta">
-                  <span class="step-num">1. Submitted</span>
-                  <span class="step-note">Bank feeds, invoices, payroll inputs</span>
-                </div>
-              </div>
-
-              <div class="workflow-step">
-                <div class="workflow-icon">RC</div>
-                <div class="workflow-step-meta">
-                  <span class="step-num">2. Reconciled</span>
-                  <span class="step-note">Categorised and matched correctly</span>
-                </div>
-              </div>
-
-              <div class="workflow-step">
-                <div class="workflow-icon">RV</div>
-                <div class="workflow-step-meta">
-                  <span class="step-num">3. Reviewed</span>
-                  <span class="step-note">Exceptions surfaced early</span>
-                </div>
-              </div>
-
-              <div class="workflow-step">
-                <div class="workflow-icon">RP</div>
-                <div class="workflow-step-meta">
-                  <span class="step-num">4. Reported</span>
-                  <span class="step-note">Ready for owner decisions and filing</span>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <article class="visual-card gold reveal-up float-card">
-            <div class="visual-card-header">
-              <strong>What the owner gets</strong>
-              <span class="pill">Outcome</span>
-            </div>
-            <div class="workflow-metrics">
-              <div>
-                <strong>Monthly</strong>
-                <span>Reporting cadence</span>
-              </div>
-              <div>
-                <strong>Cross-border</strong>
-                <span>CRA and HMRC context</span>
-              </div>
-              <div>
-                <strong>Catch-up ready</strong>
-                <span>Backlog cleanup support</span>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="services">
-      <div class="scan-line"></div>
-      <div class="container">
-        <div class="services-intro reveal-up">
-          <span class="section-kicker">Services</span>
-          <h2>What Tallyport actually handles.</h2>
-          <p class="section-copy">
-            The services are structured around making the finance function dependable, not around inflating the page with filler.
-          </p>
-        </div>
-
-        <div class="service-grid">
-          <article class="visual-card clay service-visual reveal-up float-card">
-            <div class="service-visual-top">
-              <div>
-                <span class="pill">Finance operations</span>
-                <h3>Everything stays in one cleaner operating rhythm.</h3>
-                <p class="section-copy">
-                  Tallyport keeps the day-to-day accounting work, the software stack, and the deadline sequence connected.
-                </p>
-              </div>
-            </div>
-
-            <div class="service-badges">
-              <span>QuickBooks Online</span>
-              <span>Xero</span>
-              <span>Wave</span>
-              <span>Sage</span>
-              <span>VAT</span>
-              <span>GST / HST</span>
-            </div>
-
-            <div class="service-visual-grid">
-              <div class="software-stack">
-                <div class="stack-title">Software stack</div>
-                <div class="software-list">
-                  <div class="software-row">
-                    <div class="software-mark">
-                      <svg viewBox="0 0 48 48" aria-hidden="true">
-                        <circle cx="24" cy="24" r="20" fill="#2ca01c"></circle>
-                        <path d="M19 15h10c3.31 0 6 2.69 6 6v6c0 3.31-2.69 6-6 6H19c-3.31 0-6-2.69-6-6v-6c0-3.31 2.69-6 6-6Z" fill="none" stroke="#fff" stroke-linejoin="round" stroke-width="2.6"></path>
-                        <path d="M21 24h6.8c2.32 0 4.2 1.88 4.2 4.2S30.12 32.4 27.8 32.4H21" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2.6"></path>
-                        <path d="M27 24h-6.8c-2.32 0-4.2-1.88-4.2-4.2s1.88-4.2 4.2-4.2H27" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2.6"></path>
-                      </svg>
-                    </div>
-                    <strong>QuickBooks</strong>
-                  </div>
-                  <div class="software-row">
-                    <div class="software-mark">
-                      <svg viewBox="0 0 48 48" aria-hidden="true">
-                        <circle cx="24" cy="24" r="20" fill="#13b5ea"></circle>
-                        <path d="m18 17 12 14" stroke="#fff" stroke-linecap="round" stroke-width="3.4"></path>
-                        <path d="m30 17-12 14" stroke="#fff" stroke-linecap="round" stroke-width="3.4"></path>
-                      </svg>
-                    </div>
-                    <strong>Xero</strong>
-                  </div>
-                  <div class="software-row">
-                    <div class="software-mark">
-                      <svg viewBox="0 0 48 48" aria-hidden="true">
-                        <rect x="6" y="6" width="36" height="36" rx="12" fill="#f75b4f"></rect>
-                        <path d="M12 19.5c3.4 0 3.4 9 6.8 9s3.4-9 6.8-9 3.4 9 6.8 9 3.4-9 6.8-9" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
-                      </svg>
-                    </div>
-                    <strong>Wave</strong>
-                  </div>
-                  <div class="software-row">
-                    <div class="software-mark">
-                      <svg viewBox="0 0 48 48" aria-hidden="true">
-                        <rect x="6" y="6" width="36" height="36" rx="11" fill="#00c389"></rect>
-                        <path d="M31.6 16.8h-10a3.6 3.6 0 1 0 0 7.2h4.8a3.6 3.6 0 1 1 0 7.2H16.2" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.2"></path>
-                      </svg>
-                    </div>
-                    <strong>Sage</strong>
-                  </div>
-                </div>
-              </div>
-
-              <div class="deadline-stack">
-                <div class="stack-title">Critical sequences</div>
-                <ul>
-                  <li><span>Payroll processing</span><strong>Monthly</strong></li>
-                  <li><span>VAT / GST / HST filing</span><strong>Tracked</strong></li>
-                  <li><span>Year-end support</span><strong>Ready</strong></li>
-                  <li><span>Reporting pack</span><strong>Delivered</strong></li>
-                </ul>
-              </div>
-            </div>
-          </article>
-
-          <article class="service-card reveal-up float-card">
-            <span class="pill">Core</span>
-            <h3>Bookkeeping and reconciliations</h3>
-            <p>Bank reconciliations, transaction categorisation, accounts payable, accounts receivable, and current records across QuickBooks Online, Xero, Wave, and Sage.</p>
-          </article>
-
-          <article class="service-card reveal-up float-card">
-            <span class="pill">Compliance</span>
-            <h3>GST/HST and VAT filing</h3>
-            <p>Returns prepared from clean books, with Canadian and UK compliance work handled before the deadline energy gets ugly.</p>
-          </article>
-
-          <article class="service-card reveal-up float-card">
-            <span class="pill">Payroll</span>
-            <h3>Payroll processing</h3>
-            <p>Payslips, remittances, RTI submissions, and year-end slips handled with the boring consistency payroll deserves.</p>
-          </article>
-
-          <article class="service-card reveal-up float-card">
-            <span class="pill">Reporting</span>
-            <h3>Monthly financial reporting</h3>
-            <p>P&amp;L, balance sheet, cash flow, and owner-friendly commentary so you know what matters, not just what changed.</p>
-          </article>
-
-          <article class="service-card reveal-up float-card">
-            <span class="pill">Year-End</span>
-            <h3>Cleanup and closing support</h3>
-            <p>Backlog recovery, year-end preparation, and books that are ready for tax filing instead of “almost there.”</p>
-          </article>
-
-          <article class="service-card reveal-up float-card">
-            <span class="pill">Advisory</span>
-            <h3>Cash flow and planning support</h3>
-            <p>Budgeting, visibility, and practical financial advice for owners who want the numbers to help guide decisions.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="credentials">
-      <div class="scan-line"></div>
-      <div class="container">
-        <div class="credentials-intro reveal-up">
-          <span class="section-kicker">Credentials</span>
-          <h2>Trust signals that actually matter.</h2>
-          <p class="section-copy">
-            The Aura reference does this well: trust is not a vague paragraph, it is structured proof.
-            So Tallyport should show professional credibility quickly and cleanly.
-          </p>
-        </div>
-
-        <div class="trust-layout">
-          <div class="trust-grid">
-            <article class="trust-card reveal-up float-card">
-              <span class="pill">Canada</span>
-              <h3>CA context</h3>
-              <p>Professional accounting support for Canadian small businesses needing accurate books, GST/HST handling, and clean reporting.</p>
-            </article>
-
-            <article class="trust-card reveal-up float-card">
-              <span class="pill">United Kingdom</span>
-              <h3>UK compliance familiarity</h3>
-              <p>Useful for London and UK clients who need MTD-aware VAT work, payroll support, and ongoing accounting structure.</p>
-            </article>
-
-            <article class="trust-card reveal-up float-card">
-              <span class="pill">Cloud stack</span>
-              <h3>Cloud accounting stack</h3>
-              <p>Modern remote workflows, real-time visibility, and less friction than the old spreadsheet-and-email circus.</p>
-            </article>
-
-            <article class="trust-card region reveal-up float-card">
-              <div>
-                <span class="pill">Coverage</span>
-                <h3>Built around Canada and UK operating reality.</h3>
-                <div class="region-points">
-                  <div>Canadian standards, filings, and GST/HST workflows.</div>
-                  <div>London and wider UK support with VAT, HMRC, and payroll familiarity.</div>
-                  <div>Cross-border understanding when a business needs clean continuity across both.</div>
-                </div>
-              </div>
-              <svg viewBox="0 0 360 260" aria-hidden="true">
-                <rect x="0" y="0" width="360" height="260" rx="28" fill="#f8f3ed"></rect>
-                <path d="M62 92c18-26 44-42 78-42 24 0 48 8 64 24 20 18 44 24 86 22 24-2 45 3 58 14 8 7 12 17 12 31 0 20-10 38-28 52-26 22-58 31-102 31-42 0-76-11-102-28-14-10-31-17-52-20-28-4-44-20-44-42 0-16 10-30 30-42Z" fill="#dbe6dc"></path>
-                <circle cx="134" cy="110" r="14" fill="#d4a24c"></circle>
-                <circle cx="278" cy="124" r="14" fill="#7f9a85"></circle>
-                <path d="M148 114c22 2 84 8 116 8" fill="none" stroke="#d4a24c" stroke-width="4" stroke-dasharray="7 9" stroke-linecap="round"></path>
-                <rect x="38" y="198" width="116" height="34" rx="17" fill="#fffaf4" stroke="rgba(25,24,21,0.08)"></rect>
-                <rect x="206" y="198" width="116" height="34" rx="17" fill="#fffaf4" stroke="rgba(25,24,21,0.08)"></rect>
-                <text x="74" y="220" font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="1.2" fill="#59554f">CANADA</text>
-                <text x="252" y="220" font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="1.2" fill="#59554f">UNITED KINGDOM</text>
-              </svg>
-            </article>
-          </div>
-
-          <div>
-            <article class="visual-card sage reveal-up float-card">
-              <div class="visual-card-header">
-                <strong>Software and workflows</strong>
-                <span class="pill">Integrations</span>
-              </div>
-              <p class="section-copy" style="margin-bottom:18px;">
-                The tools matter less than the discipline behind them, but it helps when the accounting stack is already familiar.
-              </p>
-              <div class="integrations-grid">
-                <article class="integration-card">
-                  <div class="integration-mark">
-                    <svg viewBox="0 0 48 48" aria-hidden="true">
-                      <circle cx="24" cy="24" r="20" fill="#2ca01c"></circle>
-                      <path d="M19 15h10c3.31 0 6 2.69 6 6v6c0 3.31-2.69 6-6 6H19c-3.31 0-6-2.69-6-6v-6c0-3.31 2.69-6 6-6Z" fill="none" stroke="#fff" stroke-linejoin="round" stroke-width="2.6"></path>
-                      <path d="M21 24h6.8c2.32 0 4.2 1.88 4.2 4.2S30.12 32.4 27.8 32.4H21" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2.6"></path>
-                      <path d="M27 24h-6.8c-2.32 0-4.2-1.88-4.2-4.2s1.88-4.2 4.2-4.2H27" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2.6"></path>
-                    </svg>
-                  </div>
-                  <div class="integration-name">QuickBooks</div>
-                  <p>Certified workflows for ongoing bookkeeping and reporting.</p>
-                </article>
-
-                <article class="integration-card">
-                  <div class="integration-mark">
-                    <svg viewBox="0 0 48 48" aria-hidden="true">
-                      <circle cx="24" cy="24" r="20" fill="#13b5ea"></circle>
-                      <path d="m18 17 12 14" stroke="#fff" stroke-linecap="round" stroke-width="3.4"></path>
-                      <path d="m30 17-12 14" stroke="#fff" stroke-linecap="round" stroke-width="3.4"></path>
-                    </svg>
-                  </div>
-                  <div class="integration-name">Xero</div>
-                  <p>Good fit for UK cloud bookkeeping and VAT reporting.</p>
-                </article>
-
-                <article class="integration-card">
-                  <div class="integration-mark">
-                    <svg viewBox="0 0 48 48" aria-hidden="true">
-                      <rect x="6" y="6" width="36" height="36" rx="12" fill="#f75b4f"></rect>
-                      <path d="M12 19.5c3.4 0 3.4 9 6.8 9s3.4-9 6.8-9 3.4 9 6.8 9 3.4-9 6.8-9" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
-                    </svg>
-                  </div>
-                  <div class="integration-name">Wave</div>
-                  <p>Useful for simpler operating setups and smaller businesses.</p>
-                </article>
-
-                <article class="integration-card">
-                  <div class="integration-mark">
-                    <svg viewBox="0 0 48 48" aria-hidden="true">
-                      <rect x="6" y="6" width="36" height="36" rx="11" fill="#00c389"></rect>
-                      <path d="M31.6 16.8h-10a3.6 3.6 0 1 0 0 7.2h4.8a3.6 3.6 0 1 1 0 7.2H16.2" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.2"></path>
-                    </svg>
-                  </div>
-                  <div class="integration-name">Sage</div>
-                  <p>Handled where legacy or specific client workflows need it.</p>
-                </article>
-              </div>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="pricing">
-      <div class="scan-line"></div>
-      <div class="container">
-        <div class="pricing-intro reveal-up">
-          <span class="section-kicker">Pricing</span>
-          <h2>Fixed monthly pricing, clearer scope.</h2>
-          <p class="section-copy">
-            Still simple, but now presented more like a proper finance product. Cleaner hierarchy, less brochure energy.
-          </p>
-        </div>
-
-        <div class="pricing-grid">
-          <article class="price-card reveal-up float-card">
-            <div class="price-plan">Starter</div>
-            <div class="price-number"><sup>£</sup>120</div>
-            <p>For freelancers and sole traders who need clean books, regular reporting, and filing support without overcomplicating the setup.</p>
-            <ul class="price-list">
-              <li>Monthly bank reconciliation</li>
-              <li>Transaction categorisation</li>
-              <li>Quarterly VAT or GST filing</li>
-              <li>Basic monthly P&amp;L</li>
-              <li>Email support</li>
-              <li>Annual self-assessment or T1 support</li>
-            </ul>
-            <a href="#contact" class="button secondary">Choose Starter</a>
-          </article>
-
-          <article class="price-card featured reveal-up float-card">
-            <div class="price-badge">Most Popular</div>
-            <div class="price-plan">Growth</div>
-            <div class="price-number"><sup>£</sup>220</div>
-            <p>For growing businesses that need stronger reporting, payroll, and tighter operational visibility without hiring internally too early.</p>
-            <ul class="price-list">
-              <li>Everything in Starter</li>
-              <li>Accounts payable and receivable</li>
-              <li>Payroll up to 5 employees</li>
-              <li>Full monthly reporting pack</li>
-              <li>Priority support</li>
-              <li>Corporate tax return support</li>
-              <li>Year-end preparation</li>
-            </ul>
-            <a href="#contact" class="button primary">Choose Growth</a>
-          </article>
-
-          <article class="price-card reveal-up float-card">
-            <div class="price-plan">Premium</div>
-            <div class="price-number"><sup>£</sup>380</div>
-            <p>For established businesses that want finance support to be proactive, visible, and more strategic month to month.</p>
-            <ul class="price-list">
-              <li>Everything in Growth</li>
-              <li>Payroll up to 15 employees</li>
-              <li>Cash flow forecasting</li>
-              <li>Budget versus actual reporting</li>
-              <li>Quarterly strategy calls</li>
-              <li>Financial planning support</li>
-              <li>Dedicated account manager</li>
-            </ul>
-            <a href="#contact" class="button secondary">Choose Premium</a>
-          </article>
-        </div>
-
-        <div class="footer-note">Catch-up bookkeeping available from £95 per month of backlog, with rush turnaround available when needed.</div>
-      </div>
-    </section>
-
-    <section class="section" id="about-contact">
-      <div class="scan-line"></div>
-      <div class="container about-contact-grid">
-        <article class="about-card reveal-up float-card">
-          <span class="section-kicker">About</span>
-          <div class="about-top">
-            <div class="about-copy">
-              <h3>Tallyport is built for owners who want finance work done properly and explained clearly.</h3>
-              <p>
-                The business was designed around a simple standard: keep the books current, make the reports readable,
-                handle compliance before it becomes a crisis, and work like the owner’s time is expensive, because it is.
-              </p>
-            </div>
-            <svg class="founder-illustration" viewBox="0 0 220 220" aria-hidden="true">
-              <rect x="0" y="0" width="220" height="220" rx="34" fill="#f8f3ed"></rect>
-              <circle cx="110" cy="78" r="32" fill="#d9b29b"></circle>
-              <path d="M56 194c0-42 22-70 54-70s54 28 54 70v10H56Z" fill="#2a2520"></path>
-              <path d="M78 72c4-24 18-40 36-40 18 0 34 14 40 34-18 10-42 16-76 6Z" fill="#231f1a"></path>
-              <circle cx="164" cy="56" r="16" fill="#dbe6dc"></circle>
-              <rect x="26" y="26" width="56" height="16" rx="8" fill="#efe5db"></rect>
-            </svg>
-          </div>
-
-          <div class="about-points">
-            <div class="about-point">
-              <span class="about-index">01</span>
+          <div class="space-y-5 text-neutral-700">
+            <div class="flex gap-4">
+              <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 pt-1">01</div>
               <p>Chartered accountant-led support, not generic back-office churn.</p>
             </div>
-            <div class="about-point">
-              <span class="about-index">02</span>
+            <div class="flex gap-4">
+              <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 pt-1">02</div>
               <p>Cross-border understanding for Canada and UK workflows.</p>
             </div>
-            <div class="about-point">
-              <span class="about-index">03</span>
+            <div class="flex gap-4">
+              <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 pt-1">03</div>
               <p>Better structure for ongoing work and catch-up situations alike.</p>
             </div>
           </div>
         </article>
 
-        <article class="contact-card reveal-up float-card" id="contact">
-          <span class="section-kicker">Contact</span>
-          <div class="contact-copy">
-            <h3>Book a free 20-minute discovery call.</h3>
-            <p>
-              We will talk through your current setup, what is messy, what is urgent, and which level of support fits best.
-            </p>
+        <article id="contact" class="rounded-[2.5rem] bg-brand-light p-10">
+          <span class="inline-block border border-brand/20 text-neutral-700 rounded-full px-4 py-1 text-sm font-medium mb-6 bg-white/80">Contact</span>
+          <h2 class="font-serif text-3xl md:text-5xl font-medium tracking-tight text-neutral-900 leading-tight mb-6">
+            Book a free 20-minute discovery call.
+          </h2>
+          <p class="text-neutral-700 mb-8">
+            We will talk through your current setup, what is messy, what is urgent, and which level of support fits best.
+          </p>
+
+          <div class="space-y-4 text-neutral-700 mb-8">
+            <div><span class="text-xs uppercase tracking-[0.18em] text-neutral-500 mr-3">Email</span>hello [at] tallyportaccounting.com</div>
+            <div><span class="text-xs uppercase tracking-[0.18em] text-neutral-500 mr-3">Serving</span>Canada except Quebec, plus London and the wider UK.</div>
+            <div><span class="text-xs uppercase tracking-[0.18em] text-neutral-500 mr-3">Speed</span>Response target within 24 business hours during normal operating periods.</div>
           </div>
 
-          <div class="contact-list">
-            <div class="contact-item">
-              <span class="contact-key">Email</span>
-              <p>hello [at] tallyportaccounting.com</p>
+          <form class="space-y-4">
+            <div class="grid md:grid-cols-2 gap-4">
+              <input type="text" placeholder="First name" class="w-full rounded-full border border-neutral-200 bg-white px-5 py-3.5 text-base text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand/30">
+              <input type="text" placeholder="Last name" class="w-full rounded-full border border-neutral-200 bg-white px-5 py-3.5 text-base text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand/30">
             </div>
-            <div class="contact-item">
-              <span class="contact-key">Serving</span>
-              <p>Canada except Quebec, plus London and the wider UK.</p>
+            <input type="email" placeholder="Email address" class="w-full rounded-full border border-neutral-200 bg-white px-5 py-3.5 text-base text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand/30">
+            <div class="grid md:grid-cols-2 gap-4">
+              <select class="w-full rounded-full border border-neutral-200 bg-white px-5 py-3.5 text-base text-neutral-700 focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand/30">
+                <option>Select your business type</option>
+                <option>Freelancer / Self-employed</option>
+                <option>Contractor</option>
+                <option>Small business, 1 to 10 employees</option>
+                <option>Growing business, 10+ employees</option>
+              </select>
+              <select class="w-full rounded-full border border-neutral-200 bg-white px-5 py-3.5 text-base text-neutral-700 focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand/30">
+                <option>Where are you based?</option>
+                <option>Canada - Ontario</option>
+                <option>Canada - British Columbia</option>
+                <option>Canada - Alberta</option>
+                <option>Canada - Other</option>
+                <option>London, UK</option>
+                <option>Other UK</option>
+              </select>
             </div>
-            <div class="contact-item">
-              <span class="contact-key">Speed</span>
-              <p>Response target within 24 business hours during normal operating periods.</p>
-            </div>
-          </div>
-
-          <form>
-            <div class="field-row">
-              <div class="field">
-                <label for="first-name">First name</label>
-                <input id="first-name" type="text" placeholder="Sarah">
-              </div>
-              <div class="field">
-                <label for="last-name">Last name</label>
-                <input id="last-name" type="text" placeholder="Johnson">
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="email">Email address</label>
-              <input id="email" type="email" placeholder="sarah@yourbusiness.com">
-            </div>
-
-            <div class="field-row">
-              <div class="field">
-                <label for="business-type">Business type</label>
-                <select id="business-type">
-                  <option value="">Select your business type</option>
-                  <option>Freelancer / Self-employed</option>
-                  <option>Contractor</option>
-                  <option>Small business, 1 to 10 employees</option>
-                  <option>Growing business, 10+ employees</option>
-                </select>
-              </div>
-              <div class="field">
-                <label for="location">Location</label>
-                <select id="location">
-                  <option value="">Where are you based?</option>
-                  <option>Canada - Ontario</option>
-                  <option>Canada - British Columbia</option>
-                  <option>Canada - Alberta</option>
-                  <option>Canada - Other</option>
-                  <option>London, UK</option>
-                  <option>Other UK</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="message">What do you need help with?</label>
-              <textarea id="message" placeholder="Tell us about your bookkeeping, payroll, filings, or any backlog you need cleaned up."></textarea>
-            </div>
-
-            <button type="button" class="button primary">Book My Discovery Call</button>
+            <textarea placeholder="Tell us about your bookkeeping, payroll, filings, or any backlog you need cleaned up." class="w-full rounded-[2rem] border border-neutral-200 bg-white px-5 py-4 text-base text-neutral-800 placeholder:text-neutral-400 min-h-[132px] focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand/30"></textarea>
+            <button type="button" class="bg-brand text-white px-8 py-3.5 rounded-full text-base font-medium hover:bg-brand/90 transition-all shadow-md w-full sm:w-auto">
+              Book My Discovery Call
+            </button>
           </form>
         </article>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="container">
-      <div class="footer-shell reveal-up">
-        <div class="footer-grid">
-          <div>
-            <div class="footer-heading">Platform</div>
-            <ul class="footer-list">
-              <li><a href="#services">Services</a></li>
-              <li><a href="#workflow">Process</a></li>
-              <li><a href="#pricing">Pricing</a></li>
-            </ul>
-          </div>
-          <div>
-            <div class="footer-heading">Trust</div>
-            <ul class="footer-list">
-              <li><a href="#credentials">Credentials</a></li>
-              <li><a href="#about-contact">About</a></li>
-              <li><a href="#contact">Contact</a></li>
-            </ul>
-          </div>
-          <div>
-            <div class="footer-heading">Coverage</div>
-            <ul class="footer-list">
-              <li><a href="#contact">Canada</a></li>
-              <li><a href="#contact">United Kingdom</a></li>
-              <li><a href="#pricing">Catch-up Work</a></li>
-            </ul>
-          </div>
-          <div>
-            <div class="footer-heading">Tallyport</div>
-            <p>
-              Chartered accountant-led bookkeeping, payroll, compliance, and reporting support for small businesses that want fewer surprises.
-            </p>
-          </div>
-        </div>
-
-        <div class="footer-bottom">
-          <span>Tallyport Accounting © 2026.</span>
-          <a href="#contact">Book a call →</a>
+  <footer class="py-16 px-6 md:px-12 border-t border-neutral-100">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-8">
+      <div>
+        <div class="font-serif text-xl text-neutral-900 mb-4">Tallyport Accounting</div>
+        <p class="text-neutral-600 text-sm">Chartered accountant-led bookkeeping, payroll, compliance, and reporting support for small businesses that want fewer surprises.</p>
+      </div>
+      <div>
+        <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-4">Platform</div>
+        <div class="space-y-2 text-sm text-neutral-600">
+          <div><a href="#services" class="hover:text-brand">Services</a></div>
+          <div><a href="#workflow" class="hover:text-brand">Process</a></div>
+          <div><a href="#pricing" class="hover:text-brand">Pricing</a></div>
         </div>
       </div>
+      <div>
+        <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-4">Trust</div>
+        <div class="space-y-2 text-sm text-neutral-600">
+          <div><a href="#credentials" class="hover:text-brand">Credentials</a></div>
+          <div><a href="#about" class="hover:text-brand">About</a></div>
+          <div><a href="#contact" class="hover:text-brand">Contact</a></div>
+        </div>
+      </div>
+      <div>
+        <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-4">Coverage</div>
+        <div class="space-y-2 text-sm text-neutral-600">
+          <div>Canada</div>
+          <div>United Kingdom</div>
+          <div>Catch-up Work</div>
+        </div>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto mt-10 pt-6 border-t border-neutral-100 flex flex-col md:flex-row gap-4 items-start md:items-center justify-between text-sm text-neutral-500">
+      <span>Tallyport Accounting © 2026.</span>
+      <a href="#contact" class="hover:text-brand">Book a call →</a>
     </div>
   </footer>
 
   <script>
-    document.documentElement.classList.add("js");
-
-    const nav = document.getElementById("site-nav");
-    const navToggle = document.getElementById("nav-toggle");
-    const typewriters = Array.from(document.querySelectorAll("[data-typewriter]"));
-
-    navToggle?.addEventListener("click", () => {
-      const open = nav.classList.toggle("open");
-      navToggle.setAttribute("aria-expanded", String(open));
-    });
-
-    window.addEventListener("scroll", () => {
-      nav.classList.toggle("scrolled", window.scrollY > 28);
-    });
-
-    typewriters.forEach((el) => {
-      const text = el.dataset.typewriter || el.textContent.trim();
-      el.dataset.typewriter = text;
-      el.textContent = "";
-    });
-
-    function animateCounter(el) {
-      const target = Number(el.dataset.target || "0");
-      const prefix = el.dataset.prefix || "";
-      const suffix = el.dataset.suffix || "";
-      const duration = 760;
-      const start = performance.now();
-      el.textContent = `${prefix}0${suffix}`;
-
-      function tick(now) {
-        const progress = Math.min((now - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        const value = Math.round(target * eased);
-        el.textContent = `${prefix}${value}${suffix}`;
-        if (progress < 1) requestAnimationFrame(tick);
-      }
-
-      requestAnimationFrame(tick);
-    }
-
-    function animateTypewriter(el, delay = 0) {
-      if (el.dataset.animated === "true") return;
-      const fullText = el.dataset.typewriter || "";
-      if (!fullText) return;
-      el.dataset.animated = "true";
-
-      window.setTimeout(() => {
-        let index = 0;
-        el.classList.add("typing");
-
-        const timer = window.setInterval(() => {
-          index += 1;
-          el.textContent = fullText.slice(0, index);
-          if (index >= fullText.length) {
-            window.clearInterval(timer);
-            window.setTimeout(() => el.classList.remove("typing"), 240);
-          }
-        }, 44);
-      }, delay);
-    }
-
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add("visible");
-        revealObserver.unobserve(entry.target);
-      });
-    }, { threshold: 0.15 });
-
-    document.querySelectorAll(".reveal-up, .proof-shell, .section, footer .footer-shell").forEach((el) => {
-      revealObserver.observe(el);
-    });
-
-    const motionObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-
-        if (entry.target.matches(".proof-shell")) {
-          entry.target.querySelectorAll("[data-counter]").forEach((counter) => {
-            if (counter.dataset.counted === "true") return;
-            counter.dataset.counted = "true";
-            animateCounter(counter);
-          });
-        }
-
-        if (entry.target.matches("[data-typewriter]")) {
-          animateTypewriter(entry.target);
-        }
-
-        observer.unobserve(entry.target);
-      });
-    }, { threshold: 0.3 });
-
-    document.querySelectorAll(".proof-shell, [data-typewriter]").forEach((el) => {
-      motionObserver.observe(el);
-    });
+    lucide.createIcons();
   </script>
 </body>
 </html>
