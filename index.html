@@ -107,7 +107,7 @@
 
   <main id="top">
     <header class="pt-20 pb-16 md:pt-32 md:pb-24 px-6 md:px-12 text-center max-w-5xl mx-auto flex flex-col items-center">
-      <h1 class="font-serif text-5xl md:text-7xl font-medium tracking-tight text-neutral-900 leading-tight mb-6 max-w-4xl">
+      <h1 class="font-serif text-[2.7rem] md:text-7xl font-medium tracking-tight text-neutral-900 leading-[0.94] md:leading-tight mb-6 max-w-[12ch] md:max-w-4xl">
         Clean books, faster closes, calmer finances.
       </h1>
       <p class="text-neutral-600 text-lg md:text-xl mb-10 max-w-3xl font-medium">
@@ -212,7 +212,7 @@
     </section>
 
     <section class="py-24 md:py-32 px-6 overflow-hidden relative bg-neutral-50/50">
-      <div class="max-w-4xl mx-auto relative h-[540px] flex items-center justify-center">
+      <div class="max-w-4xl mx-auto relative h-[460px] md:h-[540px] flex items-center justify-center">
         <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div class="w-[300px] h-[300px] rounded-full border border-brand/20 absolute translate-x-10 translate-y-10"></div>
           <div class="w-[450px] h-[450px] rounded-full border border-neutral-200 absolute -translate-x-12 -translate-y-4"></div>
@@ -221,33 +221,33 @@
 
         <div class="text-center z-10 max-w-2xl">
           <span class="inline-block border border-neutral-300 text-neutral-600 rounded-full px-4 py-1 text-sm font-medium mb-6 bg-white">The reality</span>
-          <h2 class="font-serif text-3xl md:text-5xl font-medium tracking-tight text-neutral-900 leading-tight">
+          <h2 class="font-serif text-[1.85rem] md:text-5xl font-medium tracking-tight text-neutral-900 leading-[0.95] md:leading-tight max-w-[11ch] md:max-w-none mx-auto">
             Most owners do not need more accounting jargon. They need a cleaner system.
           </h2>
         </div>
 
-        <div class="absolute top-10 left-0 md:left-20 bg-white/90 backdrop-blur-sm shadow-sm border border-neutral-100 rounded-full px-5 py-2.5 flex items-center gap-3 text-sm font-medium z-20">
+        <div class="absolute top-10 left-0 md:left-20 bg-white/90 backdrop-blur-sm shadow-sm border border-neutral-100 rounded-full px-5 py-2.5 hidden md:flex items-center gap-3 text-sm font-medium z-20">
           <div class="w-6 h-6 rounded-full bg-brand/10 flex items-center justify-center text-brand">
             <i data-lucide="clock-3" class="w-3.5 h-3.5 stroke-1-5"></i>
           </div>
           Books without rhythm
         </div>
 
-        <div class="absolute bottom-20 left-4 md:left-10 bg-white/90 backdrop-blur-sm shadow-sm border border-neutral-100 rounded-full px-5 py-2.5 flex items-center gap-3 text-sm font-medium z-20">
+        <div class="absolute bottom-20 left-4 md:left-10 bg-white/90 backdrop-blur-sm shadow-sm border border-neutral-100 rounded-full px-5 py-2.5 hidden md:flex items-center gap-3 text-sm font-medium z-20">
           <div class="w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center text-orange-600">
             <i data-lucide="alert-circle" class="w-3.5 h-3.5 stroke-1-5"></i>
           </div>
           Compliance that appears too late
         </div>
 
-        <div class="absolute top-24 right-0 md:right-10 bg-white/90 backdrop-blur-sm shadow-sm border border-neutral-100 rounded-full px-5 py-2.5 flex items-center gap-3 text-sm font-medium z-20">
+        <div class="absolute top-24 right-0 md:right-10 bg-white/90 backdrop-blur-sm shadow-sm border border-neutral-100 rounded-full px-5 py-2.5 hidden md:flex items-center gap-3 text-sm font-medium z-20">
           <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600">
             <i data-lucide="file-text" class="w-3.5 h-3.5 stroke-1-5"></i>
           </div>
           Reporting that says too little
         </div>
 
-        <div class="absolute bottom-32 right-4 md:right-20 bg-white/90 backdrop-blur-sm shadow-sm border border-neutral-100 rounded-full px-5 py-2.5 flex items-center gap-3 text-sm font-medium z-20 max-w-[260px] text-left">
+        <div class="absolute bottom-32 right-4 md:right-20 bg-white/90 backdrop-blur-sm shadow-sm border border-neutral-100 rounded-full px-5 py-2.5 hidden md:flex items-center gap-3 text-sm font-medium z-20 max-w-[260px] text-left">
           <div class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
             <i data-lucide="target" class="w-3.5 h-3.5 stroke-1-5"></i>
           </div>
@@ -294,10 +294,13 @@
 
         <article class="md:col-span-1 rounded-[2rem] relative overflow-hidden group bg-white border border-neutral-100 photo-card">
           <img src="./assets/photos/reporting-desk.jpg" alt="Accounting workspace with laptop dashboard and monthly reporting materials">
-          <div class="absolute inset-x-6 bottom-6 rounded-[1.5rem] bg-white/88 backdrop-blur-md border border-white p-5 shadow-md">
+          <div class="absolute inset-x-3 bottom-3 rounded-full bg-white/90 backdrop-blur-md border border-white px-4 py-2 shadow-md md:hidden">
+            <div class="text-[11px] font-medium tracking-[0.08em] text-neutral-800">Current books. Modern workflows.</div>
+          </div>
+          <div class="absolute inset-x-6 bottom-6 rounded-[1.5rem] bg-white/88 backdrop-blur-md border border-white p-5 shadow-md hidden md:block">
             <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-3">Cloud stack</div>
-            <div class="font-serif text-2xl text-neutral-900 tracking-tight mb-2">Current books, modern workflows</div>
-            <div class="text-sm text-neutral-600">QuickBooks, Xero, Wave, and Sage handled in a cleaner operating rhythm.</div>
+            <div class="font-serif text-2xl text-neutral-900 tracking-tight leading-tight mb-2">Current books. Modern workflows.</div>
+            <div class="text-sm text-neutral-600">Cloud bookkeeping kept clean and current.</div>
           </div>
         </article>
 
