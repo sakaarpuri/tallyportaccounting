@@ -50,6 +50,12 @@
       height: 100%;
       display: block;
     }
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
     .hero-card {
       position: relative;
       top: 0;
@@ -123,34 +129,18 @@
       </div>
 
       <div class="w-full flex justify-center items-end gap-2 md:gap-4 overflow-hidden relative pt-10">
-        <div class="hero-card w-1/5 md:w-44 aspect-[3/4] rounded-t-[40px] rounded-b-xl overflow-hidden translate-y-12 opacity-80 shadow-sm border border-neutral-100 bg-neutral-50 illustration-card">
-          <svg viewBox="0 0 260 340" aria-hidden="true">
-            <rect width="260" height="340" fill="#f6efe9"></rect>
-            <circle cx="194" cy="76" r="36" fill="#f4e8e8"></circle>
-            <rect x="28" y="46" width="96" height="18" rx="9" fill="#e9d5d5"></rect>
-            <rect x="28" y="78" width="140" height="12" rx="6" fill="#eadfd7"></rect>
-            <rect x="28" y="100" width="126" height="12" rx="6" fill="#eadfd7"></rect>
-            <circle cx="132" cy="168" r="52" fill="#d8b19b"></circle>
-            <path d="M86 314c0-56 34-94 82-94s82 38 82 94v18H86Z" fill="#2d2d2d"></path>
-            <path d="M98 158c6-42 28-68 58-68 27 0 50 20 58 56-20 12-66 24-116 12Z" fill="#1a1a1a"></path>
-            <rect x="24" y="278" width="128" height="34" rx="17" fill="#fff" stroke="#e5e5e5"></rect>
-            <text x="42" y="299" fill="#91181a" font-family="Inter, sans-serif" font-size="12" font-weight="500">Owner-ready reports</text>
-          </svg>
+        <div class="hero-card photo-card relative w-1/5 md:w-44 aspect-[3/4] rounded-t-[40px] rounded-b-xl overflow-hidden translate-y-12 opacity-80 shadow-sm border border-neutral-100 bg-neutral-50">
+          <img src="./assets/photos/founder-portrait.jpg" alt="Professional accountant seated at a desk with reports and laptop">
+          <div class="absolute inset-x-4 bottom-4 rounded-full bg-white/88 backdrop-blur-sm px-3 py-2 text-[11px] font-medium tracking-[0.08em] text-neutral-800">
+            Founder-led support
+          </div>
         </div>
 
-        <div class="hero-card w-1/5 md:w-52 aspect-[3/4] rounded-t-[50px] rounded-b-xl overflow-hidden translate-y-6 opacity-90 shadow-md border border-neutral-100 bg-white illustration-card">
-          <svg viewBox="0 0 280 360" aria-hidden="true">
-            <rect width="280" height="360" fill="#fbfaf8"></rect>
-            <rect x="28" y="28" width="224" height="304" rx="28" fill="#ffffff" stroke="#ece7e3"></rect>
-            <rect x="54" y="66" width="106" height="10" rx="5" fill="#e5e5e5"></rect>
-            <rect x="54" y="88" width="148" height="10" rx="5" fill="#f0e3e3"></rect>
-            <rect x="54" y="132" width="172" height="72" rx="18" fill="#f4e8e8"></rect>
-            <rect x="54" y="224" width="76" height="76" rx="18" fill="#efe3d4"></rect>
-            <rect x="146" y="224" width="80" height="76" rx="18" fill="#ebefe8"></rect>
-            <text x="70" y="168" fill="#91181a" font-family="Inter, sans-serif" font-size="14" font-weight="600">Month-end pack</text>
-            <text x="68" y="257" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="12">VAT / GST</text>
-            <text x="160" y="257" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="12">Payroll</text>
-          </svg>
+        <div class="hero-card photo-card relative w-1/5 md:w-52 aspect-[3/4] rounded-t-[50px] rounded-b-xl overflow-hidden translate-y-6 opacity-90 shadow-md border border-neutral-100 bg-white">
+          <img src="./assets/photos/bookkeeping-workspace.jpg" alt="Clean bookkeeping workspace with laptop, calculator, invoices, and coffee">
+          <div class="absolute inset-x-4 bottom-4 rounded-full bg-white/88 backdrop-blur-sm px-3 py-2 text-[11px] font-medium tracking-[0.08em] text-neutral-800">
+            Clean month-end inputs
+          </div>
         </div>
 
         <div class="hero-card w-1/4 md:w-64 aspect-[3/4] rounded-t-[60px] rounded-b-xl overflow-hidden z-10 shadow-lg border-2 border-white relative bg-white hero-dashboard">
@@ -184,37 +174,18 @@
           <div class="absolute inset-0 bg-brand/5"></div>
         </div>
 
-        <div class="hero-card w-1/5 md:w-52 aspect-[3/4] rounded-t-[50px] rounded-b-xl overflow-hidden translate-y-6 opacity-90 shadow-md border border-neutral-100 bg-white illustration-card">
-          <svg viewBox="0 0 280 360" aria-hidden="true">
-            <rect width="280" height="360" fill="#fbfaf8"></rect>
-            <rect x="26" y="28" width="228" height="304" rx="28" fill="#ffffff" stroke="#ece7e3"></rect>
-            <text x="48" y="72" fill="#91181a" font-family="Playfair Display, serif" font-size="24">Working rhythm</text>
-            <rect x="48" y="100" width="184" height="54" rx="20" fill="#f5f5f5"></rect>
-            <rect x="48" y="172" width="184" height="54" rx="20" fill="#f4e8e8"></rect>
-            <rect x="48" y="244" width="184" height="54" rx="20" fill="#eef2ee"></rect>
-            <text x="68" y="133" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="13" font-weight="600">Submitted</text>
-            <text x="68" y="205" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="13" font-weight="600">Reconciled</text>
-            <text x="68" y="277" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="13" font-weight="600">Reported</text>
-            <circle cx="208" cy="126" r="15" fill="#e6b17e"></circle>
-            <circle cx="208" cy="198" r="15" fill="#9ba492"></circle>
-            <circle cx="208" cy="270" r="15" fill="#a9b5c2"></circle>
-          </svg>
+        <div class="hero-card photo-card relative w-1/5 md:w-52 aspect-[3/4] rounded-t-[50px] rounded-b-xl overflow-hidden translate-y-6 opacity-90 shadow-md border border-neutral-100 bg-white">
+          <img src="./assets/photos/client-meeting.jpg" alt="Accountant and small business owner reviewing reports together">
+          <div class="absolute inset-x-4 bottom-4 rounded-full bg-white/88 backdrop-blur-sm px-3 py-2 text-[11px] font-medium tracking-[0.08em] text-neutral-800">
+            Discovery calls that clarify
+          </div>
         </div>
 
-        <div class="hero-card w-1/5 md:w-44 aspect-[3/4] rounded-t-[40px] rounded-b-xl overflow-hidden translate-y-12 opacity-80 shadow-sm border border-neutral-100 bg-neutral-50 illustration-card">
-          <svg viewBox="0 0 260 340" aria-hidden="true">
-            <rect width="260" height="340" fill="#f8f4ef"></rect>
-            <rect x="30" y="34" width="200" height="272" rx="28" fill="#fff" stroke="#e5e5e5"></rect>
-            <text x="54" y="78" fill="#91181a" font-family="Playfair Display, serif" font-size="22">Cloud stack</text>
-            <rect x="52" y="100" width="156" height="42" rx="18" fill="#f5f5f5"></rect>
-            <rect x="52" y="154" width="156" height="42" rx="18" fill="#eef2ee"></rect>
-            <rect x="52" y="208" width="156" height="42" rx="18" fill="#f4e8e8"></rect>
-            <rect x="52" y="262" width="156" height="28" rx="14" fill="#fcfaf8"></rect>
-            <text x="70" y="126" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="12" font-weight="600">QuickBooks / Xero</text>
-            <text x="70" y="180" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="12" font-weight="600">Wave / Sage</text>
-            <text x="70" y="234" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="12" font-weight="600">VAT / GST-HST</text>
-            <text x="78" y="280" fill="#737373" font-family="Inter, sans-serif" font-size="10">Current and owner-ready</text>
-          </svg>
+        <div class="hero-card photo-card relative w-1/5 md:w-44 aspect-[3/4] rounded-t-[40px] rounded-b-xl overflow-hidden translate-y-12 opacity-80 shadow-sm border border-neutral-100 bg-neutral-50">
+          <img src="./assets/photos/reporting-desk.jpg" alt="Reporting desk with laptop dashboard, statements, and calculator">
+          <div class="absolute inset-x-4 bottom-4 rounded-full bg-white/88 backdrop-blur-sm px-3 py-2 text-[11px] font-medium tracking-[0.08em] text-neutral-800">
+            Reporting without scramble
+          </div>
         </div>
       </div>
     </header>
@@ -321,19 +292,13 @@
           </div>
         </article>
 
-        <article class="md:col-span-1 rounded-[2rem] relative overflow-hidden group bg-white border border-neutral-100 illustration-card">
-          <svg viewBox="0 0 500 500" class="w-full h-full">
-            <rect width="500" height="500" fill="#fcfaf8"></rect>
-            <rect x="40" y="48" width="420" height="404" rx="40" fill="#ffffff" stroke="#ece7e3"></rect>
-            <rect x="76" y="94" width="140" height="18" rx="9" fill="#f4e8e8"></rect>
-            <rect x="76" y="130" width="204" height="12" rx="6" fill="#e5e5e5"></rect>
-            <rect x="76" y="170" width="348" height="86" rx="30" fill="#f7f2ec"></rect>
-            <rect x="76" y="280" width="164" height="118" rx="28" fill="#eef2ee"></rect>
-            <rect x="260" y="280" width="164" height="118" rx="28" fill="#f4e8e8"></rect>
-            <text x="104" y="218" fill="#91181a" font-family="Playfair Display, serif" font-size="28">Cloud accounting stack</text>
-            <text x="108" y="330" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="18" font-weight="600">QuickBooks</text>
-            <text x="290" y="330" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="18" font-weight="600">Xero / Sage / Wave</text>
-          </svg>
+        <article class="md:col-span-1 rounded-[2rem] relative overflow-hidden group bg-white border border-neutral-100 photo-card">
+          <img src="./assets/photos/reporting-desk.jpg" alt="Accounting workspace with laptop dashboard and monthly reporting materials">
+          <div class="absolute inset-x-6 bottom-6 rounded-[1.5rem] bg-white/88 backdrop-blur-md border border-white p-5 shadow-md">
+            <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-3">Cloud stack</div>
+            <div class="font-serif text-2xl text-neutral-900 tracking-tight mb-2">Current books, modern workflows</div>
+            <div class="text-sm text-neutral-600">QuickBooks, Xero, Wave, and Sage handled in a cleaner operating rhythm.</div>
+          </div>
         </article>
 
         <article class="md:col-span-1 rounded-[2rem] bg-[#e6b17e] p-8 flex flex-col justify-between group cursor-pointer transition-all hover:bg-[#dfa773] text-white">
