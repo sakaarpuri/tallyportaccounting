@@ -699,50 +699,92 @@
           </div>
         </article>
 
-        <article id="contact" class="rounded-[2.5rem] bg-brand-light p-10">
-          <span class="inline-block border border-brand/20 text-neutral-700 rounded-full px-4 py-1 text-sm font-medium mb-6 bg-white/80">Contact</span>
-          <h2 class="font-serif text-3xl md:text-5xl font-medium tracking-tight text-neutral-900 leading-tight mb-6">
-            Book a free 20-minute discovery call.
-          </h2>
-          <p class="text-neutral-700 mb-8">
-            We will talk through your current setup, what is messy, what is urgent, and which level of support fits best.
-          </p>
+        <article id="contact" class="rounded-[2.5rem] overflow-hidden border border-[#d5e0d1] bg-[#dce7d8] relative">
+          <div class="absolute inset-y-0 right-0 w-1/2 bg-[#e7efe4] hidden md:block"></div>
+          <div class="absolute -top-20 left-8 w-48 h-48 rounded-full bg-white/35 blur-3xl"></div>
+          <div class="absolute bottom-8 right-8 w-40 h-40 rounded-full bg-white/25 blur-3xl"></div>
+          <div class="relative grid md:grid-cols-2 min-h-full">
+            <div class="p-10 md:p-12 flex flex-col justify-center">
+              <span class="inline-block border border-white/80 text-neutral-700 rounded-full px-4 py-1 text-sm font-medium mb-6 bg-white/75 w-fit">Consultation</span>
+              <h2 class="font-serif text-3xl md:text-5xl font-medium tracking-tight text-neutral-900 leading-tight mb-6 max-w-md">
+                Book a free 20-minute discovery call.
+              </h2>
+              <p class="text-neutral-700 text-lg mb-8 max-w-md">
+                We will talk through what is messy, what is urgent, and the level of support that fits without overbuilding the process.
+              </p>
 
-          <div class="space-y-4 text-neutral-700 mb-8">
-            <div><span class="text-xs uppercase tracking-[0.18em] text-neutral-500 mr-3">Email</span>hello [at] tallyportaccounting.com</div>
-            <div><span class="text-xs uppercase tracking-[0.18em] text-neutral-500 mr-3">Serving</span>Canada except Quebec, plus London and the wider UK.</div>
-            <div><span class="text-xs uppercase tracking-[0.18em] text-neutral-500 mr-3">Speed</span>Response target within 24 business hours during normal operating periods.</div>
+              <div class="space-y-4 text-neutral-700 mb-10 max-w-md">
+                <div><span class="text-xs uppercase tracking-[0.18em] text-neutral-500 mr-3">Email</span>hello [at] tallyportaccounting.com</div>
+                <div><span class="text-xs uppercase tracking-[0.18em] text-neutral-500 mr-3">Serving</span>Canada except Quebec, plus London and the wider UK.</div>
+                <div><span class="text-xs uppercase tracking-[0.18em] text-neutral-500 mr-3">Speed</span>Response target within 24 business hours during normal operating periods.</div>
+              </div>
+
+              <div class="flex flex-wrap gap-3 max-w-lg">
+                <div class="bg-white/85 px-5 py-2.5 rounded-full text-sm font-medium text-neutral-700 flex items-center gap-2 shadow-sm">
+                  <span class="w-2 h-2 rounded-full bg-green-400"></span> Clean books
+                </div>
+                <div class="bg-white/85 px-5 py-2.5 rounded-full text-sm font-medium text-neutral-700 flex items-center gap-2 shadow-sm">
+                  <span class="w-2 h-2 rounded-full bg-brand/60"></span> Filing support
+                </div>
+                <div class="bg-white/85 px-5 py-2.5 rounded-full text-sm font-medium text-neutral-700 flex items-center gap-2 shadow-sm">
+                  <span class="w-2 h-2 rounded-full bg-[#d7bd3e]"></span> Owner-ready reports
+                </div>
+              </div>
+            </div>
+
+            <div class="p-8 md:p-10 flex items-center justify-center relative">
+              <div class="absolute top-12 left-10 w-64 bg-white/70 backdrop-blur-sm rounded-[1.75rem] p-5 shadow-sm border border-white/80 hidden md:block">
+                <div class="h-3 w-24 bg-neutral-200 rounded mb-4"></div>
+                <div class="h-12 w-full bg-neutral-100 rounded-2xl"></div>
+              </div>
+
+              <div class="absolute bottom-10 left-8 bg-white/85 backdrop-blur-sm rounded-2xl p-4 shadow-md border border-white/90 flex items-center gap-3 hidden md:flex">
+                <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                  <i data-lucide="badge-check" class="w-4 h-4 stroke-1-5"></i>
+                </div>
+                <span class="text-sm font-medium text-neutral-800">Structured consultation</span>
+              </div>
+
+              <form class="space-y-4 w-full max-w-xl rounded-[2rem] border border-white bg-white/90 backdrop-blur-md p-6 md:p-7 shadow-xl relative z-10">
+                <div class="flex items-center gap-3 mb-2">
+                  <div class="w-8 h-8 rounded-full bg-brand/10 flex items-center justify-center text-brand">
+                    <i data-lucide="calendar-range" class="w-4 h-4 stroke-1-5"></i>
+                  </div>
+                  <div>
+                    <div class="text-sm font-medium text-neutral-800">Discovery call intake</div>
+                    <div class="text-xs text-neutral-500">Tell us a little about your setup</div>
+                  </div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-4">
+                  <input type="text" placeholder="First name" class="w-full rounded-full border border-neutral-200 bg-white px-5 py-3.5 text-base text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand/30">
+                  <input type="text" placeholder="Last name" class="w-full rounded-full border border-neutral-200 bg-white px-5 py-3.5 text-base text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand/30">
+                </div>
+                <input type="email" placeholder="Email address" class="w-full rounded-full border border-neutral-200 bg-white px-5 py-3.5 text-base text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand/30">
+                <div class="grid md:grid-cols-2 gap-4">
+                  <select class="w-full rounded-full border border-neutral-200 bg-white px-5 py-3.5 text-base text-neutral-700 focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand/30">
+                    <option>Select your business type</option>
+                    <option>Freelancer / Self-employed</option>
+                    <option>Contractor</option>
+                    <option>Small business, 1 to 10 employees</option>
+                    <option>Growing business, 10+ employees</option>
+                  </select>
+                  <select class="w-full rounded-full border border-neutral-200 bg-white px-5 py-3.5 text-base text-neutral-700 focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand/30">
+                    <option>Where are you based?</option>
+                    <option>Canada - Ontario</option>
+                    <option>Canada - British Columbia</option>
+                    <option>Canada - Alberta</option>
+                    <option>Canada - Other</option>
+                    <option>London, UK</option>
+                    <option>Other UK</option>
+                  </select>
+                </div>
+                <textarea placeholder="Tell us about your bookkeeping, payroll, filings, or any backlog you need cleaned up." class="w-full rounded-[2rem] border border-neutral-200 bg-white px-5 py-4 text-base text-neutral-800 placeholder:text-neutral-400 min-h-[132px] focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand/30"></textarea>
+                <button type="button" class="bg-neutral-900 text-white px-8 py-3.5 rounded-full text-base font-medium hover:bg-neutral-800 transition-all shadow-md w-full sm:w-auto">
+                  Book My Discovery Call
+                </button>
+              </form>
+            </div>
           </div>
-
-          <form class="space-y-4">
-            <div class="grid md:grid-cols-2 gap-4">
-              <input type="text" placeholder="First name" class="w-full rounded-full border border-neutral-200 bg-white px-5 py-3.5 text-base text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand/30">
-              <input type="text" placeholder="Last name" class="w-full rounded-full border border-neutral-200 bg-white px-5 py-3.5 text-base text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand/30">
-            </div>
-            <input type="email" placeholder="Email address" class="w-full rounded-full border border-neutral-200 bg-white px-5 py-3.5 text-base text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand/30">
-            <div class="grid md:grid-cols-2 gap-4">
-              <select class="w-full rounded-full border border-neutral-200 bg-white px-5 py-3.5 text-base text-neutral-700 focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand/30">
-                <option>Select your business type</option>
-                <option>Freelancer / Self-employed</option>
-                <option>Contractor</option>
-                <option>Small business, 1 to 10 employees</option>
-                <option>Growing business, 10+ employees</option>
-              </select>
-              <select class="w-full rounded-full border border-neutral-200 bg-white px-5 py-3.5 text-base text-neutral-700 focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand/30">
-                <option>Where are you based?</option>
-                <option>Canada - Ontario</option>
-                <option>Canada - British Columbia</option>
-                <option>Canada - Alberta</option>
-                <option>Canada - Other</option>
-                <option>London, UK</option>
-                <option>Other UK</option>
-              </select>
-            </div>
-            <textarea placeholder="Tell us about your bookkeeping, payroll, filings, or any backlog you need cleaned up." class="w-full rounded-[2rem] border border-neutral-200 bg-white px-5 py-4 text-base text-neutral-800 placeholder:text-neutral-400 min-h-[132px] focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand/30"></textarea>
-            <button type="button" class="bg-brand text-white px-8 py-3.5 rounded-full text-base font-medium hover:bg-brand/90 transition-all shadow-md w-full sm:w-auto">
-              Book My Discovery Call
-            </button>
-          </form>
         </article>
       </div>
     </section>
