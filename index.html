@@ -10,20 +10,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --canvas: #f5efe9;
-      --canvas-deep: #efe5db;
-      --surface: rgba(255, 251, 246, 0.92);
-      --surface-strong: #fffaf4;
+      --canvas: #f2eee7;
+      --canvas-deep: #e7dfd4;
+      --surface: rgba(252, 249, 244, 0.92);
+      --surface-strong: #fffaf5;
       --ink: #191815;
       --ink-soft: #59554f;
       --line: rgba(25, 24, 21, 0.1);
-      --gold: #d4a24c;
-      --gold-soft: rgba(212, 162, 76, 0.16);
-      --sage: #7f9a85;
-      --sage-soft: rgba(127, 154, 133, 0.15);
-      --clay: #d4ab92;
-      --clay-soft: rgba(212, 171, 146, 0.14);
-      --berry-soft: rgba(178, 122, 138, 0.14);
+      --gold: #d2ab67;
+      --gold-soft: rgba(210, 171, 103, 0.18);
+      --sage: #6f8f72;
+      --sage-soft: rgba(111, 143, 114, 0.18);
+      --clay: #d1a289;
+      --clay-soft: rgba(209, 162, 137, 0.18);
+      --berry-soft: rgba(177, 125, 138, 0.16);
       --shadow-lg: 0 32px 90px rgba(25, 24, 21, 0.12);
       --shadow-md: 0 16px 40px rgba(25, 24, 21, 0.08);
       --shadow-sm: 0 8px 18px rgba(25, 24, 21, 0.05);
@@ -49,11 +49,11 @@
       font-family: "Inter", sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at 12% 12%, rgba(212, 162, 76, 0.15), transparent 24%),
-        radial-gradient(circle at 84% 8%, rgba(127, 154, 133, 0.12), transparent 24%),
-        radial-gradient(circle at 18% 64%, rgba(212, 171, 146, 0.14), transparent 22%),
-        radial-gradient(circle at 90% 82%, rgba(178, 122, 138, 0.12), transparent 26%),
-        linear-gradient(180deg, #f8f4ef 0%, var(--canvas) 42%, var(--canvas-deep) 100%);
+        radial-gradient(circle at 10% 10%, rgba(111, 143, 114, 0.18), transparent 24%),
+        radial-gradient(circle at 88% 10%, rgba(209, 162, 137, 0.18), transparent 24%),
+        radial-gradient(circle at 22% 68%, rgba(210, 171, 103, 0.14), transparent 22%),
+        radial-gradient(circle at 88% 84%, rgba(177, 125, 138, 0.14), transparent 28%),
+        linear-gradient(180deg, #f8f5ef 0%, var(--canvas) 42%, var(--canvas-deep) 100%);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
@@ -237,9 +237,9 @@
 
     .nav-button {
       padding: 14px 20px;
-      background: linear-gradient(180deg, #e2b15f, #cf9942);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 8px 20px rgba(212, 162, 76, 0.22);
-      color: var(--ink);
+      background: linear-gradient(180deg, #86a589, #6f8f72);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 8px 20px rgba(111, 143, 114, 0.24);
+      color: #f8f5ef;
       font-size: 0.68rem;
       font-weight: 600;
       letter-spacing: 0.14em;
@@ -256,13 +256,13 @@
     }
 
     .button.primary {
-      background: linear-gradient(180deg, var(--ink), #2c2823);
-      color: #f8f4ef;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 12px 26px rgba(25, 24, 21, 0.18);
+      background: linear-gradient(180deg, #86a589, #6f8f72);
+      color: #f8f5ef;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 12px 26px rgba(111, 143, 114, 0.24);
     }
 
     .button.secondary {
-      background: rgba(255, 250, 244, 0.72);
+      background: rgba(255, 250, 244, 0.76);
       color: var(--ink);
       border-color: rgba(25, 24, 21, 0.12);
       box-shadow: var(--shadow-sm);
@@ -316,7 +316,7 @@
       width: 42vw;
       height: 42vw;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(127, 154, 133, 0.18), transparent 68%);
+      background: radial-gradient(circle, rgba(111, 143, 114, 0.22), transparent 68%);
       pointer-events: none;
     }
 
@@ -328,7 +328,7 @@
       width: 34vw;
       height: 34vw;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(212, 162, 76, 0.16), transparent 70%);
+      background: radial-gradient(circle, rgba(209, 162, 137, 0.2), transparent 70%);
       pointer-events: none;
     }
 
@@ -336,7 +336,7 @@
       position: relative;
       z-index: 1;
       display: grid;
-      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+      grid-template-columns: minmax(0, 0.84fr) minmax(0, 1.16fr);
       gap: 42px;
       align-items: center;
     }
@@ -376,7 +376,7 @@
     }
 
     h1 .accent {
-      color: var(--gold);
+      color: var(--sage);
       font-weight: 600;
     }
 
@@ -418,8 +418,8 @@
     }
 
     .proof-stack span:first-child { background: var(--ink); }
-    .proof-stack span:nth-child(2) { background: var(--sage); }
-    .proof-stack span:nth-child(3) { background: var(--gold); }
+    .proof-stack span:nth-child(2) { background: var(--clay); }
+    .proof-stack span:nth-child(3) { background: var(--sage); }
 
     .proof-text {
       font-size: 0.72rem;
@@ -436,7 +436,7 @@
 
     .hero-media {
       position: relative;
-      min-height: 680px;
+      min-height: 720px;
     }
 
     .hero-main-card,
@@ -451,28 +451,118 @@
     }
 
     .hero-main-card {
-      inset: 82px 0 72px 90px;
-      z-index: 3;
+      inset: auto 8px 40px auto;
+      width: 392px;
+      z-index: 4;
     }
 
     .hero-side-card {
-      width: 220px;
+      width: 230px;
       z-index: 2;
       box-shadow: 0 24px 46px rgba(25, 24, 21, 0.08);
     }
 
     .hero-side-card.top {
-      top: 6px;
-      right: 84px;
-      transform: rotate(-5deg);
+      top: 28px;
+      right: 10px;
+      transform: rotate(4deg);
       animation: driftOne 8s ease-in-out infinite;
     }
 
     .hero-side-card.bottom {
       bottom: 18px;
-      left: 8px;
-      transform: rotate(5deg);
+      left: 22px;
+      transform: rotate(-6deg);
       animation: driftTwo 9s ease-in-out infinite;
+    }
+
+    .hero-feature-card {
+      position: absolute;
+      inset: 0 132px 82px 0;
+      z-index: 2;
+      border-radius: 40px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255, 249, 241, 0.72), rgba(255, 249, 241, 0.94)),
+        radial-gradient(circle at top left, rgba(111, 143, 114, 0.22), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(209, 162, 137, 0.24), transparent 32%);
+      border: 1px solid rgba(25, 24, 21, 0.08);
+      box-shadow: var(--shadow-lg);
+      backdrop-filter: blur(18px);
+    }
+
+    .hero-feature-inner {
+      height: 100%;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      padding: 28px;
+      gap: 18px;
+      position: relative;
+    }
+
+    .hero-feature-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .hero-feature-head strong {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.18rem;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-feature-copy {
+      max-width: 250px;
+      color: var(--ink-soft);
+      line-height: 1.75;
+      font-size: 0.96rem;
+    }
+
+    .hero-portrait-wrap {
+      position: absolute;
+      inset: 118px 156px 112px 34px;
+      border-radius: 34px;
+      background: rgba(255, 255, 255, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    .hero-bottom-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      align-self: end;
+      margin-top: auto;
+    }
+
+    .hero-strip-card {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.68);
+      border: 1px solid rgba(25, 24, 21, 0.08);
+    }
+
+    .hero-strip-card strong {
+      display: block;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      margin-bottom: 6px;
+    }
+
+    .hero-strip-card span {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      line-height: 1.7;
     }
 
     .hero-blob {
@@ -488,7 +578,7 @@
       height: 170px;
       top: 28px;
       left: 64px;
-      background: radial-gradient(circle, rgba(212, 171, 146, 0.52), rgba(212, 171, 146, 0));
+      background: radial-gradient(circle, rgba(209, 162, 137, 0.58), rgba(209, 162, 137, 0));
     }
 
     .hero-blob.two {
@@ -496,7 +586,7 @@
       height: 220px;
       right: 12px;
       bottom: 34px;
-      background: radial-gradient(circle, rgba(127, 154, 133, 0.36), rgba(127, 154, 133, 0));
+      background: radial-gradient(circle, rgba(111, 143, 114, 0.42), rgba(111, 143, 114, 0));
     }
 
     .media-sheen {
@@ -520,7 +610,7 @@
       padding-top: 22px;
       padding-bottom: 18px;
       border-bottom: 1px solid rgba(25, 24, 21, 0.08);
-      background: rgba(245, 239, 233, 0.72);
+      background: rgba(239, 232, 223, 0.84);
     }
 
     .hero-panel-brand {
@@ -632,7 +722,7 @@
 
     .metric-value {
       font-family: "Space Grotesk", sans-serif;
-      font-size: 2rem;
+      font-size: 1.82rem;
       font-weight: 600;
       letter-spacing: -0.05em;
     }
@@ -696,7 +786,7 @@
       height: 100%;
       width: var(--fill, 0%);
       border-radius: inherit;
-      background: linear-gradient(90deg, #dfbe7f, #cc9b46);
+      background: linear-gradient(90deg, #7fa083, #d2ab67);
       transform-origin: left;
       transform: scaleX(0);
       transition: transform 900ms var(--ease);
@@ -766,7 +856,7 @@
     }
 
     .task-dot.green { background: var(--sage); }
-    .task-dot.gold { background: var(--gold); }
+    .task-dot.gold { background: var(--clay); }
     .task-dot.red { background: #d46858; }
 
     .task-name {
@@ -1072,20 +1162,20 @@
 
     .visual-card.sage {
       background:
-        linear-gradient(180deg, rgba(255, 251, 246, 0.76), rgba(255, 251, 246, 0.88)),
-        radial-gradient(circle at top left, rgba(127, 154, 133, 0.18), transparent 26%);
+        linear-gradient(180deg, rgba(255, 250, 244, 0.8), rgba(255, 250, 244, 0.92)),
+        radial-gradient(circle at top left, rgba(111, 143, 114, 0.24), transparent 30%);
     }
 
     .visual-card.gold {
       background:
-        linear-gradient(180deg, rgba(255, 251, 246, 0.76), rgba(255, 251, 246, 0.88)),
-        radial-gradient(circle at top right, rgba(212, 162, 76, 0.18), transparent 28%);
+        linear-gradient(180deg, rgba(255, 250, 244, 0.82), rgba(255, 250, 244, 0.92)),
+        radial-gradient(circle at top right, rgba(210, 171, 103, 0.24), transparent 30%);
     }
 
     .visual-card.clay {
       background:
-        linear-gradient(180deg, rgba(255, 251, 246, 0.76), rgba(255, 251, 246, 0.88)),
-        radial-gradient(circle at bottom right, rgba(212, 171, 146, 0.2), transparent 26%);
+        linear-gradient(180deg, rgba(255, 250, 244, 0.82), rgba(255, 250, 244, 0.92)),
+        radial-gradient(circle at bottom right, rgba(209, 162, 137, 0.24), transparent 30%);
     }
 
     .visual-card-header {
@@ -1118,8 +1208,9 @@
 
     .workflow-band {
       background:
-        linear-gradient(180deg, rgba(255, 251, 246, 0.34), rgba(255, 251, 246, 0)),
-        radial-gradient(circle at 86% 14%, rgba(127, 154, 133, 0.18), transparent 24%);
+        linear-gradient(180deg, rgba(255, 251, 246, 0.36), rgba(255, 251, 246, 0)),
+        radial-gradient(circle at 86% 14%, rgba(111, 143, 114, 0.24), transparent 24%),
+        radial-gradient(circle at 18% 88%, rgba(209, 162, 137, 0.18), transparent 26%);
     }
 
     .workflow-card {
@@ -1467,8 +1558,9 @@
 
     .price-card.featured {
       background:
-        linear-gradient(180deg, rgba(255, 250, 244, 0.92), rgba(255, 250, 244, 0.72)),
-        radial-gradient(circle at top right, rgba(212, 162, 76, 0.16), transparent 32%);
+        linear-gradient(180deg, rgba(255, 250, 244, 0.92), rgba(255, 250, 244, 0.78)),
+        radial-gradient(circle at top right, rgba(111, 143, 114, 0.18), transparent 36%),
+        radial-gradient(circle at bottom left, rgba(209, 162, 137, 0.16), transparent 34%);
       transform: translateY(-10px);
     }
 
@@ -1486,8 +1578,8 @@
       right: 20px;
       padding: 6px 8px;
       border-radius: 999px;
-      background: var(--gold-soft);
-      color: #9a6d1b;
+      background: var(--sage-soft);
+      color: #4e6952;
       font-weight: 600;
     }
 
@@ -1640,7 +1732,9 @@
 
     .footer-shell {
       border-radius: 30px;
-      background: rgba(25, 24, 21, 0.95);
+      background:
+        linear-gradient(180deg, rgba(35, 40, 33, 0.96), rgba(28, 31, 28, 0.98)),
+        radial-gradient(circle at top right, rgba(111, 143, 114, 0.18), transparent 30%);
       color: rgba(248, 244, 239, 0.88);
       padding: 34px 34px 20px;
       box-shadow: var(--shadow-lg);
@@ -1726,15 +1820,20 @@
 
     @media (max-width: 1180px) {
       .hero-media {
-        min-height: 620px;
+        min-height: 680px;
+      }
+
+      .hero-feature-card {
+        inset: 0 112px 74px 0;
       }
 
       .hero-main-card {
-        inset: 76px 0 64px 56px;
+        right: 0;
+        bottom: 34px;
       }
 
       .hero-side-card.top {
-        right: 36px;
+        right: 0;
       }
     }
 
@@ -1768,16 +1867,21 @@
         min-height: 720px;
       }
 
+      .hero-feature-card {
+        inset: 0 102px 96px 0;
+      }
+
       .hero-main-card {
-        inset: 90px 30px 84px 40px;
+        right: 0;
+        bottom: 48px;
       }
 
       .hero-side-card.top {
-        right: 48px;
+        right: 24px;
       }
 
       .hero-side-card.bottom {
-        left: 24px;
+        left: 14px;
       }
 
       .service-grid,
@@ -1859,6 +1963,7 @@
         gap: 16px;
       }
 
+      .hero-feature-card,
       .hero-main-card,
       .hero-side-card {
         position: relative;
@@ -1874,6 +1979,12 @@
         left: auto;
         top: auto;
         bottom: auto;
+      }
+
+      .hero-portrait-wrap {
+        position: relative;
+        inset: auto;
+        min-height: 280px;
       }
 
       .proof-grid,
@@ -2004,11 +2115,53 @@
           <div class="hero-blob one" aria-hidden="true"></div>
           <div class="hero-blob two" aria-hidden="true"></div>
 
+          <article class="hero-feature-card float-card">
+            <div class="hero-feature-inner">
+              <div class="hero-feature-head">
+                <strong>Owner-ready finance support</strong>
+                <span class="side-pill">Main visual</span>
+              </div>
+              <p class="hero-feature-copy">
+                Clean reporting, calmer month-end, and a more confident founder on the other side of the numbers.
+              </p>
+
+              <div class="hero-portrait-wrap">
+                <svg class="portrait-illustration" viewBox="0 0 520 520" aria-hidden="true">
+                  <rect x="0" y="0" width="520" height="520" rx="54" fill="#f7f2ea"></rect>
+                  <circle cx="420" cy="86" r="52" fill="#dbe6dc"></circle>
+                  <circle cx="116" cy="104" r="34" fill="#efdac9"></circle>
+                  <rect x="52" y="74" width="148" height="24" rx="12" fill="#efe1d2"></rect>
+                  <rect x="52" y="116" width="216" height="16" rx="8" fill="#efe1d2"></rect>
+                  <rect x="52" y="146" width="192" height="16" rx="8" fill="#efe1d2"></rect>
+                  <path d="M152 430c0-80 50-136 124-136 73 0 124 56 124 136v28H152Z" fill="#2d2722"></path>
+                  <circle cx="276" cy="216" r="78" fill="#d8b19b"></circle>
+                  <path d="M210 210c8-68 42-110 92-110 46 0 86 36 98 92-38 24-108 44-190 18Z" fill="#26211d"></path>
+                  <rect x="44" y="416" width="190" height="56" rx="28" fill="#fffaf4" stroke="rgba(25,24,21,0.08)"></rect>
+                  <rect x="286" y="416" width="190" height="56" rx="28" fill="#fffaf4" stroke="rgba(25,24,21,0.08)"></rect>
+                  <text x="76" y="451" font-family="IBM Plex Mono, monospace" font-size="16" letter-spacing="1.4" fill="#59554f">MONTH-END READY</text>
+                  <text x="320" y="451" font-family="IBM Plex Mono, monospace" font-size="16" letter-spacing="1.4" fill="#59554f">CLEARER REPORTS</text>
+                </svg>
+              </div>
+
+              <div class="hero-bottom-strip">
+                <div class="hero-strip-card">
+                  <strong>Founder clarity</strong>
+                  <span>Readable reporting and fewer deadline surprises.</span>
+                </div>
+                <div class="hero-strip-card">
+                  <strong>Steady process</strong>
+                  <span>Books, payroll, VAT, GST / HST, and year-end moving in sequence.</span>
+                </div>
+              </div>
+            </div>
+            <div class="media-sheen"></div>
+          </article>
+
           <article class="hero-side-card top float-card">
             <div class="side-card-body">
               <div class="side-card-top">
-                <strong>Owner ready</strong>
-                <span class="side-pill">Snapshot</span>
+                <strong>Programs fit</strong>
+                <span class="side-pill">Coverage</span>
               </div>
               <svg class="portrait-illustration" viewBox="0 0 240 180" aria-hidden="true">
                 <rect x="0" y="0" width="240" height="180" rx="26" fill="#f8f3ed"></rect>
@@ -2022,7 +2175,7 @@
                 <rect x="20" y="124" width="122" height="36" rx="18" fill="#fffaf4" stroke="rgba(25,24,21,0.08)"></rect>
                 <text x="40" y="146" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1.2" fill="#59554f">MONTHLY REVIEW READY</text>
               </svg>
-              <p class="side-card-copy">Clear month-end summaries, cleaner explanations, and less time guessing what changed.</p>
+              <p class="side-card-copy">For freelancers, contractors, and small businesses that want accounting support to feel organised and steady.</p>
             </div>
             <div class="media-sheen"></div>
           </article>
