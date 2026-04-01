@@ -50,6 +50,26 @@
       height: 100%;
       display: block;
     }
+    .hero-card {
+      position: relative;
+      top: 0;
+      transition: top 320ms ease, box-shadow 320ms ease, border-color 320ms ease;
+    }
+    .hero-card:hover {
+      top: -18px;
+      box-shadow: 0 24px 60px rgba(45, 45, 45, 0.12);
+      border-color: rgba(145, 24, 26, 0.18);
+    }
+    .section-image-card {
+      box-shadow: 0 18px 46px rgba(45, 45, 45, 0.08);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-card,
+      .hero-card:hover {
+        transition: none;
+        top: 0;
+      }
+    }
   </style>
 </head>
 <body class="bg-white text-neutral-800 font-sans antialiased text-lg selection:bg-brand selection:text-white">
@@ -103,7 +123,7 @@
       </div>
 
       <div class="w-full flex justify-center items-end gap-2 md:gap-4 overflow-hidden relative pt-10">
-        <div class="w-1/5 md:w-44 aspect-[3/4] rounded-t-[40px] rounded-b-xl overflow-hidden translate-y-12 opacity-80 shadow-sm border border-neutral-100 bg-neutral-50 illustration-card">
+        <div class="hero-card w-1/5 md:w-44 aspect-[3/4] rounded-t-[40px] rounded-b-xl overflow-hidden translate-y-12 opacity-80 shadow-sm border border-neutral-100 bg-neutral-50 illustration-card">
           <svg viewBox="0 0 260 340" aria-hidden="true">
             <rect width="260" height="340" fill="#f6efe9"></rect>
             <circle cx="194" cy="76" r="36" fill="#f4e8e8"></circle>
@@ -118,7 +138,7 @@
           </svg>
         </div>
 
-        <div class="w-1/5 md:w-52 aspect-[3/4] rounded-t-[50px] rounded-b-xl overflow-hidden translate-y-6 opacity-90 shadow-md border border-neutral-100 bg-white illustration-card">
+        <div class="hero-card w-1/5 md:w-52 aspect-[3/4] rounded-t-[50px] rounded-b-xl overflow-hidden translate-y-6 opacity-90 shadow-md border border-neutral-100 bg-white illustration-card">
           <svg viewBox="0 0 280 360" aria-hidden="true">
             <rect width="280" height="360" fill="#fbfaf8"></rect>
             <rect x="28" y="28" width="224" height="304" rx="28" fill="#ffffff" stroke="#ece7e3"></rect>
@@ -133,7 +153,7 @@
           </svg>
         </div>
 
-        <div class="w-1/4 md:w-64 aspect-[3/4] rounded-t-[60px] rounded-b-xl overflow-hidden z-10 shadow-lg border-2 border-white relative bg-white hero-dashboard">
+        <div class="hero-card w-1/4 md:w-64 aspect-[3/4] rounded-t-[60px] rounded-b-xl overflow-hidden z-10 shadow-lg border-2 border-white relative bg-white hero-dashboard">
           <svg viewBox="0 0 320 420" aria-hidden="true">
             <rect width="320" height="420" fill="#ffffff"></rect>
             <rect x="0" y="0" width="320" height="58" fill="#fcfaf8"></rect>
@@ -164,7 +184,7 @@
           <div class="absolute inset-0 bg-brand/5"></div>
         </div>
 
-        <div class="w-1/5 md:w-52 aspect-[3/4] rounded-t-[50px] rounded-b-xl overflow-hidden translate-y-6 opacity-90 shadow-md border border-neutral-100 bg-white illustration-card">
+        <div class="hero-card w-1/5 md:w-52 aspect-[3/4] rounded-t-[50px] rounded-b-xl overflow-hidden translate-y-6 opacity-90 shadow-md border border-neutral-100 bg-white illustration-card">
           <svg viewBox="0 0 280 360" aria-hidden="true">
             <rect width="280" height="360" fill="#fbfaf8"></rect>
             <rect x="26" y="28" width="228" height="304" rx="28" fill="#ffffff" stroke="#ece7e3"></rect>
@@ -181,7 +201,7 @@
           </svg>
         </div>
 
-        <div class="w-1/5 md:w-44 aspect-[3/4] rounded-t-[40px] rounded-b-xl overflow-hidden translate-y-12 opacity-80 shadow-sm border border-neutral-100 bg-neutral-50 illustration-card">
+        <div class="hero-card w-1/5 md:w-44 aspect-[3/4] rounded-t-[40px] rounded-b-xl overflow-hidden translate-y-12 opacity-80 shadow-sm border border-neutral-100 bg-neutral-50 illustration-card">
           <svg viewBox="0 0 260 340" aria-hidden="true">
             <rect width="260" height="340" fill="#f8f4ef"></rect>
             <rect x="30" y="34" width="200" height="272" rx="28" fill="#fff" stroke="#e5e5e5"></rect>
@@ -350,7 +370,7 @@
         </article>
 
         <article class="md:col-span-3 rounded-[2rem] border border-neutral-100 bg-white p-8 md:p-10">
-          <div class="grid md:grid-cols-3 gap-8">
+          <div class="grid md:grid-cols-[1.1fr_0.95fr_1.1fr] gap-8 items-start">
             <div>
               <span class="inline-block border border-neutral-300 text-neutral-600 rounded-full px-4 py-1 text-xs font-medium mb-5 bg-white">Additional support</span>
               <h3 class="font-serif text-3xl tracking-tight text-neutral-900 mb-4">Reporting, cleanup, and year-end support stay in the same system.</h3>
@@ -366,14 +386,28 @@
                 <p class="text-sm text-neutral-600">Backlog recovery, year-end preparation, and books that are ready for tax filing instead of “almost there.”</p>
               </div>
             </div>
-            <div class="rounded-[1.5rem] bg-brand-light p-6">
-              <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-4">Software coverage</div>
-              <div class="space-y-3 text-sm text-neutral-700">
-                <div>QuickBooks Online</div>
-                <div>Xero</div>
-                <div>Wave</div>
-                <div>Sage</div>
-                <div>Canada and UK workflows</div>
+            <div class="space-y-5">
+              <div class="rounded-[1.5rem] bg-neutral-50 border border-neutral-100 overflow-hidden illustration-card section-image-card">
+                <svg viewBox="0 0 420 260" class="w-full h-full" aria-hidden="true">
+                  <rect width="420" height="260" fill="#fcfaf8"></rect>
+                  <rect x="28" y="28" width="364" height="204" rx="34" fill="#ffffff" stroke="#ece7e3"></rect>
+                  <text x="56" y="74" fill="#91181a" font-family="Playfair Display, serif" font-size="28">Close pack</text>
+                  <rect x="56" y="94" width="124" height="12" rx="6" fill="#eadfd7"></rect>
+                  <rect x="56" y="124" width="140" height="74" rx="22" fill="#eef2ee"></rect>
+                  <rect x="212" y="124" width="152" height="74" rx="22" fill="#f4e8e8"></rect>
+                  <text x="82" y="164" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="16" font-weight="600">Owner report</text>
+                  <text x="236" y="164" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="16" font-weight="600">Filing queue</text>
+                </svg>
+              </div>
+              <div class="rounded-[1.5rem] bg-brand-light p-6">
+                <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-4">Software coverage</div>
+                <div class="space-y-3 text-sm text-neutral-700">
+                  <div>QuickBooks Online</div>
+                  <div>Xero</div>
+                  <div>Wave</div>
+                  <div>Sage</div>
+                  <div>Canada and UK workflows</div>
+                </div>
               </div>
             </div>
           </div>
@@ -487,6 +521,17 @@
             <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-4">Coverage</div>
             <h3 class="font-serif text-3xl text-neutral-900 tracking-tight mb-4">Canada and UK</h3>
             <p class="text-sm text-neutral-700">Cross-border understanding for Canada and UK workflows, without turning it into a maze.</p>
+          </div>
+          <div class="rounded-[1.5rem] border border-white/70 bg-white/70 overflow-hidden illustration-card section-image-card mb-6">
+            <svg viewBox="0 0 360 190" class="w-full h-full" aria-hidden="true">
+              <rect width="360" height="190" fill="#f9f4ef"></rect>
+              <circle cx="112" cy="98" r="58" fill="#ffffff" stroke="#eadfd7"></circle>
+              <circle cx="232" cy="98" r="58" fill="#ffffff" stroke="#eadfd7"></circle>
+              <text x="92" y="102" fill="#91181a" font-family="Inter, sans-serif" font-size="20" font-weight="600">CA</text>
+              <text x="214" y="102" fill="#91181a" font-family="Inter, sans-serif" font-size="20" font-weight="600">UK</text>
+              <rect x="122" y="85" width="116" height="26" rx="13" fill="#eef2ee"></rect>
+              <text x="144" y="102" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="12" font-weight="600">Shared workflow</text>
+            </svg>
           </div>
           <div class="text-sm text-neutral-700 space-y-2">
             <div>CRA and GST/HST familiarity</div>
@@ -614,7 +659,7 @@
     </section>
 
     <section id="about" class="py-24 px-6 md:px-12 max-w-7xl mx-auto">
-      <div class="grid md:grid-cols-2 gap-8">
+      <div class="grid md:grid-cols-2 gap-8 items-stretch">
         <article class="rounded-[2.5rem] bg-neutral-50 border border-neutral-100 p-10">
           <span class="inline-block border border-neutral-300 text-neutral-600 rounded-full px-4 py-1 text-sm font-medium mb-6 bg-white">About</span>
           <h2 class="font-serif text-3xl md:text-5xl font-medium tracking-tight text-neutral-900 leading-tight mb-6">
@@ -637,6 +682,20 @@
               <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 pt-1">03</div>
               <p>Better structure for ongoing work and catch-up situations alike.</p>
             </div>
+          </div>
+          <div class="mt-10 rounded-[2rem] overflow-hidden border border-neutral-100 bg-white illustration-card section-image-card">
+            <svg viewBox="0 0 620 270" class="w-full h-full" aria-hidden="true">
+              <rect width="620" height="270" fill="#fcfaf8"></rect>
+              <rect x="30" y="28" width="560" height="214" rx="34" fill="#ffffff" stroke="#ece7e3"></rect>
+              <text x="62" y="78" fill="#91181a" font-family="Playfair Display, serif" font-size="30">Owner conversation</text>
+              <rect x="62" y="100" width="178" height="12" rx="6" fill="#eadfd7"></rect>
+              <rect x="62" y="132" width="148" height="70" rx="28" fill="#eef2ee"></rect>
+              <rect x="232" y="132" width="148" height="70" rx="28" fill="#f4e8e8"></rect>
+              <rect x="402" y="132" width="156" height="70" rx="28" fill="#f7f2ec"></rect>
+              <text x="92" y="172" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="16" font-weight="600">What is urgent</text>
+              <text x="264" y="172" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="16" font-weight="600">What is messy</text>
+              <text x="432" y="172" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="16" font-weight="600">What fits best</text>
+            </svg>
           </div>
         </article>
 
