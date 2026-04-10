@@ -71,6 +71,14 @@
         width: 198px;
       }
     }
+    @media (max-width: 640px) {
+      .site-logo {
+        width: 110px;
+      }
+      .footer-logo {
+        width: 170px;
+      }
+    }
     .hero-card {
       position: relative;
       top: 0;
@@ -93,9 +101,9 @@
     }
   </style>
 </head>
-<body class="bg-white text-neutral-800 font-sans antialiased text-lg selection:bg-brand selection:text-white">
+<body class="bg-white text-neutral-800 font-sans antialiased text-lg overflow-x-hidden selection:bg-brand selection:text-white">
 
-  <nav class="w-full px-6 py-4 md:px-12 md:py-5 flex items-center justify-between z-50 relative bg-white/80 backdrop-blur-md sticky top-0 border-b border-neutral-100">
+  <nav class="w-full px-3 py-4 md:px-12 md:py-5 flex items-center justify-between z-50 relative bg-white/80 backdrop-blur-md sticky top-0 border-b border-neutral-100">
     <a href="#top" class="flex items-center">
       <img src="./assets/branding/tallyport_earthy.png" alt="Tallyport Accounting logo" class="site-logo">
     </a>
@@ -108,29 +116,29 @@
       <a href="#contact" class="hover:text-brand transition-colors">Contact</a>
     </div>
 
-    <div class="flex items-center gap-4">
+    <div class="flex items-center gap-2 md:gap-4 shrink-0">
       <a href="#contact" class="hidden lg:block text-[0.95rem] font-medium text-neutral-600 hover:text-brand transition-colors">Book a call</a>
-      <a href="#contact" class="bg-white border border-neutral-200 text-neutral-800 px-5 py-2.5 rounded-full text-[0.95rem] font-medium hover:border-neutral-300 transition-all flex items-center gap-2 shadow-sm">
+      <a href="#contact" class="bg-white border border-neutral-200 text-neutral-800 px-3.5 py-2 md:px-5 md:py-2.5 rounded-full text-[0.82rem] md:text-[0.95rem] font-medium hover:border-neutral-300 transition-all flex items-center gap-2 shadow-sm whitespace-nowrap">
         Discovery Call
       </a>
     </div>
   </nav>
 
   <main id="top">
-    <header class="pt-10 pb-16 md:pt-[4.5rem] md:pb-24 px-6 md:px-12 text-center max-w-5xl mx-auto flex flex-col items-center">
-      <h1 class="font-serif text-[2.7rem] md:text-7xl font-medium tracking-tight text-neutral-900 leading-[0.94] md:leading-tight mb-6 max-w-[12ch] md:max-w-4xl">
+    <header class="pt-8 pb-14 md:pt-[4.5rem] md:pb-24 px-3 md:px-12 text-center max-w-5xl mx-auto flex flex-col items-center">
+      <h1 class="font-serif text-[2.15rem] sm:text-[2.7rem] md:text-7xl font-medium tracking-tight text-neutral-900 leading-[0.94] md:leading-tight mb-5 md:mb-6 max-w-[8ch] sm:max-w-[12ch] md:max-w-4xl">
         Clean books, faster closes, calmer finances.
       </h1>
-      <p class="text-neutral-600 text-lg md:text-xl mb-8 max-w-3xl font-medium">
+      <p class="text-[0.92rem] sm:text-lg md:text-xl mb-7 md:mb-8 max-w-3xl font-medium text-neutral-600">
         Bookkeeping <span class="mx-2 opacity-50">•</span> Payroll <span class="mx-2 opacity-50">•</span> VAT / GST-HST <span class="mx-2 opacity-50">•</span> Reporting
       </p>
 
-      <p class="text-neutral-600 text-base md:text-[1.05rem] leading-8 mb-8 max-w-2xl">
+      <p class="text-neutral-600 text-[0.98rem] sm:text-base md:text-[1.05rem] leading-7 md:leading-8 mb-7 md:mb-8 max-w-xl md:max-w-2xl">
         Tallyport gives freelancers, contractors, and small businesses a proper finance rhythm:
         reconciled books, cleaner reporting, payroll and tax deadlines handled on time, and real visibility across Canada and the UK.
       </p>
 
-      <div class="flex flex-col sm:flex-row items-center gap-4 mb-10 md:mb-10">
+      <div class="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mb-8 md:mb-10 w-full sm:w-auto">
         <a href="#contact" class="bg-brand text-white px-8 py-3.5 rounded-full text-base font-medium hover:bg-brand/90 transition-all shadow-md w-full sm:w-auto">
           Book a Free Call
         </a>
@@ -139,22 +147,22 @@
         </a>
       </div>
 
-      <div class="w-full flex justify-center items-end gap-2 md:gap-5 overflow-hidden relative">
-        <div class="hero-card photo-card relative w-[18%] md:w-48 aspect-[3/4] rounded-t-[40px] rounded-b-xl overflow-hidden translate-y-12 opacity-90 shadow-sm border border-neutral-100 bg-neutral-50">
+      <div class="w-full flex justify-center items-end gap-1.5 sm:gap-2 md:gap-5 overflow-hidden relative max-w-[20rem] sm:max-w-none">
+        <div class="hero-card photo-card relative hidden sm:block w-[18%] md:w-48 aspect-[3/4] rounded-t-[40px] rounded-b-xl overflow-hidden translate-y-12 opacity-90 shadow-sm border border-neutral-100 bg-neutral-50">
           <img src="./assets/photos/founder-portrait.jpg" alt="Professional accountant seated at a desk with reports and laptop">
           <div class="absolute inset-x-3 md:inset-x-4 bottom-3 md:bottom-4 rounded-full bg-white/88 backdrop-blur-sm px-3 py-2 text-[11px] md:text-xs font-medium tracking-[0.08em] text-neutral-800">
             Founder-led support
           </div>
         </div>
 
-        <div class="hero-card photo-card relative w-[19%] md:w-56 aspect-[3/4] rounded-t-[50px] rounded-b-xl overflow-hidden translate-y-6 shadow-md border border-neutral-100 bg-white">
+        <div class="hero-card photo-card relative w-[30%] sm:w-[19%] md:w-56 aspect-[3/4] rounded-t-[34px] sm:rounded-t-[50px] rounded-b-xl overflow-hidden translate-y-4 sm:translate-y-6 shadow-md border border-neutral-100 bg-white">
           <img src="./assets/photos/bookkeeping-workspace.jpg" alt="Clean bookkeeping workspace with laptop, calculator, invoices, and coffee">
-          <div class="absolute inset-x-3 md:inset-x-4 bottom-3 md:bottom-4 rounded-full bg-white/88 backdrop-blur-sm px-3 py-2 text-[11px] md:text-xs font-medium tracking-[0.08em] text-neutral-800">
+          <div class="absolute inset-x-2 sm:inset-x-3 md:inset-x-4 bottom-2 sm:bottom-3 md:bottom-4 rounded-full bg-white/88 backdrop-blur-sm px-2 sm:px-3 py-1.5 sm:py-2 text-[9px] sm:text-[11px] md:text-xs font-medium tracking-[0.06em] sm:tracking-[0.08em] text-neutral-800">
             Month-end inputs, organised
           </div>
         </div>
 
-        <div class="hero-card w-[24%] md:w-72 aspect-[3/4] rounded-t-[60px] rounded-b-xl overflow-hidden z-10 shadow-xl border-2 border-white relative bg-white hero-dashboard">
+        <div class="hero-card w-[40%] sm:w-[24%] md:w-72 aspect-[3/4] rounded-t-[40px] sm:rounded-t-[60px] rounded-b-xl overflow-hidden z-10 shadow-xl border-2 border-white relative bg-white hero-dashboard">
           <svg viewBox="0 0 320 420" aria-hidden="true">
             <rect width="320" height="420" fill="#ffffff"></rect>
             <rect x="0" y="0" width="320" height="58" fill="#fcfaf8"></rect>
@@ -185,14 +193,14 @@
           <div class="absolute inset-0 bg-brand/5"></div>
         </div>
 
-        <div class="hero-card photo-card relative w-[19%] md:w-56 aspect-[3/4] rounded-t-[50px] rounded-b-xl overflow-hidden translate-y-6 shadow-md border border-neutral-100 bg-white">
+        <div class="hero-card photo-card relative w-[30%] sm:w-[19%] md:w-56 aspect-[3/4] rounded-t-[34px] sm:rounded-t-[50px] rounded-b-xl overflow-hidden translate-y-4 sm:translate-y-6 shadow-md border border-neutral-100 bg-white">
           <img src="./assets/photos/client-meeting.jpg" alt="Accountant and small business owner reviewing reports together">
-          <div class="absolute inset-x-3 md:inset-x-4 bottom-3 md:bottom-4 rounded-full bg-white/88 backdrop-blur-sm px-3 py-2 text-[11px] md:text-xs font-medium tracking-[0.08em] text-neutral-800">
+          <div class="absolute inset-x-2 sm:inset-x-3 md:inset-x-4 bottom-2 sm:bottom-3 md:bottom-4 rounded-full bg-white/88 backdrop-blur-sm px-2 sm:px-3 py-1.5 sm:py-2 text-[9px] sm:text-[11px] md:text-xs font-medium tracking-[0.06em] sm:tracking-[0.08em] text-neutral-800">
             Calls that clarify next steps
           </div>
         </div>
 
-        <div class="hero-card photo-card relative w-[18%] md:w-48 aspect-[3/4] rounded-t-[40px] rounded-b-xl overflow-hidden translate-y-12 opacity-90 shadow-sm border border-neutral-100 bg-neutral-50">
+        <div class="hero-card photo-card relative hidden sm:block w-[18%] md:w-48 aspect-[3/4] rounded-t-[40px] rounded-b-xl overflow-hidden translate-y-12 opacity-90 shadow-sm border border-neutral-100 bg-neutral-50">
           <img src="./assets/photos/reporting-desk.jpg" alt="Reporting desk with laptop dashboard, statements, and calculator">
           <div class="absolute inset-x-3 md:inset-x-4 bottom-3 md:bottom-4 rounded-full bg-white/88 backdrop-blur-sm px-3 py-2 text-[11px] md:text-xs font-medium tracking-[0.08em] text-neutral-800">
             Reporting, without scramble
@@ -201,38 +209,38 @@
       </div>
     </header>
 
-    <section class="py-12 px-6 md:px-12 max-w-6xl mx-auto">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="rounded-[2rem] border border-[#f1debf] bg-[#fbf2df] p-7 text-center shadow-sm">
-          <div class="font-serif text-4xl md:text-[2.8rem] text-neutral-900 mb-2">15+</div>
-          <div class="text-[0.98rem] leading-6 text-neutral-700">Years across owner-led finance support</div>
+    <section class="py-12 px-3 md:px-12 max-w-6xl mx-auto">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+        <div class="rounded-[1.6rem] md:rounded-[2rem] border border-[#f1debf] bg-[#fbf2df] p-5 md:p-7 text-center shadow-sm">
+          <div class="font-serif text-[2.1rem] md:text-[2.8rem] text-neutral-900 mb-2">15+</div>
+          <div class="text-[0.87rem] md:text-[0.98rem] leading-5 md:leading-6 text-neutral-700">Years across owner-led finance support</div>
         </div>
-        <div class="rounded-[2rem] border border-[#e8d8dd] bg-[#f7ecef] p-7 text-center shadow-sm">
-          <div class="font-serif text-4xl md:text-[2.8rem] text-neutral-900 mb-2">2</div>
-          <div class="text-[0.98rem] leading-6 text-neutral-700">Operating contexts, Canada and UK</div>
+        <div class="rounded-[1.6rem] md:rounded-[2rem] border border-[#e8d8dd] bg-[#f7ecef] p-5 md:p-7 text-center shadow-sm">
+          <div class="font-serif text-[2.1rem] md:text-[2.8rem] text-neutral-900 mb-2">2</div>
+          <div class="text-[0.87rem] md:text-[0.98rem] leading-5 md:leading-6 text-neutral-700">Operating contexts, Canada and UK</div>
         </div>
-        <div class="rounded-[2rem] border border-[#d8e7db] bg-[#edf6ef] p-7 text-center shadow-sm">
-          <div class="font-serif text-4xl md:text-[2.8rem] text-neutral-900 mb-2">24h</div>
-          <div class="text-[0.98rem] leading-6 text-neutral-700">Reply target on normal business days</div>
+        <div class="rounded-[1.6rem] md:rounded-[2rem] border border-[#d8e7db] bg-[#edf6ef] p-5 md:p-7 text-center shadow-sm">
+          <div class="font-serif text-[2.1rem] md:text-[2.8rem] text-neutral-900 mb-2">24h</div>
+          <div class="text-[0.87rem] md:text-[0.98rem] leading-5 md:leading-6 text-neutral-700">Reply target on normal business days</div>
         </div>
-        <div class="rounded-[2rem] border border-[#d9e0ee] bg-[#edf3fb] p-7 text-center shadow-sm">
-          <div class="font-serif text-4xl md:text-[2.8rem] text-neutral-900 mb-2">Fixed</div>
-          <div class="text-[0.98rem] leading-6 text-neutral-700">Monthly pricing, not drifting hourly bills</div>
+        <div class="rounded-[1.6rem] md:rounded-[2rem] border border-[#d9e0ee] bg-[#edf3fb] p-5 md:p-7 text-center shadow-sm">
+          <div class="font-serif text-[2.1rem] md:text-[2.8rem] text-neutral-900 mb-2">Fixed</div>
+          <div class="text-[0.87rem] md:text-[0.98rem] leading-5 md:leading-6 text-neutral-700">Monthly pricing, not drifting hourly bills</div>
         </div>
       </div>
     </section>
 
-    <section class="py-24 md:py-32 px-6 overflow-hidden relative bg-neutral-50/50">
-      <div class="max-w-4xl mx-auto relative h-[460px] md:h-[540px] flex items-center justify-center">
+    <section class="py-20 md:py-32 px-3 md:px-6 overflow-hidden relative bg-neutral-50/50">
+      <div class="max-w-4xl mx-auto relative h-[420px] md:h-[540px] flex items-center justify-center">
         <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div class="w-[300px] h-[300px] rounded-full border border-brand/20 absolute translate-x-10 translate-y-10"></div>
-          <div class="w-[450px] h-[450px] rounded-full border border-neutral-200 absolute -translate-x-12 -translate-y-4"></div>
-          <div class="w-[600px] h-[600px] rounded-full border border-brand/10 absolute"></div>
+          <div class="w-[240px] h-[240px] md:w-[300px] md:h-[300px] rounded-full border border-brand/20 absolute translate-x-8 translate-y-8 md:translate-x-10 md:translate-y-10"></div>
+          <div class="w-[360px] h-[360px] md:w-[450px] md:h-[450px] rounded-full border border-neutral-200 absolute -translate-x-8 md:-translate-x-12 -translate-y-3 md:-translate-y-4"></div>
+          <div class="w-[500px] h-[500px] md:w-[600px] md:h-[600px] rounded-full border border-brand/10 absolute"></div>
         </div>
 
         <div class="text-center z-10 max-w-2xl">
           <span class="inline-block border border-neutral-300 text-neutral-600 rounded-full px-4 py-1 text-sm font-medium mb-6 bg-white">The reality</span>
-          <h2 class="font-serif text-[1.85rem] md:text-5xl font-medium tracking-tight text-neutral-900 leading-[0.95] md:leading-tight max-w-[11ch] md:max-w-none mx-auto">
+          <h2 class="font-serif text-[1.55rem] sm:text-[1.85rem] md:text-5xl font-medium tracking-tight text-neutral-900 leading-[0.95] md:leading-tight max-w-[10ch] sm:max-w-[11ch] md:max-w-none mx-auto">
             Most owners do not need more accounting jargon. They need a cleaner system.
           </h2>
         </div>
@@ -267,10 +275,10 @@
       </div>
     </section>
 
-    <section id="services" class="py-24 px-6 md:px-12 max-w-7xl mx-auto">
+    <section id="services" class="py-20 md:py-24 px-3 md:px-12 max-w-7xl mx-auto">
       <div class="text-center max-w-3xl mx-auto mb-14">
         <span class="inline-block border border-neutral-300 text-neutral-600 rounded-full px-4 py-1 text-sm font-medium mb-6 bg-white">Services</span>
-        <h2 class="font-serif text-3xl md:text-5xl font-medium tracking-tight text-neutral-900 leading-tight mb-5">
+        <h2 class="font-serif text-[2rem] md:text-5xl font-medium tracking-tight text-neutral-900 leading-tight mb-5">
           What Tallyport actually handles
         </h2>
         <p class="text-neutral-600">
@@ -279,10 +287,10 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-auto md:auto-rows-[340px]">
-        <article class="md:col-span-1 rounded-[2rem] relative overflow-hidden group bg-[#f8f0df] border border-[#f0dfbb] p-8 md:p-9 flex flex-col justify-between shadow-sm">
+        <article class="md:col-span-1 rounded-[2rem] relative overflow-hidden group bg-[#f8f0df] border border-[#f0dfbb] p-6 md:p-9 flex flex-col justify-between shadow-sm">
           <div>
             <span class="inline-block border border-[#e8cf95] text-neutral-700 rounded-full px-4 py-1 text-xs font-medium mb-6 bg-white/70">Core</span>
-            <h3 class="font-serif text-[2rem] tracking-tight leading-[1.02] text-neutral-900 mb-4">Bookkeeping and reconciliations</h3>
+            <h3 class="font-serif text-[1.72rem] md:text-[2rem] tracking-tight leading-[1.02] text-neutral-900 mb-4">Bookkeeping and reconciliations</h3>
             <p class="text-sm text-neutral-700">Current books, clean categorisation, receivables and payables tracked properly, and bank activity matched before month-end gets away from you.</p>
           </div>
           <div class="w-11 h-11 rounded-full border border-[#e8cf95] bg-white/70 flex items-center justify-center text-brand self-end">
@@ -290,9 +298,9 @@
           </div>
         </article>
 
-        <article class="md:col-span-1 rounded-[2rem] bg-[#f7edf0] border border-[#ead8de] p-8 md:p-9 flex flex-col items-center justify-center text-center shadow-sm">
+        <article class="md:col-span-1 rounded-[2rem] bg-[#f7edf0] border border-[#ead8de] p-6 md:p-9 flex flex-col items-center justify-center text-center shadow-sm">
           <span class="text-xs font-medium tracking-wider uppercase text-neutral-500 mb-4 border border-[#e8d8dd] rounded-full px-4 py-1.5 bg-white/75">Working scope</span>
-          <h3 class="font-serif text-3xl md:text-[2.55rem] tracking-tight font-medium text-neutral-900 leading-[0.95] mb-4">
+          <h3 class="font-serif text-[1.9rem] md:text-[2.55rem] tracking-tight font-medium text-neutral-900 leading-[0.95] mb-4">
             Built for owners who want cleaner finance operations
           </h3>
           <p class="text-sm text-neutral-700">Books stay current, reports stay readable, and filing work gets handled before deadline drama starts running the month.</p>
@@ -315,10 +323,10 @@
           </div>
         </article>
 
-        <article class="md:col-span-1 rounded-[2rem] bg-[#e5ab6a] p-8 md:p-9 flex flex-col justify-between group cursor-pointer transition-all hover:bg-[#db9f59] text-white shadow-sm">
+        <article class="md:col-span-1 rounded-[2rem] bg-[#e5ab6a] p-6 md:p-9 flex flex-col justify-between group cursor-pointer transition-all hover:bg-[#db9f59] text-white shadow-sm">
           <div>
             <span class="inline-block border border-white/30 rounded-full px-4 py-1 text-xs font-medium mb-6 bg-white/10">Compliance</span>
-            <h3 class="font-serif text-[2rem] tracking-tight leading-[1.02]">GST/HST and VAT filing</h3>
+            <h3 class="font-serif text-[1.72rem] md:text-[2rem] tracking-tight leading-[1.02]">GST/HST and VAT filing</h3>
             <p class="text-sm text-white/85 mt-4">Returns prepared from clean books, with Canadian and UK compliance work handled before the deadline panic starts driving decisions.</p>
           </div>
           <div class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center self-end">
@@ -326,10 +334,10 @@
           </div>
         </article>
 
-        <article class="md:col-span-1 rounded-[2rem] bg-[#8f9b84] p-8 md:p-9 flex flex-col justify-between group cursor-pointer transition-all hover:bg-[#819076] text-white shadow-sm">
+        <article class="md:col-span-1 rounded-[2rem] bg-[#8f9b84] p-6 md:p-9 flex flex-col justify-between group cursor-pointer transition-all hover:bg-[#819076] text-white shadow-sm">
           <div>
             <span class="inline-block border border-white/30 rounded-full px-4 py-1 text-xs font-medium mb-6 bg-white/10">Payroll</span>
-            <h3 class="font-serif text-[2rem] tracking-tight leading-[1.02] w-2/3">Payroll processing</h3>
+            <h3 class="font-serif text-[1.72rem] md:text-[2rem] tracking-tight leading-[1.02] md:w-2/3">Payroll processing</h3>
             <p class="text-sm text-white/85 mt-4">Payslips, remittances, RTI submissions, and year-end slips handled with the boring consistency payroll should always have.</p>
           </div>
           <div class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center self-end">
@@ -337,10 +345,10 @@
           </div>
         </article>
 
-        <article class="md:col-span-1 rounded-[2rem] bg-[#9aa9bd] p-8 md:p-9 flex flex-col justify-between group cursor-pointer transition-all hover:bg-[#8d9eb5] text-white shadow-sm">
+        <article class="md:col-span-1 rounded-[2rem] bg-[#9aa9bd] p-6 md:p-9 flex flex-col justify-between group cursor-pointer transition-all hover:bg-[#8d9eb5] text-white shadow-sm">
           <div>
             <span class="inline-block border border-white/30 rounded-full px-4 py-1 text-xs font-medium mb-6 bg-white/10">Advisory</span>
-            <h3 class="font-serif text-[2rem] tracking-tight leading-[1.02]">Cash flow and planning support</h3>
+            <h3 class="font-serif text-[1.72rem] md:text-[2rem] tracking-tight leading-[1.02]">Cash flow and planning support</h3>
             <p class="text-sm text-white/85 mt-4">Budgeting, visibility, and practical guidance for owners who want the numbers to help steer the business, not just explain it afterward.</p>
           </div>
           <div class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center self-end">
@@ -348,11 +356,11 @@
           </div>
         </article>
 
-        <article class="md:col-span-3 rounded-[2rem] border border-neutral-100 bg-white p-8 md:p-10">
+        <article class="md:col-span-3 rounded-[2rem] border border-neutral-100 bg-white p-6 md:p-10">
           <div class="grid md:grid-cols-[1.1fr_0.95fr_1.1fr] gap-8 items-start">
             <div>
               <span class="inline-block border border-neutral-300 text-neutral-600 rounded-full px-4 py-1 text-xs font-medium mb-5 bg-white">Additional support</span>
-              <h3 class="font-serif text-3xl tracking-tight text-neutral-900 mb-4">Reporting, cleanup, and year-end support stay in the same system.</h3>
+              <h3 class="font-serif text-[1.95rem] md:text-3xl tracking-tight text-neutral-900 mb-4">Reporting, cleanup, and year-end support stay in the same system.</h3>
               <p class="text-neutral-600">Tallyport keeps the finance function connected instead of turning every issue into a separate scramble.</p>
             </div>
             <div class="space-y-5">
@@ -394,30 +402,30 @@
       </div>
     </section>
 
-    <section id="workflow" class="py-24 px-6 md:px-12 max-w-6xl mx-auto">
-      <div class="bg-[#eaf1eb] rounded-[3rem] p-10 md:p-16">
-        <div class="flex flex-col md:flex-row justify-between items-start gap-12 mb-12">
+    <section id="workflow" class="py-20 md:py-24 px-3 md:px-12 max-w-6xl mx-auto">
+      <div class="bg-[#eaf1eb] rounded-[2.2rem] md:rounded-[3rem] p-6 sm:p-8 md:p-16">
+        <div class="flex flex-col md:flex-row justify-between items-start gap-8 md:gap-12 mb-10 md:mb-12">
           <div class="max-w-2xl">
             <span class="inline-block border border-neutral-300 text-neutral-600 rounded-full px-4 py-1 text-sm font-medium mb-6 bg-white">Working rhythm</span>
-            <h2 class="font-serif text-3xl md:text-5xl font-medium tracking-tight text-neutral-900 leading-tight mb-6">
+            <h2 class="font-serif text-[1.95rem] md:text-5xl font-medium tracking-tight text-neutral-900 leading-tight mb-5 md:mb-6">
               Clean process beats heroic cleanup
             </h2>
-            <p class="text-neutral-700">
+            <p class="text-neutral-700 text-[0.98rem] sm:text-base leading-8">
               Tallyport’s value is not just “doing the books.” It is turning finance operations into a repeatable system:
               gather, reconcile, review, report, and file before the month-end scramble begins.
             </p>
           </div>
 
           <div class="flex flex-wrap gap-3 max-w-md">
-            <span class="px-4 py-2 rounded-full bg-white text-sm font-medium text-neutral-700 border border-white/60 shadow-sm">Monthly reporting cadence</span>
-            <span class="px-4 py-2 rounded-full bg-white text-sm font-medium text-neutral-700 border border-white/60 shadow-sm">CRA and HMRC context</span>
-            <span class="px-4 py-2 rounded-full bg-white text-sm font-medium text-neutral-700 border border-white/60 shadow-sm">Catch-up ready</span>
-            <span class="px-4 py-2 rounded-full bg-white text-sm font-medium text-neutral-700 border border-white/60 shadow-sm">Owner-readable reporting</span>
+            <span class="px-4 py-2 rounded-full bg-white text-[0.92rem] text-center font-medium text-neutral-700 border border-white/60 shadow-sm">Monthly reporting cadence</span>
+            <span class="px-4 py-2 rounded-full bg-white text-[0.92rem] text-center font-medium text-neutral-700 border border-white/60 shadow-sm">CRA and HMRC context</span>
+            <span class="px-4 py-2 rounded-full bg-white text-[0.92rem] text-center font-medium text-neutral-700 border border-white/60 shadow-sm">Catch-up ready</span>
+            <span class="px-4 py-2 rounded-full bg-white text-[0.92rem] text-center font-medium text-neutral-700 border border-white/60 shadow-sm">Owner-readable reporting</span>
           </div>
         </div>
 
         <div class="grid md:grid-cols-2 gap-6">
-          <div class="rounded-[2rem] bg-white border border-white/60 shadow-sm p-8">
+          <div class="rounded-[2rem] bg-white border border-white/60 shadow-sm p-6 md:p-8">
             <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-6">Client records</div>
             <div class="space-y-4">
               <div class="rounded-[1.5rem] bg-neutral-50 border border-neutral-100 p-5">
@@ -443,7 +451,7 @@
             </div>
           </div>
 
-          <div class="rounded-[2rem] relative overflow-hidden bg-white border border-white/60 shadow-sm illustration-card">
+          <div class="rounded-[2rem] relative overflow-hidden bg-white border border-white/60 shadow-sm illustration-card aspect-square md:aspect-auto">
             <svg viewBox="0 0 500 500" class="w-full h-full">
               <rect width="500" height="500" fill="#f9f7f4"></rect>
               <rect x="34" y="38" width="432" height="424" rx="42" fill="#ffffff" stroke="#ece7e3"></rect>
@@ -463,12 +471,12 @@
       </div>
     </section>
 
-    <section id="credentials" class="py-24 px-6 md:px-12 max-w-7xl mx-auto">
+    <section id="credentials" class="py-20 md:py-24 px-3 md:px-12 max-w-7xl mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-auto md:auto-rows-[260px]">
-        <article class="md:col-span-2 rounded-[2rem] bg-neutral-50 border border-neutral-100 p-8 md:p-10 flex flex-col justify-between">
+        <article class="md:col-span-2 rounded-[2rem] bg-neutral-50 border border-neutral-100 p-6 md:p-10 flex flex-col justify-between">
           <div>
             <span class="inline-block border border-neutral-300 text-neutral-600 rounded-full px-4 py-1 text-sm font-medium mb-6 bg-white">Credentials</span>
-            <h2 class="font-serif text-3xl md:text-5xl font-medium tracking-tight text-neutral-900 leading-tight mb-6 max-w-3xl">
+            <h2 class="font-serif text-[1.95rem] md:text-5xl font-medium tracking-tight text-neutral-900 leading-tight mb-6 max-w-3xl">
               Trust signals that actually matter.
             </h2>
             <p class="text-neutral-600 max-w-2xl">
@@ -495,10 +503,10 @@
           </div>
         </article>
 
-        <article class="rounded-[2rem] bg-brand-light p-8 flex flex-col justify-between">
+        <article class="rounded-[2rem] bg-brand-light p-6 md:p-8 flex flex-col justify-between">
           <div>
             <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-4">Coverage</div>
-            <h3 class="font-serif text-3xl text-neutral-900 tracking-tight mb-4">Canada and UK</h3>
+            <h3 class="font-serif text-[1.85rem] md:text-3xl text-neutral-900 tracking-tight mb-4">Canada and UK</h3>
             <p class="text-sm text-neutral-700">Cross-border understanding for Canada and UK workflows, without turning it into a maze.</p>
           </div>
           <div class="rounded-[1.5rem] border border-white/70 bg-white/70 overflow-hidden illustration-card section-image-card mb-6">
@@ -519,10 +527,10 @@
           </div>
         </article>
 
-        <article class="rounded-[2rem] bg-white border border-neutral-100 p-8 md:col-span-3">
+        <article class="rounded-[2rem] bg-white border border-neutral-100 p-6 md:p-8 md:col-span-3">
           <div class="text-center mb-8">
             <span class="inline-block border border-neutral-300 text-neutral-600 rounded-full px-4 py-1 text-sm font-medium mb-4 bg-white">Software</span>
-            <h3 class="font-serif text-3xl text-neutral-900 tracking-tight">QuickBooks, Xero, Wave, and Sage</h3>
+            <h3 class="font-serif text-[1.8rem] md:text-3xl text-neutral-900 tracking-tight">QuickBooks, Xero, Wave, and Sage</h3>
           </div>
           <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div class="rounded-[1.5rem] bg-neutral-50 border border-neutral-100 p-6 text-center integration-logo">
@@ -573,10 +581,10 @@
       </div>
     </section>
 
-    <section id="pricing" class="py-24 px-6 md:px-12 max-w-7xl mx-auto">
+    <section id="pricing" class="py-20 md:py-24 px-3 md:px-12 max-w-7xl mx-auto">
       <div class="text-center max-w-3xl mx-auto mb-14">
         <span class="inline-block border border-neutral-300 text-neutral-600 rounded-full px-4 py-1 text-sm font-medium mb-6 bg-white">Pricing</span>
-        <h2 class="font-serif text-3xl md:text-5xl font-medium tracking-tight text-neutral-900 leading-tight mb-5">
+        <h2 class="font-serif text-[2rem] md:text-5xl font-medium tracking-tight text-neutral-900 leading-tight mb-5">
           Fixed monthly pricing, clearer scope.
         </h2>
         <p class="text-neutral-600">
@@ -585,9 +593,9 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <article class="rounded-[2rem] border border-neutral-100 bg-white p-8 shadow-sm">
+        <article class="rounded-[2rem] border border-neutral-100 bg-white p-6 md:p-8 shadow-sm">
           <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-4">Starter</div>
-          <div class="font-serif text-5xl text-neutral-900 mb-5">£120</div>
+          <div class="font-serif text-[3rem] md:text-5xl text-neutral-900 mb-5">£120</div>
           <p class="text-neutral-600 mb-6">For freelancers and sole traders who need clean books, regular reporting, and filing support without overcomplicating the setup.</p>
           <ul class="space-y-3 text-sm text-neutral-700 mb-8">
             <li>Monthly bank reconciliation</li>
@@ -600,10 +608,10 @@
           <a href="#contact" class="w-full inline-flex justify-center bg-neutral-50 text-neutral-800 border border-neutral-200 px-6 py-3 rounded-full text-sm font-medium hover:bg-neutral-100 transition-all">Choose Starter</a>
         </article>
 
-        <article class="rounded-[2rem] border border-brand/20 bg-brand-light p-8 shadow-sm relative">
+        <article class="rounded-[2rem] border border-brand/20 bg-brand-light p-6 md:p-8 shadow-sm relative">
           <div class="absolute top-6 right-6 text-xs uppercase tracking-[0.18em] text-brand font-medium">Most Popular</div>
           <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-4">Growth</div>
-          <div class="font-serif text-5xl text-neutral-900 mb-5">£220</div>
+          <div class="font-serif text-[3rem] md:text-5xl text-neutral-900 mb-5">£220</div>
           <p class="text-neutral-700 mb-6">For growing businesses that need stronger reporting, payroll, and tighter operational visibility without hiring internally too early.</p>
           <ul class="space-y-3 text-sm text-neutral-700 mb-8">
             <li>Everything in Starter</li>
@@ -617,9 +625,9 @@
           <a href="#contact" class="w-full inline-flex justify-center bg-brand text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-brand/90 transition-all">Choose Growth</a>
         </article>
 
-        <article class="rounded-[2rem] border border-neutral-100 bg-white p-8 shadow-sm">
+        <article class="rounded-[2rem] border border-neutral-100 bg-white p-6 md:p-8 shadow-sm">
           <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-4">Premium</div>
-          <div class="font-serif text-5xl text-neutral-900 mb-5">£380</div>
+          <div class="font-serif text-[3rem] md:text-5xl text-neutral-900 mb-5">£380</div>
           <p class="text-neutral-600 mb-6">For established businesses that want finance support to be proactive, visible, and more strategic month to month.</p>
           <ul class="space-y-3 text-sm text-neutral-700 mb-8">
             <li>Everything in Growth</li>
@@ -637,15 +645,15 @@
       <p class="text-center text-neutral-600 text-base mt-8">Catch-up bookkeeping available from £95 per month of backlog, with rush turnaround available when needed.</p>
     </section>
 
-    <section id="contact" class="py-24 px-6 md:px-12 max-w-7xl mx-auto relative">
+    <section id="contact" class="py-20 md:py-24 px-3 md:px-12 max-w-7xl mx-auto relative">
       <span id="about" class="absolute -top-24"></span>
-      <div class="rounded-[3rem] overflow-hidden flex flex-col md:flex-row shadow-sm border border-neutral-100">
-        <div class="w-full md:w-1/2 bg-[#d7bd3e] p-12 md:p-20 flex flex-col justify-center">
+      <div class="rounded-[2.2rem] md:rounded-[3rem] overflow-hidden flex flex-col md:flex-row shadow-sm border border-neutral-100">
+        <div class="w-full md:w-1/2 bg-[#d7bd3e] p-7 sm:p-9 md:p-20 flex flex-col justify-center">
           <span class="inline-flex w-fit border border-neutral-900/10 text-neutral-800 rounded-full px-4 py-1 text-sm font-medium mb-6 bg-white/30 backdrop-blur-sm">About + Consultation</span>
-          <h2 class="font-serif text-4xl md:text-5xl font-medium tracking-tight text-neutral-900 leading-tight mb-6 max-w-lg">
+          <h2 class="font-serif text-[2.35rem] md:text-5xl font-medium tracking-tight text-neutral-900 leading-tight mb-6 max-w-lg">
             Proper finance support should keep the work clean and the decisions clear.
           </h2>
-          <p class="text-neutral-800 text-lg mb-8 max-w-md">
+          <p class="text-neutral-800 text-base md:text-lg mb-8 max-w-md leading-8">
             Tallyport is built for owners who want current books, readable reporting, compliance handled before it turns urgent, and a discovery call that leads to the right level of support.
           </p>
 
@@ -677,7 +685,7 @@
           </div>
         </div>
 
-        <div class="w-full md:w-1/2 bg-[#e8cd54] p-8 md:p-12 relative flex items-center justify-center min-h-[440px]">
+        <div class="w-full md:w-1/2 bg-[#e8cd54] p-5 sm:p-7 md:p-12 relative flex items-center justify-center min-h-[440px]">
           <div class="absolute top-1/2 left-1/2 -translate-x-[40%] -translate-y-[82%] w-72 bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-white/50 z-10 scale-95 opacity-80 hidden md:block">
             <div class="h-4 w-24 bg-neutral-200 rounded mb-4"></div>
             <div class="h-10 w-full bg-neutral-100 rounded"></div>
