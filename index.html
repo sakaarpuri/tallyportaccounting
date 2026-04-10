@@ -60,11 +60,13 @@
       display: block;
       height: auto;
       width: 152px;
+      mix-blend-mode: multiply;
     }
     .footer-logo {
       display: block;
       height: auto;
       width: 210px;
+      mix-blend-mode: multiply;
     }
     @media (min-width: 768px) {
       .site-logo {
@@ -780,6 +782,112 @@
 
   <script>
     lucide.createIcons();
+
+    (function () {
+      const logos = Array.from(document.querySelectorAll(".site-logo, .footer-logo"));
+      if (!logos.length) return;
+
+      const source = logos[0];
+
+      const applyTransparentLogo = () => {
+        const width = source.naturalWidth;
+        const height = source.naturalHeight;
+        if (!width || !height) return;
+
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+
+        const context = canvas.getContext("2d", { willReadFrequently: true });
+        context.drawImage(source, 0, 0, width, height);
+
+        const imageData = context.getImageData(0, 0, width, height);
+        const data = imageData.data;
+        const seen = new Uint8Array(width * height);
+        const queue = [];
+
+        const isBackground = (r, g, b, a) =>
+          a > 0 && Math.max(r, g, b) > 208 && Math.max(r, g, b) - Math.min(r, g, b) < 42 && r + g + b > 690;
+
+        const push = (x, y) => {
+          if (x < 0 || y < 0 || x >= width || y >= height) return;
+          const index = y * width + x;
+          if (seen[index]) return;
+          seen[index] = 1;
+          queue.push(index);
+        };
+
+        for (let x = 0; x < width; x += 1) {
+          push(x, 0);
+          push(x, height - 1);
+        }
+
+        for (let y = 0; y < height; y += 1) {
+          push(0, y);
+          push(width - 1, y);
+        }
+
+        while (queue.length) {
+          const index = queue.shift();
+          const x = index % width;
+          const y = (index - x) / width;
+          const offset = index * 4;
+          const r = data[offset];
+          const g = data[offset + 1];
+          const b = data[offset + 2];
+          const a = data[offset + 3];
+
+          if (!isBackground(r, g, b, a)) continue;
+
+          data[offset + 3] = 0;
+
+          push(x + 1, y);
+          push(x - 1, y);
+          push(x, y + 1);
+          push(x, y - 1);
+        }
+
+        context.putImageData(imageData, 0, 0);
+
+        let minX = width;
+        let minY = height;
+        let maxX = 0;
+        let maxY = 0;
+
+        for (let y = 0; y < height; y += 1) {
+          for (let x = 0; x < width; x += 1) {
+            if (!data[(y * width + x) * 4 + 3]) continue;
+            minX = Math.min(minX, x);
+            minY = Math.min(minY, y);
+            maxX = Math.max(maxX, x);
+            maxY = Math.max(maxY, y);
+          }
+        }
+
+        const padding = 10;
+        const cropX = Math.max(0, minX - padding);
+        const cropY = Math.max(0, minY - padding);
+        const cropWidth = Math.min(width - cropX, maxX - minX + 1 + padding * 2);
+        const cropHeight = Math.min(height - cropY, maxY - minY + 1 + padding * 2);
+
+        const croppedCanvas = document.createElement("canvas");
+        croppedCanvas.width = cropWidth;
+        croppedCanvas.height = cropHeight;
+        const croppedContext = croppedCanvas.getContext("2d");
+        croppedContext.drawImage(canvas, cropX, cropY, cropWidth, cropHeight, 0, 0, cropWidth, cropHeight);
+
+        const transparentSrc = croppedCanvas.toDataURL("image/png");
+        logos.forEach((logo) => {
+          logo.src = transparentSrc;
+        });
+      };
+
+      if (source.complete) {
+        applyTransparentLogo();
+      } else {
+        source.addEventListener("load", applyTransparentLogo, { once: true });
+      }
+    })();
   </script>
 </body>
 </html>
