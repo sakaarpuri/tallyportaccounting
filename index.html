@@ -37,10 +37,15 @@
   </script>
   <style>
     :root {
-      --accent-green: #87d983;
-      --accent-green-soft: #ecf9e8;
-      --accent-green-border: #cfeec9;
       --hero-gap-mobile: 0.75rem;
+      --accent-lime-soft: #eef8dd;
+      --accent-lime-border: #d9ebba;
+      --accent-apricot-soft: #f9efe3;
+      --accent-apricot-border: #efd7bc;
+      --accent-sky-soft: #ebf4ff;
+      --accent-sky-border: #cfe0f6;
+      --accent-citrus-soft: #f7f7d8;
+      --accent-citrus-border: #ece3a9;
     }
     .stroke-1-5 { stroke-width: 1.5px; }
     .bg-pattern {
@@ -119,8 +124,17 @@
       text-align: center;
       line-height: 1.18;
     }
-    .green-glow {
-      box-shadow: 0 18px 46px rgba(135, 217, 131, 0.16);
+    .glow-lime {
+      box-shadow: 0 18px 46px rgba(176, 214, 103, 0.16);
+    }
+    .glow-apricot {
+      box-shadow: 0 18px 46px rgba(236, 174, 111, 0.14);
+    }
+    .glow-sky {
+      box-shadow: 0 18px 46px rgba(144, 190, 255, 0.13);
+    }
+    .glow-citrus {
+      box-shadow: 0 18px 46px rgba(220, 211, 92, 0.14);
     }
     @media (max-width: 767px) {
       .hero-collage {
@@ -267,7 +281,7 @@
           <div class="font-serif text-[2.1rem] md:text-[2.8rem] text-neutral-900 mb-2">2</div>
           <div class="text-[0.83rem] md:text-[0.98rem] leading-5 md:leading-6 text-neutral-700">Operating contexts, Canada and UK</div>
         </div>
-        <div class="rounded-[1.6rem] md:rounded-[2rem] border border-[var(--accent-green-border)] bg-[var(--accent-green-soft)] p-5 md:p-7 text-center shadow-sm green-glow">
+        <div class="rounded-[1.6rem] md:rounded-[2rem] border border-[var(--accent-lime-border)] bg-[var(--accent-lime-soft)] p-5 md:p-7 text-center shadow-sm glow-lime">
           <div class="font-serif text-[2.1rem] md:text-[2.8rem] text-neutral-900 mb-2">24h</div>
           <div class="text-[0.83rem] md:text-[0.98rem] leading-5 md:leading-6 text-neutral-700">Reply target on normal business days</div>
         </div>
@@ -434,7 +448,7 @@
                   <text x="236" y="164" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="16" font-weight="600">Filing queue</text>
                 </svg>
               </div>
-              <div class="rounded-[1.5rem] border border-[var(--accent-green-border)] bg-[var(--accent-green-soft)] p-6">
+              <div class="rounded-[1.5rem] border border-[var(--accent-apricot-border)] bg-[var(--accent-apricot-soft)] p-6 glow-apricot">
                 <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-4">Software coverage</div>
                 <div class="space-y-3 text-sm text-neutral-700">
                   <div>QuickBooks Online</div>
@@ -451,7 +465,7 @@
     </section>
 
     <section id="workflow" class="py-20 md:py-24 px-3 md:px-12 max-w-6xl mx-auto">
-      <div class="bg-[linear-gradient(180deg,#eef9ed_0%,#e6f2e8_100%)] rounded-[2.2rem] md:rounded-[3rem] p-6 sm:p-8 md:p-16 border border-[var(--accent-green-border)] green-glow">
+      <div class="bg-[linear-gradient(180deg,#f7f9df_0%,#eef5d7_100%)] rounded-[2.2rem] md:rounded-[3rem] p-6 sm:p-8 md:p-16 border border-[var(--accent-citrus-border)] glow-citrus">
         <div class="flex flex-col md:flex-row justify-between items-start gap-8 md:gap-12 mb-10 md:mb-12">
           <div class="max-w-2xl">
             <span class="inline-block border border-neutral-300 text-neutral-600 rounded-full px-4 py-1 text-sm font-medium mb-6 bg-white">Working rhythm</span>
@@ -464,10 +478,10 @@
           </div>
 
           <div class="flex flex-wrap gap-3 max-w-md">
-            <span class="px-4 py-2 rounded-full bg-white text-[0.92rem] text-center font-medium text-neutral-700 border border-[var(--accent-green-border)] shadow-sm">Month-end cadence</span>
-            <span class="px-4 py-2 rounded-full bg-white text-[0.92rem] text-center font-medium text-neutral-700 border border-[var(--accent-green-border)] shadow-sm">Tax deadlines mapped</span>
-            <span class="px-4 py-2 rounded-full bg-white text-[0.92rem] text-center font-medium text-neutral-700 border border-[var(--accent-green-border)] shadow-sm">Backlog recovery ready</span>
-            <span class="px-4 py-2 rounded-full bg-white text-[0.92rem] text-center font-medium text-neutral-700 border border-[var(--accent-green-border)] shadow-sm">Clear owner summary</span>
+            <span class="px-4 py-2 rounded-full bg-white text-[0.92rem] text-center font-medium text-neutral-700 border border-[#e6d99d] shadow-sm">Month-end cadence</span>
+            <span class="px-4 py-2 rounded-full bg-white text-[0.92rem] text-center font-medium text-neutral-700 border border-[#e5cdb1] shadow-sm">Tax deadlines mapped</span>
+            <span class="px-4 py-2 rounded-full bg-white text-[0.92rem] text-center font-medium text-neutral-700 border border-[#dce6b5] shadow-sm">Backlog recovery ready</span>
+            <span class="px-4 py-2 rounded-full bg-white text-[0.92rem] text-center font-medium text-neutral-700 border border-[#d8e5f7] shadow-sm">Clear owner summary</span>
           </div>
         </div>
 
@@ -550,7 +564,7 @@
           </div>
         </article>
 
-        <article class="rounded-[2rem] border border-[var(--accent-green-border)] bg-[var(--accent-green-soft)] p-6 md:p-8 flex flex-col justify-between green-glow">
+        <article class="rounded-[2rem] border border-[var(--accent-sky-border)] bg-[var(--accent-sky-soft)] p-6 md:p-8 flex flex-col justify-between glow-sky">
           <div>
             <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-4">Coverage</div>
             <h3 class="font-serif text-[1.62rem] md:text-3xl text-neutral-900 tracking-tight mb-4">Two operating contexts</h3>
@@ -655,7 +669,7 @@
           <a href="#contact" class="w-full inline-flex justify-center bg-neutral-50 text-neutral-800 border border-neutral-200 px-6 py-3 rounded-full text-sm font-medium hover:bg-neutral-100 transition-all">Choose Starter</a>
         </article>
 
-        <article class="rounded-[2rem] border border-[var(--accent-green-border)] bg-[linear-gradient(180deg,#f4fbf1_0%,#e9f8e5_100%)] p-6 md:p-8 shadow-sm relative green-glow min-h-[32rem] md:min-h-0">
+        <article class="rounded-[2rem] border border-[var(--accent-citrus-border)] bg-[linear-gradient(180deg,#fff8da_0%,#f5efbb_100%)] p-6 md:p-8 shadow-sm relative glow-citrus min-h-[32rem] md:min-h-0">
           <div class="absolute top-6 right-6 text-xs uppercase tracking-[0.18em] text-brand font-medium">Most Popular</div>
           <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-4">Growth</div>
           <div class="font-serif text-[3rem] md:text-5xl text-neutral-900 mb-5">£220</div>
@@ -694,7 +708,7 @@
 
     <section id="contact" class="py-20 md:py-24 px-3 md:px-12 max-w-7xl mx-auto relative">
       <span id="about" class="absolute -top-24"></span>
-      <div class="rounded-[2.2rem] md:rounded-[3rem] overflow-hidden flex flex-col md:flex-row shadow-sm border border-neutral-100 green-glow">
+      <div class="rounded-[2.2rem] md:rounded-[3rem] overflow-hidden flex flex-col md:flex-row shadow-sm border border-neutral-100 glow-apricot">
         <div class="w-full md:w-1/2 bg-[#d7bd3e] p-7 sm:p-9 md:p-20 flex flex-col justify-center">
           <span class="inline-flex w-fit border border-neutral-900/10 text-neutral-800 rounded-full px-4 py-1 text-sm font-medium mb-6 bg-white/30 backdrop-blur-sm">About + Consultation</span>
           <h2 class="font-serif text-[1.95rem] md:text-5xl font-medium tracking-tight text-neutral-900 leading-tight mb-6 max-w-lg">
