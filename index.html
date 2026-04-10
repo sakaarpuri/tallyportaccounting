@@ -36,6 +36,12 @@
     };
   </script>
   <style>
+    :root {
+      --accent-green: #87d983;
+      --accent-green-soft: #ecf9e8;
+      --accent-green-border: #cfeec9;
+      --hero-gap-mobile: 0.75rem;
+    }
     .stroke-1-5 { stroke-width: 1.5px; }
     .bg-pattern {
       background-image: radial-gradient(#e5e5e5 1px, transparent 1px);
@@ -84,10 +90,10 @@
     .hero-card {
       position: relative;
       --card-rest: 0px;
-      --card-rise: 54px;
+      --card-rise: 38px;
       transform: translateY(calc(var(--card-rest) + var(--card-rise)));
       opacity: 0;
-      transition: transform 760ms cubic-bezier(0.2, 0.9, 0.2, 1), opacity 520ms ease, box-shadow 320ms ease, border-color 320ms ease;
+      transition: transform 680ms cubic-bezier(0.2, 0.9, 0.2, 1), opacity 460ms ease, box-shadow 320ms ease, border-color 320ms ease;
       will-change: transform, opacity;
     }
     body.hero-cards-ready .hero-card {
@@ -101,6 +107,33 @@
     }
     .section-image-card {
       box-shadow: 0 18px 46px rgba(45, 45, 45, 0.08);
+    }
+    .hero-collage {
+      overflow: visible;
+    }
+    .hero-card-caption {
+      border-radius: 1.2rem;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 12px 28px rgba(45, 45, 45, 0.08);
+      text-align: center;
+      line-height: 1.18;
+    }
+    .green-glow {
+      box-shadow: 0 18px 46px rgba(135, 217, 131, 0.16);
+    }
+    @media (max-width: 767px) {
+      .hero-collage {
+        width: min(100%, 21.5rem);
+        gap: var(--hero-gap-mobile);
+      }
+      .hero-card {
+        --card-rise: 22px;
+      }
+      .hero-card-caption {
+        border-radius: 0.95rem;
+        box-shadow: 0 10px 24px rgba(45, 45, 45, 0.06);
+      }
     }
     @media (prefers-reduced-motion: reduce) {
       .hero-card,
@@ -130,22 +163,26 @@
 
     <div class="flex items-center gap-2 md:gap-4 shrink-0">
       <a href="#contact" class="hidden lg:block text-[0.95rem] font-medium text-neutral-600 hover:text-brand transition-colors">Book a call</a>
-      <a href="#contact" class="bg-white border border-neutral-200 text-neutral-800 px-3.5 py-2 md:px-5 md:py-2.5 rounded-full text-[0.82rem] md:text-[0.95rem] font-medium hover:border-neutral-300 transition-all flex items-center gap-2 shadow-sm whitespace-nowrap">
-        Discovery Call
+      <a href="#contact" class="bg-white border border-neutral-200 text-neutral-800 px-2.5 py-1.5 md:px-5 md:py-2.5 rounded-full text-[0.74rem] md:text-[0.95rem] font-medium hover:border-neutral-300 transition-all flex items-center gap-2 shadow-sm whitespace-nowrap">
+        <span class="sm:hidden">Call</span>
+        <span class="hidden sm:inline">Discovery Call</span>
       </a>
     </div>
   </nav>
 
   <main id="top">
-    <header class="pt-8 pb-14 md:pt-[4.5rem] md:pb-24 px-3 md:px-12 text-center max-w-5xl mx-auto flex flex-col items-center">
-      <h1 class="font-serif text-[1.9rem] sm:text-[2.7rem] md:text-7xl font-medium tracking-tight text-neutral-900 leading-[0.94] md:leading-tight mb-5 md:mb-6 max-w-[8ch] sm:max-w-[12ch] md:max-w-4xl">
+    <header class="pt-7 pb-14 md:pt-[4.5rem] md:pb-24 px-4 md:px-12 text-center max-w-5xl mx-auto flex flex-col items-center">
+      <h1 class="font-serif text-[1.34rem] sm:text-[2.7rem] md:text-7xl font-medium tracking-tight text-neutral-900 leading-[1.02] sm:leading-[0.96] md:leading-tight mb-4 md:mb-6 max-w-[13ch] sm:max-w-[12ch] md:max-w-4xl">
         Clean books, faster closes, calmer finances.
       </h1>
-      <p class="text-[0.83rem] sm:text-lg md:text-xl mb-7 md:mb-8 max-w-3xl font-medium text-neutral-600">
-        Bookkeeping <span class="mx-2 opacity-50">•</span> Payroll <span class="mx-2 opacity-50">•</span> VAT / GST-HST <span class="mx-2 opacity-50">•</span> Reporting
-      </p>
+      <div class="grid grid-cols-2 gap-x-4 gap-y-1.5 justify-items-center sm:flex sm:flex-wrap sm:items-center sm:justify-center sm:gap-x-4 text-[0.74rem] sm:text-lg md:text-xl mb-6 md:mb-8 max-w-[17.25rem] sm:max-w-3xl font-medium text-neutral-600">
+        <span>Bookkeeping</span>
+        <span>Payroll</span>
+        <span>VAT / GST-HST</span>
+        <span>Reporting</span>
+      </div>
 
-      <p class="text-neutral-600 text-[0.92rem] sm:text-base md:text-[1.05rem] leading-7 md:leading-8 mb-7 md:mb-8 max-w-[22rem] sm:max-w-xl md:max-w-2xl">
+      <p class="text-neutral-600 text-[0.95rem] sm:text-base md:text-[1.05rem] leading-7 md:leading-8 mb-7 md:mb-8 max-w-[19rem] sm:max-w-xl md:max-w-2xl">
         Tallyport keeps the bookkeeping, payroll, and tax work steady for owner-led businesses in Canada and the UK.
       </p>
 
@@ -158,22 +195,22 @@
         </a>
       </div>
 
-      <div class="w-full flex justify-center items-end gap-1.5 sm:gap-2 md:gap-5 overflow-hidden relative max-w-[20rem] sm:max-w-none">
+      <div class="hero-collage w-full flex justify-center items-end gap-3 sm:gap-2 md:gap-5 relative max-w-[21.5rem] sm:max-w-none" data-hero-collage>
         <div class="hero-card photo-card relative hidden sm:block w-[18%] md:w-[14.4rem] aspect-[3/4] rounded-t-[40px] rounded-b-xl overflow-hidden opacity-90 shadow-sm border border-neutral-100 bg-neutral-50" style="--card-rest: 3rem;">
           <img src="./assets/photos/founder-portrait.jpg" alt="Professional accountant seated at a desk with reports and laptop">
-          <div class="absolute inset-x-3 md:inset-x-4 bottom-3 md:bottom-4 rounded-[1.2rem] bg-white/94 backdrop-blur-sm px-3.5 py-2.5 text-[11px] md:text-[0.95rem] font-medium tracking-[0.04em] md:tracking-[0.05em] leading-[1.18] text-center text-neutral-800 shadow-sm">
+          <div class="hero-card-caption absolute inset-x-3 md:inset-x-4 bottom-3 md:bottom-4 px-3.5 py-2.5 text-[11px] md:text-[0.95rem] font-medium tracking-[0.04em] md:tracking-[0.05em] text-neutral-800">
             Accountant-led
           </div>
         </div>
 
-        <div class="hero-card photo-card relative w-[30%] sm:w-[19%] md:w-[16.8rem] aspect-[3/4] rounded-t-[34px] sm:rounded-t-[50px] rounded-b-xl overflow-hidden shadow-md border border-neutral-100 bg-white" style="--card-rest: 1.5rem;">
+        <div class="hero-card photo-card relative w-[23%] sm:w-[19%] md:w-[16.8rem] aspect-[3/4] rounded-t-[34px] sm:rounded-t-[50px] rounded-b-xl overflow-hidden shadow-md border border-neutral-100 bg-white" style="--card-rest: 1.5rem;">
           <img src="./assets/photos/bookkeeping-workspace.jpg" alt="Clean bookkeeping workspace with laptop, calculator, invoices, and coffee">
-          <div class="absolute inset-x-2 sm:inset-x-3 md:inset-x-4 bottom-2 sm:bottom-3 md:bottom-4 rounded-[1.2rem] bg-white/94 backdrop-blur-sm px-2 sm:px-3.5 py-1.5 sm:py-2.5 text-[9px] sm:text-[11px] md:text-[0.95rem] font-medium tracking-[0.04em] sm:tracking-[0.05em] leading-[1.18] text-center text-neutral-800 shadow-sm">
+          <div class="hero-card-caption absolute inset-x-1.5 sm:inset-x-3 md:inset-x-4 bottom-1.5 sm:bottom-3 md:bottom-4 px-1.5 sm:px-3.5 py-1.5 sm:py-2.5 text-[8px] sm:text-[11px] md:text-[0.95rem] font-medium tracking-[0.03em] sm:tracking-[0.05em] text-neutral-800">
             Sorted inputs
           </div>
         </div>
 
-        <div class="hero-card w-[40%] sm:w-[24%] md:w-[21.6rem] aspect-[3/4] rounded-t-[40px] sm:rounded-t-[60px] rounded-b-xl overflow-hidden z-10 shadow-xl border-2 border-white relative bg-white hero-dashboard" style="--card-rest: 0rem;">
+        <div class="hero-card w-[46%] sm:w-[24%] md:w-[21.6rem] aspect-[3/4] rounded-t-[40px] sm:rounded-t-[60px] rounded-b-xl overflow-hidden z-10 shadow-xl border-2 border-white relative bg-white hero-dashboard" style="--card-rest: 0rem;">
           <svg viewBox="0 0 320 420" aria-hidden="true">
             <rect width="320" height="420" fill="#ffffff"></rect>
             <rect x="0" y="0" width="320" height="58" fill="#fcfaf8"></rect>
@@ -204,16 +241,16 @@
           <div class="absolute inset-0 bg-brand/5"></div>
         </div>
 
-        <div class="hero-card photo-card relative w-[30%] sm:w-[19%] md:w-[16.8rem] aspect-[3/4] rounded-t-[34px] sm:rounded-t-[50px] rounded-b-xl overflow-hidden shadow-md border border-neutral-100 bg-white" style="--card-rest: 1.5rem;">
+        <div class="hero-card photo-card relative w-[23%] sm:w-[19%] md:w-[16.8rem] aspect-[3/4] rounded-t-[34px] sm:rounded-t-[50px] rounded-b-xl overflow-hidden shadow-md border border-neutral-100 bg-white" style="--card-rest: 1.5rem;">
           <img src="./assets/photos/client-meeting.jpg" alt="Accountant and small business owner reviewing reports together">
-          <div class="absolute inset-x-2 sm:inset-x-3 md:inset-x-4 bottom-2 sm:bottom-3 md:bottom-4 rounded-[1.2rem] bg-white/94 backdrop-blur-sm px-2 sm:px-3.5 py-1.5 sm:py-2.5 text-[9px] sm:text-[11px] md:text-[0.95rem] font-medium tracking-[0.04em] sm:tracking-[0.05em] leading-[1.18] text-center text-neutral-800 shadow-sm">
+          <div class="hero-card-caption absolute inset-x-1.5 sm:inset-x-3 md:inset-x-4 bottom-1.5 sm:bottom-3 md:bottom-4 px-1.5 sm:px-3.5 py-1.5 sm:py-2.5 text-[8px] sm:text-[11px] md:text-[0.95rem] font-medium tracking-[0.03em] sm:tracking-[0.05em] text-neutral-800">
             Next-step clarity
           </div>
         </div>
 
         <div class="hero-card photo-card relative hidden sm:block w-[18%] md:w-[14.4rem] aspect-[3/4] rounded-t-[40px] rounded-b-xl overflow-hidden opacity-90 shadow-sm border border-neutral-100 bg-neutral-50" style="--card-rest: 3rem;">
           <img src="./assets/photos/reporting-desk.jpg" alt="Reporting desk with laptop dashboard, statements, and calculator">
-          <div class="absolute inset-x-3 md:inset-x-4 bottom-3 md:bottom-4 rounded-[1.2rem] bg-white/94 backdrop-blur-sm px-3.5 py-2.5 text-[11px] md:text-[0.95rem] font-medium tracking-[0.04em] md:tracking-[0.05em] leading-[1.18] text-center text-neutral-800 shadow-sm">
+          <div class="hero-card-caption absolute inset-x-3 md:inset-x-4 bottom-3 md:bottom-4 px-3.5 py-2.5 text-[11px] md:text-[0.95rem] font-medium tracking-[0.04em] md:tracking-[0.05em] text-neutral-800">
             Useful reports
           </div>
         </div>
@@ -230,7 +267,7 @@
           <div class="font-serif text-[2.1rem] md:text-[2.8rem] text-neutral-900 mb-2">2</div>
           <div class="text-[0.83rem] md:text-[0.98rem] leading-5 md:leading-6 text-neutral-700">Operating contexts, Canada and UK</div>
         </div>
-        <div class="rounded-[1.6rem] md:rounded-[2rem] border border-[#d8e7db] bg-[#edf6ef] p-5 md:p-7 text-center shadow-sm">
+        <div class="rounded-[1.6rem] md:rounded-[2rem] border border-[var(--accent-green-border)] bg-[var(--accent-green-soft)] p-5 md:p-7 text-center shadow-sm green-glow">
           <div class="font-serif text-[2.1rem] md:text-[2.8rem] text-neutral-900 mb-2">24h</div>
           <div class="text-[0.83rem] md:text-[0.98rem] leading-5 md:leading-6 text-neutral-700">Reply target on normal business days</div>
         </div>
@@ -397,7 +434,7 @@
                   <text x="236" y="164" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="16" font-weight="600">Filing queue</text>
                 </svg>
               </div>
-              <div class="rounded-[1.5rem] bg-brand-light p-6">
+              <div class="rounded-[1.5rem] border border-[var(--accent-green-border)] bg-[var(--accent-green-soft)] p-6">
                 <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-4">Software coverage</div>
                 <div class="space-y-3 text-sm text-neutral-700">
                   <div>QuickBooks Online</div>
@@ -414,7 +451,7 @@
     </section>
 
     <section id="workflow" class="py-20 md:py-24 px-3 md:px-12 max-w-6xl mx-auto">
-      <div class="bg-[#eaf1eb] rounded-[2.2rem] md:rounded-[3rem] p-6 sm:p-8 md:p-16">
+      <div class="bg-[linear-gradient(180deg,#eef9ed_0%,#e6f2e8_100%)] rounded-[2.2rem] md:rounded-[3rem] p-6 sm:p-8 md:p-16 border border-[var(--accent-green-border)] green-glow">
         <div class="flex flex-col md:flex-row justify-between items-start gap-8 md:gap-12 mb-10 md:mb-12">
           <div class="max-w-2xl">
             <span class="inline-block border border-neutral-300 text-neutral-600 rounded-full px-4 py-1 text-sm font-medium mb-6 bg-white">Working rhythm</span>
@@ -427,10 +464,10 @@
           </div>
 
           <div class="flex flex-wrap gap-3 max-w-md">
-            <span class="px-4 py-2 rounded-full bg-white text-[0.92rem] text-center font-medium text-neutral-700 border border-white/60 shadow-sm">Month-end cadence</span>
-            <span class="px-4 py-2 rounded-full bg-white text-[0.92rem] text-center font-medium text-neutral-700 border border-white/60 shadow-sm">Tax deadlines mapped</span>
-            <span class="px-4 py-2 rounded-full bg-white text-[0.92rem] text-center font-medium text-neutral-700 border border-white/60 shadow-sm">Backlog recovery ready</span>
-            <span class="px-4 py-2 rounded-full bg-white text-[0.92rem] text-center font-medium text-neutral-700 border border-white/60 shadow-sm">Clear owner summary</span>
+            <span class="px-4 py-2 rounded-full bg-white text-[0.92rem] text-center font-medium text-neutral-700 border border-[var(--accent-green-border)] shadow-sm">Month-end cadence</span>
+            <span class="px-4 py-2 rounded-full bg-white text-[0.92rem] text-center font-medium text-neutral-700 border border-[var(--accent-green-border)] shadow-sm">Tax deadlines mapped</span>
+            <span class="px-4 py-2 rounded-full bg-white text-[0.92rem] text-center font-medium text-neutral-700 border border-[var(--accent-green-border)] shadow-sm">Backlog recovery ready</span>
+            <span class="px-4 py-2 rounded-full bg-white text-[0.92rem] text-center font-medium text-neutral-700 border border-[var(--accent-green-border)] shadow-sm">Clear owner summary</span>
           </div>
         </div>
 
@@ -482,7 +519,7 @@
     </section>
 
     <section id="credentials" class="py-20 md:py-24 px-3 md:px-12 max-w-7xl mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-auto md:auto-rows-[260px]">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-auto md:auto-rows-[280px]">
         <article class="md:col-span-2 rounded-[2rem] bg-neutral-50 border border-neutral-100 p-6 md:p-10 flex flex-col justify-between">
           <div>
             <span class="inline-block border border-neutral-300 text-neutral-600 rounded-full px-4 py-1 text-sm font-medium mb-6 bg-white">Credentials</span>
@@ -513,7 +550,7 @@
           </div>
         </article>
 
-        <article class="rounded-[2rem] bg-brand-light p-6 md:p-8 flex flex-col justify-between">
+        <article class="rounded-[2rem] border border-[var(--accent-green-border)] bg-[var(--accent-green-soft)] p-6 md:p-8 flex flex-col justify-between green-glow">
           <div>
             <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-4">Coverage</div>
             <h3 class="font-serif text-[1.62rem] md:text-3xl text-neutral-900 tracking-tight mb-4">Two operating contexts</h3>
@@ -542,7 +579,7 @@
             <span class="inline-block border border-neutral-300 text-neutral-600 rounded-full px-4 py-1 text-sm font-medium mb-4 bg-white">Software</span>
             <h3 class="font-serif text-[1.52rem] md:text-3xl text-neutral-900 tracking-tight">QuickBooks, Xero, Wave, and Sage</h3>
           </div>
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             <div class="rounded-[1.5rem] bg-neutral-50 border border-neutral-100 p-6 text-center integration-logo">
               <div class="w-14 h-14 mx-auto mb-4">
                 <svg viewBox="0 0 48 48" aria-hidden="true">
@@ -603,7 +640,7 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <article class="rounded-[2rem] border border-neutral-100 bg-white p-6 md:p-8 shadow-sm">
+        <article class="rounded-[2rem] border border-neutral-100 bg-white p-6 md:p-8 shadow-sm min-h-[32rem] md:min-h-0">
           <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-4">Starter</div>
           <div class="font-serif text-[3rem] md:text-5xl text-neutral-900 mb-5">£120</div>
           <p class="text-neutral-600 mb-6">For freelancers and sole traders who need reliable monthly bookkeeping and filing support.</p>
@@ -618,7 +655,7 @@
           <a href="#contact" class="w-full inline-flex justify-center bg-neutral-50 text-neutral-800 border border-neutral-200 px-6 py-3 rounded-full text-sm font-medium hover:bg-neutral-100 transition-all">Choose Starter</a>
         </article>
 
-        <article class="rounded-[2rem] border border-brand/20 bg-brand-light p-6 md:p-8 shadow-sm relative">
+        <article class="rounded-[2rem] border border-[var(--accent-green-border)] bg-[linear-gradient(180deg,#f4fbf1_0%,#e9f8e5_100%)] p-6 md:p-8 shadow-sm relative green-glow min-h-[32rem] md:min-h-0">
           <div class="absolute top-6 right-6 text-xs uppercase tracking-[0.18em] text-brand font-medium">Most Popular</div>
           <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-4">Growth</div>
           <div class="font-serif text-[3rem] md:text-5xl text-neutral-900 mb-5">£220</div>
@@ -635,7 +672,7 @@
           <a href="#contact" class="w-full inline-flex justify-center bg-brand text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-brand/90 transition-all">Choose Growth</a>
         </article>
 
-        <article class="rounded-[2rem] border border-neutral-100 bg-white p-6 md:p-8 shadow-sm">
+        <article class="rounded-[2rem] border border-neutral-100 bg-white p-6 md:p-8 shadow-sm min-h-[32rem] md:min-h-0">
           <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-4">Premium</div>
           <div class="font-serif text-[3rem] md:text-5xl text-neutral-900 mb-5">£380</div>
           <p class="text-neutral-600 mb-6">For established businesses that want finance support to be proactive, visible, and more strategic.</p>
@@ -657,7 +694,7 @@
 
     <section id="contact" class="py-20 md:py-24 px-3 md:px-12 max-w-7xl mx-auto relative">
       <span id="about" class="absolute -top-24"></span>
-      <div class="rounded-[2.2rem] md:rounded-[3rem] overflow-hidden flex flex-col md:flex-row shadow-sm border border-neutral-100">
+      <div class="rounded-[2.2rem] md:rounded-[3rem] overflow-hidden flex flex-col md:flex-row shadow-sm border border-neutral-100 green-glow">
         <div class="w-full md:w-1/2 bg-[#d7bd3e] p-7 sm:p-9 md:p-20 flex flex-col justify-center">
           <span class="inline-flex w-fit border border-neutral-900/10 text-neutral-800 rounded-full px-4 py-1 text-sm font-medium mb-6 bg-white/30 backdrop-blur-sm">About + Consultation</span>
           <h2 class="font-serif text-[1.95rem] md:text-5xl font-medium tracking-tight text-neutral-900 leading-tight mb-6 max-w-lg">
@@ -899,13 +936,20 @@
 
     (function () {
       const cards = Array.from(document.querySelectorAll(".hero-card"));
-      if (!cards.length) return;
+      const collage = document.querySelector("[data-hero-collage]");
+      if (!cards.length || !collage) return;
+
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (prefersReducedMotion) {
+        document.body.classList.add("hero-cards-ready");
+        return;
+      }
 
       const shuffledDelays = cards
         .map((_, index) => index)
         .sort(() => Math.random() - 0.5)
         .reduce((map, index, order) => {
-          map[index] = `${120 + order * 110}ms`;
+          map[index] = `${120 + order * 95}ms`;
           return map;
         }, {});
 
@@ -913,17 +957,64 @@
         card.style.transitionDelay = shuffledDelays[index];
       });
 
-      const startAnimation = () => {
+      const heroImages = Array.from(collage.querySelectorAll("img"));
+      let assetsReady = heroImages.length === 0;
+      let collageVisible = false;
+      let userHasScrolled = false;
+      let animationStarted = false;
+
+      const maybeStartAnimation = () => {
+        if (animationStarted || !assetsReady || !collageVisible || !userHasScrolled) return;
+        animationStarted = true;
         window.requestAnimationFrame(() => {
           document.body.classList.add("hero-cards-ready");
         });
       };
 
-      if (document.readyState === "complete") {
-        startAnimation();
-      } else {
-        window.addEventListener("load", startAnimation, { once: true });
+      if (!assetsReady) {
+        let loadedCount = 0;
+        const markLoaded = () => {
+          loadedCount += 1;
+          if (loadedCount >= heroImages.length) {
+            assetsReady = true;
+            maybeStartAnimation();
+          }
+        };
+
+        heroImages.forEach((image) => {
+          if (image.complete) {
+            markLoaded();
+          } else {
+            image.addEventListener("load", markLoaded, { once: true });
+            image.addEventListener("error", markLoaded, { once: true });
+          }
+        });
       }
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              collageVisible = true;
+              maybeStartAnimation();
+            }
+          });
+        },
+        { threshold: 0.42, rootMargin: "0px 0px -8% 0px" }
+      );
+
+      observer.observe(collage);
+
+      window.addEventListener(
+        "scroll",
+        () => {
+          if (!userHasScrolled && window.scrollY > 18) {
+            userHasScrolled = true;
+          }
+          maybeStartAnimation();
+        },
+        { passive: true }
+      );
     })();
   </script>
 </body>
