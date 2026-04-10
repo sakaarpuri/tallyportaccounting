@@ -83,11 +83,19 @@
     }
     .hero-card {
       position: relative;
-      top: 0;
-      transition: top 320ms ease, box-shadow 320ms ease, border-color 320ms ease;
+      --card-rest: 0px;
+      --card-rise: 54px;
+      transform: translateY(calc(var(--card-rest) + var(--card-rise)));
+      opacity: 0;
+      transition: transform 760ms cubic-bezier(0.2, 0.9, 0.2, 1), opacity 520ms ease, box-shadow 320ms ease, border-color 320ms ease;
+      will-change: transform, opacity;
     }
-    .hero-card:hover {
-      top: -18px;
+    body.hero-cards-ready .hero-card {
+      transform: translateY(var(--card-rest));
+      opacity: 1;
+    }
+    body.hero-cards-ready .hero-card:hover {
+      transform: translateY(calc(var(--card-rest) - 18px));
       box-shadow: 0 24px 60px rgba(45, 45, 45, 0.12);
       border-color: rgba(145, 24, 26, 0.18);
     }
@@ -96,9 +104,11 @@
     }
     @media (prefers-reduced-motion: reduce) {
       .hero-card,
-      .hero-card:hover {
+      body.hero-cards-ready .hero-card,
+      body.hero-cards-ready .hero-card:hover {
         transition: none;
-        top: 0;
+        transform: translateY(var(--card-rest));
+        opacity: 1;
       }
     }
   </style>
@@ -136,7 +146,7 @@
       </p>
 
       <p class="text-neutral-600 text-[0.92rem] sm:text-base md:text-[1.05rem] leading-7 md:leading-8 mb-7 md:mb-8 max-w-[22rem] sm:max-w-xl md:max-w-2xl">
-        Tallyport keeps the books current, the filings on time, and the reporting clear for owner-led businesses in Canada and the UK.
+        Tallyport keeps the bookkeeping, payroll, and tax work steady for owner-led businesses in Canada and the UK.
       </p>
 
       <div class="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mb-8 md:mb-10 w-full sm:w-auto">
@@ -149,21 +159,21 @@
       </div>
 
       <div class="w-full flex justify-center items-end gap-1.5 sm:gap-2 md:gap-5 overflow-hidden relative max-w-[20rem] sm:max-w-none">
-        <div class="hero-card photo-card relative hidden sm:block w-[18%] md:w-48 aspect-[3/4] rounded-t-[40px] rounded-b-xl overflow-hidden translate-y-12 opacity-90 shadow-sm border border-neutral-100 bg-neutral-50">
+        <div class="hero-card photo-card relative hidden sm:block w-[18%] md:w-[14.4rem] aspect-[3/4] rounded-t-[40px] rounded-b-xl overflow-hidden opacity-90 shadow-sm border border-neutral-100 bg-neutral-50" style="--card-rest: 3rem;">
           <img src="./assets/photos/founder-portrait.jpg" alt="Professional accountant seated at a desk with reports and laptop">
-          <div class="absolute inset-x-3 md:inset-x-4 bottom-3 md:bottom-4 rounded-full bg-white/88 backdrop-blur-sm px-3 py-2 text-[11px] md:text-xs font-medium tracking-[0.08em] text-neutral-800">
-            Founder-led support
+          <div class="absolute inset-x-3 md:inset-x-4 bottom-3 md:bottom-4 rounded-[1.2rem] bg-white/94 backdrop-blur-sm px-3.5 py-2.5 text-[11px] md:text-[0.95rem] font-medium tracking-[0.04em] md:tracking-[0.05em] leading-[1.18] text-center text-neutral-800 shadow-sm">
+            Accountant-led
           </div>
         </div>
 
-        <div class="hero-card photo-card relative w-[30%] sm:w-[19%] md:w-56 aspect-[3/4] rounded-t-[34px] sm:rounded-t-[50px] rounded-b-xl overflow-hidden translate-y-4 sm:translate-y-6 shadow-md border border-neutral-100 bg-white">
+        <div class="hero-card photo-card relative w-[30%] sm:w-[19%] md:w-[16.8rem] aspect-[3/4] rounded-t-[34px] sm:rounded-t-[50px] rounded-b-xl overflow-hidden shadow-md border border-neutral-100 bg-white" style="--card-rest: 1.5rem;">
           <img src="./assets/photos/bookkeeping-workspace.jpg" alt="Clean bookkeeping workspace with laptop, calculator, invoices, and coffee">
-          <div class="absolute inset-x-2 sm:inset-x-3 md:inset-x-4 bottom-2 sm:bottom-3 md:bottom-4 rounded-full bg-white/88 backdrop-blur-sm px-2 sm:px-3 py-1.5 sm:py-2 text-[9px] sm:text-[11px] md:text-xs font-medium tracking-[0.06em] sm:tracking-[0.08em] text-neutral-800">
-            Month-end inputs, organised
+          <div class="absolute inset-x-2 sm:inset-x-3 md:inset-x-4 bottom-2 sm:bottom-3 md:bottom-4 rounded-[1.2rem] bg-white/94 backdrop-blur-sm px-2 sm:px-3.5 py-1.5 sm:py-2.5 text-[9px] sm:text-[11px] md:text-[0.95rem] font-medium tracking-[0.04em] sm:tracking-[0.05em] leading-[1.18] text-center text-neutral-800 shadow-sm">
+            Sorted inputs
           </div>
         </div>
 
-        <div class="hero-card w-[40%] sm:w-[24%] md:w-72 aspect-[3/4] rounded-t-[40px] sm:rounded-t-[60px] rounded-b-xl overflow-hidden z-10 shadow-xl border-2 border-white relative bg-white hero-dashboard">
+        <div class="hero-card w-[40%] sm:w-[24%] md:w-[21.6rem] aspect-[3/4] rounded-t-[40px] sm:rounded-t-[60px] rounded-b-xl overflow-hidden z-10 shadow-xl border-2 border-white relative bg-white hero-dashboard" style="--card-rest: 0rem;">
           <svg viewBox="0 0 320 420" aria-hidden="true">
             <rect width="320" height="420" fill="#ffffff"></rect>
             <rect x="0" y="0" width="320" height="58" fill="#fcfaf8"></rect>
@@ -194,17 +204,17 @@
           <div class="absolute inset-0 bg-brand/5"></div>
         </div>
 
-        <div class="hero-card photo-card relative w-[30%] sm:w-[19%] md:w-56 aspect-[3/4] rounded-t-[34px] sm:rounded-t-[50px] rounded-b-xl overflow-hidden translate-y-4 sm:translate-y-6 shadow-md border border-neutral-100 bg-white">
+        <div class="hero-card photo-card relative w-[30%] sm:w-[19%] md:w-[16.8rem] aspect-[3/4] rounded-t-[34px] sm:rounded-t-[50px] rounded-b-xl overflow-hidden shadow-md border border-neutral-100 bg-white" style="--card-rest: 1.5rem;">
           <img src="./assets/photos/client-meeting.jpg" alt="Accountant and small business owner reviewing reports together">
-          <div class="absolute inset-x-2 sm:inset-x-3 md:inset-x-4 bottom-2 sm:bottom-3 md:bottom-4 rounded-full bg-white/88 backdrop-blur-sm px-2 sm:px-3 py-1.5 sm:py-2 text-[9px] sm:text-[11px] md:text-xs font-medium tracking-[0.06em] sm:tracking-[0.08em] text-neutral-800">
-            Calls that clarify next steps
+          <div class="absolute inset-x-2 sm:inset-x-3 md:inset-x-4 bottom-2 sm:bottom-3 md:bottom-4 rounded-[1.2rem] bg-white/94 backdrop-blur-sm px-2 sm:px-3.5 py-1.5 sm:py-2.5 text-[9px] sm:text-[11px] md:text-[0.95rem] font-medium tracking-[0.04em] sm:tracking-[0.05em] leading-[1.18] text-center text-neutral-800 shadow-sm">
+            Next-step clarity
           </div>
         </div>
 
-        <div class="hero-card photo-card relative hidden sm:block w-[18%] md:w-48 aspect-[3/4] rounded-t-[40px] rounded-b-xl overflow-hidden translate-y-12 opacity-90 shadow-sm border border-neutral-100 bg-neutral-50">
+        <div class="hero-card photo-card relative hidden sm:block w-[18%] md:w-[14.4rem] aspect-[3/4] rounded-t-[40px] rounded-b-xl overflow-hidden opacity-90 shadow-sm border border-neutral-100 bg-neutral-50" style="--card-rest: 3rem;">
           <img src="./assets/photos/reporting-desk.jpg" alt="Reporting desk with laptop dashboard, statements, and calculator">
-          <div class="absolute inset-x-3 md:inset-x-4 bottom-3 md:bottom-4 rounded-full bg-white/88 backdrop-blur-sm px-3 py-2 text-[11px] md:text-xs font-medium tracking-[0.08em] text-neutral-800">
-            Reporting, without scramble
+          <div class="absolute inset-x-3 md:inset-x-4 bottom-3 md:bottom-4 rounded-[1.2rem] bg-white/94 backdrop-blur-sm px-3.5 py-2.5 text-[11px] md:text-[0.95rem] font-medium tracking-[0.04em] md:tracking-[0.05em] leading-[1.18] text-center text-neutral-800 shadow-sm">
+            Useful reports
           </div>
         </div>
       </div>
@@ -283,7 +293,7 @@
           What Tallyport actually handles
         </h2>
         <p class="text-neutral-600 max-w-[22rem] mx-auto md:max-w-3xl">
-          This is the work Tallyport takes off the owner&apos;s plate every month.
+          The monthly work that keeps the books usable and the deadlines handled.
         </p>
       </div>
 
@@ -302,9 +312,9 @@
         <article class="md:col-span-1 rounded-[2rem] bg-[#f7edf0] border border-[#ead8de] p-6 md:p-9 flex flex-col items-center justify-center text-center shadow-sm">
           <span class="text-xs font-medium tracking-wider uppercase text-neutral-500 mb-4 border border-[#e8d8dd] rounded-full px-4 py-1.5 bg-white/75">Working scope</span>
           <h3 class="font-serif text-[1.66rem] md:text-[2.55rem] tracking-tight font-medium text-neutral-900 leading-[0.95] mb-4">
-            Built for owners who need a finance function that runs on time
+            A monthly finance lane, not ad hoc cleanup
           </h3>
-          <p class="text-sm text-neutral-700">The point is simple: current books, readable reports, and deadlines handled before they turn into fire drills.</p>
+          <p class="text-sm text-neutral-700">A steady cadence for books, filings, and reporting, so the month does not depend on last-minute rescue work.</p>
           <div class="mt-8 flex gap-4 text-brand/55">
             <i data-lucide="receipt-text" class="w-8 h-8 stroke-1-5"></i>
             <i data-lucide="landmark" class="w-8 h-8 stroke-1-5"></i>
@@ -315,12 +325,12 @@
         <article class="md:col-span-1 rounded-[2rem] relative overflow-hidden group bg-white border border-[#d7dfeb] photo-card shadow-sm">
           <img src="./assets/photos/reporting-desk.jpg" alt="Accounting workspace with laptop dashboard and monthly reporting materials">
           <div class="absolute inset-x-3 bottom-3 rounded-full bg-white/90 backdrop-blur-md border border-white px-4 py-2 shadow-md md:hidden">
-            <div class="text-[11px] font-medium tracking-[0.08em] text-neutral-800">Current books. Modern workflows.</div>
+            <div class="text-[11px] font-medium tracking-[0.08em] text-neutral-800">Cloud tools, shared visibility.</div>
           </div>
           <div class="absolute inset-x-5 bottom-5 rounded-[1.5rem] bg-[#f3f6fb]/92 backdrop-blur-md border border-white p-5 shadow-md hidden md:block">
             <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-3">Cloud stack</div>
-            <div class="font-serif text-[2rem] text-neutral-900 tracking-tight leading-[0.98] mb-2">Current books. Modern workflows.</div>
-            <div class="text-sm text-neutral-700">The systems are cloud-based, readable, and built for ongoing work rather than messy catch-up.</div>
+            <div class="font-serif text-[2rem] text-neutral-900 tracking-tight leading-[0.98] mb-2">Cloud tools, shared visibility.</div>
+            <div class="text-sm text-neutral-700">One connected place for books, source documents, and reporting, instead of scattered handoffs.</div>
           </div>
         </article>
 
@@ -361,17 +371,17 @@
           <div class="grid md:grid-cols-[1.1fr_0.95fr_1.1fr] gap-8 items-start">
             <div>
               <span class="inline-block border border-neutral-300 text-neutral-600 rounded-full px-4 py-1 text-xs font-medium mb-5 bg-white">Additional support</span>
-              <h3 class="font-serif text-[1.72rem] md:text-3xl tracking-tight text-neutral-900 mb-4">Reporting, cleanup, and year-end support stay in the same system.</h3>
-              <p class="text-neutral-600">When extra work shows up, it gets handled inside the same workflow instead of becoming a separate mess.</p>
+              <h3 class="font-serif text-[1.72rem] md:text-3xl tracking-tight text-neutral-900 mb-4">Year-end and catch-up work stay in the same lane.</h3>
+              <p class="text-neutral-600">When extra work shows up, it plugs into the same operating rhythm instead of turning into a side project.</p>
             </div>
             <div class="space-y-5">
               <div>
-                <h4 class="font-medium text-neutral-900 mb-2">Monthly financial reporting</h4>
-                <p class="text-sm text-neutral-600">P&amp;L, balance sheet, cash flow, and commentary that tells the owner what matters.</p>
+                <h4 class="font-medium text-neutral-900 mb-2">Monthly reporting pack</h4>
+                <p class="text-sm text-neutral-600">P&amp;L, balance sheet, cash flow, and short commentary that points to the next decisions.</p>
               </div>
               <div>
-                <h4 class="font-medium text-neutral-900 mb-2">Cleanup and closing support</h4>
-                <p class="text-sm text-neutral-600">Backlog recovery and year-end preparation that gets the books genuinely ready for filing.</p>
+                <h4 class="font-medium text-neutral-900 mb-2">Backlog and year-end close-out</h4>
+                <p class="text-sm text-neutral-600">Catch-up recovery and close preparation that gets the books ready without a separate side process.</p>
               </div>
             </div>
             <div class="space-y-5">
@@ -394,7 +404,7 @@
                   <div>Xero</div>
                   <div>Wave</div>
                   <div>Sage</div>
-                  <div>Canada and UK workflows</div>
+                  <div>CRA and HMRC familiarity</div>
                 </div>
               </div>
             </div>
@@ -412,15 +422,15 @@
               Clean process beats heroic cleanup
             </h2>
             <p class="text-neutral-700 text-[0.98rem] sm:text-base leading-8">
-              This section is about process: gather, reconcile, review, report, and file on a repeatable cadence.
+              Every month should follow the same rhythm: gather inputs, reconcile the books, review exceptions, and close cleanly.
             </p>
           </div>
 
           <div class="flex flex-wrap gap-3 max-w-md">
-            <span class="px-4 py-2 rounded-full bg-white text-[0.92rem] text-center font-medium text-neutral-700 border border-white/60 shadow-sm">Monthly reporting cadence</span>
-            <span class="px-4 py-2 rounded-full bg-white text-[0.92rem] text-center font-medium text-neutral-700 border border-white/60 shadow-sm">CRA and HMRC context</span>
-            <span class="px-4 py-2 rounded-full bg-white text-[0.92rem] text-center font-medium text-neutral-700 border border-white/60 shadow-sm">Catch-up ready</span>
-            <span class="px-4 py-2 rounded-full bg-white text-[0.92rem] text-center font-medium text-neutral-700 border border-white/60 shadow-sm">Owner-readable reporting</span>
+            <span class="px-4 py-2 rounded-full bg-white text-[0.92rem] text-center font-medium text-neutral-700 border border-white/60 shadow-sm">Month-end cadence</span>
+            <span class="px-4 py-2 rounded-full bg-white text-[0.92rem] text-center font-medium text-neutral-700 border border-white/60 shadow-sm">Tax deadlines mapped</span>
+            <span class="px-4 py-2 rounded-full bg-white text-[0.92rem] text-center font-medium text-neutral-700 border border-white/60 shadow-sm">Backlog recovery ready</span>
+            <span class="px-4 py-2 rounded-full bg-white text-[0.92rem] text-center font-medium text-neutral-700 border border-white/60 shadow-sm">Clear owner summary</span>
           </div>
         </div>
 
@@ -480,7 +490,7 @@
               Trust signals that actually matter.
             </h2>
             <p class="text-neutral-600 max-w-[22rem] md:max-w-2xl">
-              This section is the proof: jurisdictions covered, systems used, and the kind of work Tallyport already handles.
+              Qualified accounting context, software fluency, and practical cross-border coverage.
             </p>
           </div>
 
@@ -488,17 +498,17 @@
             <div class="rounded-[1.5rem] bg-white border border-neutral-100 p-5">
               <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-3">Canada</div>
               <h3 class="font-serif text-2xl text-neutral-900 mb-2">CA context</h3>
-              <p class="text-sm text-neutral-600">Support for Canadian small businesses that need accurate books, GST/HST handling, and clear reporting.</p>
+              <p class="text-sm text-neutral-600">Grounded in Canadian small-business books, GST/HST handling, and practical month-end discipline.</p>
             </div>
             <div class="rounded-[1.5rem] bg-white border border-neutral-100 p-5">
               <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-3">United Kingdom</div>
               <h3 class="font-serif text-2xl text-neutral-900 mb-2">UK compliance familiarity</h3>
-              <p class="text-sm text-neutral-600">Useful for UK clients who need MTD-aware VAT work, payroll support, and ongoing accounting structure.</p>
+              <p class="text-sm text-neutral-600">Built for UK clients who need MTD-aware VAT work, payroll routines, and cleaner monthly close habits.</p>
             </div>
             <div class="rounded-[1.5rem] bg-white border border-neutral-100 p-5">
               <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-3">Cloud stack</div>
               <h3 class="font-serif text-2xl text-neutral-900 mb-2">Current systems</h3>
-              <p class="text-sm text-neutral-600">Modern remote workflows with less spreadsheet-and-email friction.</p>
+              <p class="text-sm text-neutral-600">Modern software setup with less spreadsheet-and-email friction around the monthly close.</p>
             </div>
           </div>
         </article>
@@ -506,8 +516,8 @@
         <article class="rounded-[2rem] bg-brand-light p-6 md:p-8 flex flex-col justify-between">
           <div>
             <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-4">Coverage</div>
-            <h3 class="font-serif text-[1.62rem] md:text-3xl text-neutral-900 tracking-tight mb-4">Canada and UK</h3>
-            <p class="text-sm text-neutral-700">Cross-border understanding for Canada and UK workflows, without turning the process into a maze.</p>
+            <h3 class="font-serif text-[1.62rem] md:text-3xl text-neutral-900 tracking-tight mb-4">Two operating contexts</h3>
+            <p class="text-sm text-neutral-700">Useful for clients working in Canada or the UK who want the handoff between bookkeeping and compliance to stay simple.</p>
           </div>
           <div class="rounded-[1.5rem] border border-white/70 bg-white/70 overflow-hidden illustration-card section-image-card mb-6">
             <svg viewBox="0 0 360 190" class="w-full h-full" aria-hidden="true">
@@ -522,8 +532,8 @@
           </div>
           <div class="text-sm text-neutral-700 space-y-2">
             <div>CRA and GST/HST familiarity</div>
-            <div>HMRC, VAT, and payroll workflows</div>
-            <div>Catch-up and owner-ready reporting</div>
+            <div>HMRC, VAT, and payroll routines</div>
+            <div>Catch-up cleanup and close packs</div>
           </div>
         </article>
 
@@ -588,7 +598,7 @@
           Fixed monthly pricing, clearer scope.
         </h2>
         <p class="text-neutral-600 max-w-[22rem] mx-auto md:max-w-3xl">
-          Three starting points, each with a clear scope and a monthly price.
+          Three starting points, each with a clear scope and a monthly fee.
         </p>
       </div>
 
@@ -651,10 +661,10 @@
         <div class="w-full md:w-1/2 bg-[#d7bd3e] p-7 sm:p-9 md:p-20 flex flex-col justify-center">
           <span class="inline-flex w-fit border border-neutral-900/10 text-neutral-800 rounded-full px-4 py-1 text-sm font-medium mb-6 bg-white/30 backdrop-blur-sm">About + Consultation</span>
           <h2 class="font-serif text-[1.95rem] md:text-5xl font-medium tracking-tight text-neutral-900 leading-tight mb-6 max-w-lg">
-            Proper finance support should keep the work clean and the decisions clear.
+            A discovery call should make the next step obvious.
           </h2>
           <p class="text-neutral-800 text-base md:text-lg mb-8 max-w-md leading-8">
-            The goal of the consultation is simple: understand the setup, spot the gaps, and point you to the right level of support.
+            We look at the setup, spot what is behind, and recommend the right level of ongoing help.
           </p>
 
           <div class="space-y-5 text-neutral-900 mb-10 max-w-lg">
@@ -884,6 +894,35 @@
         applyTransparentLogo();
       } else {
         source.addEventListener("load", applyTransparentLogo, { once: true });
+      }
+    })();
+
+    (function () {
+      const cards = Array.from(document.querySelectorAll(".hero-card"));
+      if (!cards.length) return;
+
+      const shuffledDelays = cards
+        .map((_, index) => index)
+        .sort(() => Math.random() - 0.5)
+        .reduce((map, index, order) => {
+          map[index] = `${120 + order * 110}ms`;
+          return map;
+        }, {});
+
+      cards.forEach((card, index) => {
+        card.style.transitionDelay = shuffledDelays[index];
+      });
+
+      const startAnimation = () => {
+        window.requestAnimationFrame(() => {
+          document.body.classList.add("hero-cards-ready");
+        });
+      };
+
+      if (document.readyState === "complete") {
+        startAnimation();
+      } else {
+        window.addEventListener("load", startAnimation, { once: true });
       }
     })();
   </script>
