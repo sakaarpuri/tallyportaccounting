@@ -2,10 +2,17 @@
 
 Static marketing site for Tallyport Accounting.
 
+UK services include bookkeeping, PAYE payroll, VAT, management accounts and year-end tax support. Public pricing is not displayed.
+
 ## Files
 
 - `index.html` - main site
+- `assets/refinements.css` - responsive layout, card motion and visual refinements
 - `Aura Code for Tallyport.rtf` - local Aura reference used during design adaptation
+
+## Contact Form
+
+The `consultation` form uses Netlify Forms with required fields and a honeypot. Form detection must be enabled in Netlify. Submissions appear in the site's Forms dashboard; email notifications are configured there separately.
 
 ## Local preview
 

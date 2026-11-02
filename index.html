@@ -97,7 +97,7 @@
       --card-rest: 0px;
       --card-rise: 38px;
       transform: translateY(calc(var(--card-rest) + var(--card-rise)));
-      opacity: 0;
+      opacity: 1;
       transition: transform 680ms cubic-bezier(0.2, 0.9, 0.2, 1), opacity 460ms ease, box-shadow 320ms ease, border-color 320ms ease;
       will-change: transform, opacity;
     }
@@ -159,6 +159,7 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="./assets/refinements.css">
 </head>
 <body class="bg-white text-neutral-800 font-sans antialiased text-base md:text-lg overflow-x-hidden selection:bg-brand selection:text-white">
 
@@ -175,6 +176,15 @@
     </div>
 
     <div class="flex items-center gap-2 md:gap-4 shrink-0">
+      <details class="mobile-menu md:hidden">
+        <summary>Menu</summary>
+        <nav aria-label="Mobile navigation">
+          <a href="#services">Services</a>
+          <a href="#workflow">Process</a>
+          <a href="#credentials">Credentials</a>
+          <a href="#contact">Get in touch</a>
+        </nav>
+      </details>
       <a href="#contact" class="hidden lg:block text-[0.95rem] font-medium text-neutral-600 hover:text-brand transition-colors">Book a call</a>
       <a href="#contact" class="bg-white border border-neutral-200 text-neutral-800 px-2.5 py-1.5 md:px-5 md:py-2.5 rounded-full text-[0.74rem] md:text-[0.95rem] font-medium hover:border-neutral-300 transition-all flex items-center gap-2 shadow-sm whitespace-nowrap">
         <span class="sm:hidden">Call</span>
@@ -185,8 +195,10 @@
 
   <main id="top">
     <header class="pt-7 pb-14 md:pt-[4.5rem] md:pb-24 px-4 md:px-12 text-center max-w-5xl mx-auto flex flex-col items-center">
+      <div class="hero-eyebrow">UK accountancy. A clearer outlook.</div>
       <h1 class="font-serif text-[1.34rem] sm:text-[2.7rem] md:text-7xl font-medium tracking-tight text-neutral-900 leading-[1.02] sm:leading-[0.96] md:leading-tight mb-4 md:mb-6 max-w-[13ch] sm:max-w-[12ch] md:max-w-4xl">
-        Clean books, faster closes, calmer finances.
+        <span class="hero-heading-line"><span class="hero-phrase">Clean books,</span> <span class="hero-phrase">faster closes,</span></span>
+        <span class="hero-heading-line hero-phrase">calmer finances.</span>
       </h1>
       <div class="grid grid-cols-2 gap-x-4 gap-y-1.5 justify-items-center sm:flex sm:flex-wrap sm:items-center sm:justify-center sm:gap-x-4 text-[0.74rem] sm:text-lg md:text-xl mb-6 md:mb-8 max-w-[17.25rem] sm:max-w-3xl font-medium text-neutral-600">
         <span>Bookkeeping</span>
@@ -208,65 +220,8 @@
         </a>
       </div>
 
-      <div class="hero-collage w-full flex justify-center items-end gap-3 sm:gap-2 md:gap-5 relative max-w-[21.5rem] sm:max-w-none" data-hero-collage>
-        <div class="hero-card photo-card relative hidden sm:block w-[18%] md:w-[14.4rem] aspect-[3/4] rounded-t-[40px] rounded-b-xl overflow-hidden opacity-90 shadow-sm border border-neutral-100 bg-neutral-50" style="--card-rest: 3rem;">
-          <img src="./assets/photos/founder-portrait.jpg" alt="Professional accountant seated at a desk with reports and laptop">
-          <div class="hero-card-caption absolute inset-x-3 md:inset-x-4 bottom-3 md:bottom-4 px-3.5 py-2.5 text-[11px] md:text-[0.95rem] font-medium tracking-[0.04em] md:tracking-[0.05em] text-neutral-800">
-            Accountant-led
-          </div>
-        </div>
-
-        <div class="hero-card photo-card relative w-[23%] sm:w-[19%] md:w-[16.8rem] aspect-[3/4] rounded-t-[34px] sm:rounded-t-[50px] rounded-b-xl overflow-hidden shadow-md border border-neutral-100 bg-white" style="--card-rest: 1.5rem;">
-          <img src="./assets/photos/bookkeeping-workspace.jpg" alt="Clean bookkeeping workspace with laptop, calculator, invoices, and coffee">
-          <div class="hero-card-caption absolute inset-x-1.5 sm:inset-x-3 md:inset-x-4 bottom-1.5 sm:bottom-3 md:bottom-4 px-1.5 sm:px-3.5 py-1.5 sm:py-2.5 text-[8px] sm:text-[11px] md:text-[0.95rem] font-medium tracking-[0.03em] sm:tracking-[0.05em] text-neutral-800">
-            Sorted inputs
-          </div>
-        </div>
-
-        <div class="hero-card w-[46%] sm:w-[24%] md:w-[21.6rem] aspect-[3/4] rounded-t-[40px] sm:rounded-t-[60px] rounded-b-xl overflow-hidden z-10 shadow-xl border-2 border-white relative bg-white hero-dashboard" style="--card-rest: 0rem;">
-          <svg viewBox="0 0 320 420" aria-hidden="true">
-            <rect width="320" height="420" fill="#ffffff"></rect>
-            <rect x="0" y="0" width="320" height="58" fill="#fcfaf8"></rect>
-            <text x="24" y="35" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="12" font-weight="600">TALLYPORT</text>
-            <text x="24" y="86" fill="#2d2d2d" font-family="Playfair Display, serif" font-size="24" font-weight="500">Month-end preview</text>
-            <text x="24" y="120" fill="#737373" font-family="Inter, sans-serif" font-size="10">MONTHLY CYCLE</text>
-            <rect x="24" y="138" width="128" height="92" rx="20" fill="#fcfaf8" stroke="#e5e5e5"></rect>
-            <rect x="168" y="138" width="128" height="92" rx="20" fill="#fcfaf8" stroke="#e5e5e5"></rect>
-            <text x="40" y="170" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="14" font-weight="600">Reconciliations</text>
-            <text x="184" y="170" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="14" font-weight="600">Upcoming filings</text>
-            <rect x="40" y="196" width="82" height="6" rx="3" fill="#eadfd7"></rect>
-            <rect x="40" y="196" width="62" height="6" rx="3" fill="#91181a"></rect>
-            <rect x="184" y="196" width="82" height="6" rx="3" fill="#eadfd7"></rect>
-            <rect x="184" y="196" width="58" height="6" rx="3" fill="#91181a"></rect>
-            <text x="184" y="216" fill="#91181a" font-family="Inter, sans-serif" font-size="11" font-weight="600">3 ITEMS</text>
-            <text x="236" y="111" fill="#737373" font-family="Inter, sans-serif" font-size="10">BOOKS STATUS</text>
-            <text x="236" y="136" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="20" font-weight="600">On track</text>
-            <text x="24" y="270" fill="#737373" font-family="Inter, sans-serif" font-size="10" letter-spacing="2">RECENT FINANCE TASKS</text>
-            <circle cx="28" cy="302" r="4" fill="#9ba492"></circle>
-            <text x="42" y="307" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="12">Payroll run prepared</text>
-            <circle cx="28" cy="336" r="4" fill="#e6b17e"></circle>
-            <text x="42" y="341" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="12">VAT return review</text>
-            <circle cx="28" cy="370" r="4" fill="#b07b8a"></circle>
-            <text x="42" y="375" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="12">Self Assessment review</text>
-            <rect x="0" y="392" width="320" height="28" fill="#1a1a1a"></rect>
-            <text x="24" y="410" fill="#f5f5f5" font-family="Inter, sans-serif" font-size="10">ALL SYSTEMS OPERATIONAL</text>
-          </svg>
-          <div class="absolute inset-0 bg-brand/5"></div>
-        </div>
-
-        <div class="hero-card photo-card relative w-[23%] sm:w-[19%] md:w-[16.8rem] aspect-[3/4] rounded-t-[34px] sm:rounded-t-[50px] rounded-b-xl overflow-hidden shadow-md border border-neutral-100 bg-white" style="--card-rest: 1.5rem;">
-          <img src="./assets/photos/client-meeting.jpg" alt="Accountant and small business owner reviewing reports together">
-          <div class="hero-card-caption absolute inset-x-1.5 sm:inset-x-3 md:inset-x-4 bottom-1.5 sm:bottom-3 md:bottom-4 px-1.5 sm:px-3.5 py-1.5 sm:py-2.5 text-[8px] sm:text-[11px] md:text-[0.95rem] font-medium tracking-[0.03em] sm:tracking-[0.05em] text-neutral-800">
-            Next-step clarity
-          </div>
-        </div>
-
-        <div class="hero-card photo-card relative hidden sm:block w-[18%] md:w-[14.4rem] aspect-[3/4] rounded-t-[40px] rounded-b-xl overflow-hidden opacity-90 shadow-sm border border-neutral-100 bg-neutral-50" style="--card-rest: 3rem;">
-          <img src="./assets/photos/reporting-desk.jpg" alt="Reporting desk with laptop dashboard, statements, and calculator">
-          <div class="hero-card-caption absolute inset-x-3 md:inset-x-4 bottom-3 md:bottom-4 px-3.5 py-2.5 text-[11px] md:text-[0.95rem] font-medium tracking-[0.04em] md:tracking-[0.05em] text-neutral-800">
-            Useful reports
-          </div>
-        </div>
+<div class="hero-collage" data-hero-collage>
+<div class="hero-card hero-photo photo-card relative"><img src="./assets/photos/founder-portrait.jpg" alt="Accountant at a desk reviewing business records"><div class="hero-card-caption">Accountant-led</div></div><div class="hero-card hero-photo photo-card relative"><img src="./assets/photos/bookkeeping-workspace.jpg" alt="Bookkeeping workspace with invoices and a laptop"><div class="hero-card-caption">Organised records</div></div><div class="hero-card hero-ledger"><div class="eyebrow">Tallyport / monthly review</div><h2>A clearer view<br>of your business.</h2><div class="ledger-row"><i data-lucide="check"></i>Reconciled records</div><div class="ledger-row"><i data-lucide="check"></i>Useful reports</div><div class="ledger-row"><i data-lucide="check"></i>Deadlines in view</div><p class="ledger-foot">Bookkeeping. Tax. Perspective.</p></div><div class="hero-card hero-photo photo-card relative"><img src="./assets/photos/client-meeting.jpg" alt="Accountant and business owner discussing financial reports"><div class="hero-card-caption">A real conversation</div></div><div class="hero-card hero-photo photo-card relative"><img src="./assets/photos/reporting-desk.jpg" alt="Financial reporting workspace with a laptop and calculator"><div class="hero-card-caption">Informed decisions</div></div>
       </div>
     </header>
 
@@ -291,48 +246,10 @@
       </div>
     </section>
 
-    <section class="py-20 md:py-32 px-3 md:px-6 overflow-hidden relative bg-neutral-50/50">
-      <div class="max-w-4xl mx-auto relative h-[420px] md:h-[540px] flex items-center justify-center">
-        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div class="w-[240px] h-[240px] md:w-[300px] md:h-[300px] rounded-full border border-brand/20 absolute translate-x-8 translate-y-8 md:translate-x-10 md:translate-y-10"></div>
-          <div class="w-[360px] h-[360px] md:w-[450px] md:h-[450px] rounded-full border border-neutral-200 absolute -translate-x-8 md:-translate-x-12 -translate-y-3 md:-translate-y-4"></div>
-          <div class="w-[500px] h-[500px] md:w-[600px] md:h-[600px] rounded-full border border-brand/10 absolute"></div>
-        </div>
-
-        <div class="text-center z-10 max-w-2xl">
-          <span class="inline-block border border-neutral-300 text-neutral-600 rounded-full px-4 py-1 text-sm font-medium mb-6 bg-white">The reality</span>
-          <h2 class="font-serif text-[1.45rem] sm:text-[1.85rem] md:text-5xl font-medium tracking-tight text-neutral-900 leading-[0.95] md:leading-tight max-w-[10ch] sm:max-w-[11ch] md:max-w-none mx-auto">
-            Most owners do not need more jargon. They need cleaner numbers.
-          </h2>
-        </div>
-
-        <div class="absolute top-10 left-0 md:left-20 bg-white/90 backdrop-blur-sm shadow-sm border border-neutral-100 rounded-full px-5 py-2.5 hidden md:flex items-center gap-3 text-sm font-medium z-20">
-          <div class="w-6 h-6 rounded-full bg-brand/10 flex items-center justify-center text-brand">
-            <i data-lucide="clock-3" class="w-3.5 h-3.5 stroke-1-5"></i>
-          </div>
-          Books without rhythm
-        </div>
-
-        <div class="absolute bottom-20 left-4 md:left-10 bg-white/90 backdrop-blur-sm shadow-sm border border-neutral-100 rounded-full px-5 py-2.5 hidden md:flex items-center gap-3 text-sm font-medium z-20">
-          <div class="w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center text-orange-600">
-            <i data-lucide="alert-circle" class="w-3.5 h-3.5 stroke-1-5"></i>
-          </div>
-          Compliance that appears too late
-        </div>
-
-        <div class="absolute top-24 right-0 md:right-10 bg-white/90 backdrop-blur-sm shadow-sm border border-neutral-100 rounded-full px-5 py-2.5 hidden md:flex items-center gap-3 text-sm font-medium z-20">
-          <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600">
-            <i data-lucide="file-text" class="w-3.5 h-3.5 stroke-1-5"></i>
-          </div>
-          Reporting that says too little
-        </div>
-
-        <div class="absolute bottom-32 right-4 md:right-20 bg-white/90 backdrop-blur-sm shadow-sm border border-neutral-100 rounded-full px-5 py-2.5 hidden md:flex items-center gap-3 text-sm font-medium z-20 max-w-[260px] text-left">
-          <div class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
-            <i data-lucide="target" class="w-3.5 h-3.5 stroke-1-5"></i>
-          </div>
-          Good finance work should remove ambiguity, not add to it.
-        </div>
+    <section class="editorial-section">
+      <div class="editorial-note">
+        <div><span class="eyebrow">More room to run your business</span><h2>Less time in spreadsheets.<br>More confidence in what comes next.</h2></div>
+        <p>When the records are in order, the bigger picture becomes easier to see. We bring your day-to-day accounting and year-end obligations together, so you can focus on the business you are building.</p>
       </div>
     </section>
 
@@ -340,10 +257,10 @@
       <div class="text-center max-w-3xl mx-auto mb-14">
         <span class="inline-block border border-neutral-300 text-neutral-600 rounded-full px-4 py-1 text-sm font-medium mb-6 bg-white">Services</span>
         <h2 class="font-serif text-[1.75rem] md:text-5xl font-medium tracking-tight text-neutral-900 leading-tight mb-5">
-          What Tallyport actually handles
+          Accounting that works around you
         </h2>
         <p class="text-neutral-600 max-w-[22rem] mx-auto md:max-w-3xl">
-          The work Tallyport handles, start to finish.
+          From the everyday transactions to the year-end return.
         </p>
       </div>
 
@@ -390,9 +307,9 @@
             <h3 class="font-serif text-[1.48rem] md:text-[2rem] tracking-tight leading-[1.02]">VAT returns &amp; MTD</h3>
             <p class="text-sm text-white/85 mt-4">VAT returns and digital record-keeping support for Making Tax Digital (MTD).</p>
           </div>
-          <div class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center self-end">
+          <a href="#contact" aria-label="Enquire about this service" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center self-end">
             <i data-lucide="arrow-right" class="w-5 h-5 stroke-1-5"></i>
-          </div>
+          </a>
         </article>
 
         <article class="md:col-span-1 rounded-[2rem] bg-[#8f9b84] p-6 md:p-9 flex flex-col justify-between group cursor-pointer transition-all hover:bg-[#819076] text-white shadow-sm">
@@ -401,9 +318,9 @@
             <h3 class="font-serif text-[1.48rem] md:text-[2rem] tracking-tight leading-[1.02] md:w-2/3">PAYE payroll</h3>
             <p class="text-sm text-white/85 mt-4">Payslips, PAYE and National Insurance calculations, plus Real Time Information (RTI) submissions to HMRC.</p>
           </div>
-          <div class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center self-end">
+          <a href="#contact" aria-label="Enquire about this service" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center self-end">
             <i data-lucide="arrow-right" class="w-5 h-5 stroke-1-5"></i>
-          </div>
+          </a>
         </article>
 
         <article class="md:col-span-1 rounded-[2rem] bg-[#9aa9bd] p-6 md:p-9 flex flex-col justify-between group cursor-pointer transition-all hover:bg-[#8d9eb5] text-white shadow-sm">
@@ -412,9 +329,9 @@
             <h3 class="font-serif text-[1.48rem] md:text-[2rem] tracking-tight leading-[1.02]">Cash flow and planning</h3>
             <p class="text-sm text-white/85 mt-4">Cash flow forecasts, budgets and management accounts to help plan spending and growth.</p>
           </div>
-          <div class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center self-end">
+          <a href="#contact" aria-label="Enquire about this service" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center self-end">
             <i data-lucide="arrow-right" class="w-5 h-5 stroke-1-5"></i>
-          </div>
+          </a>
         </article>
 
         <article class="md:col-span-3 rounded-[2rem] border border-neutral-100 bg-white p-6 md:p-10">
@@ -464,67 +381,27 @@
 
     <section id="workflow" class="py-20 md:py-24 px-3 md:px-12 max-w-6xl mx-auto">
       <div class="bg-[linear-gradient(180deg,#f7f9df_0%,#eef5d7_100%)] rounded-[2.2rem] md:rounded-[3rem] p-6 sm:p-8 md:p-16 border border-[var(--accent-citrus-border)] glow-citrus">
-        <div class="flex flex-col md:flex-row justify-between items-start gap-8 md:gap-12 mb-10 md:mb-12">
-          <div class="max-w-2xl">
-            <span class="inline-block border border-neutral-300 text-neutral-600 rounded-full px-4 py-1 text-sm font-medium mb-6 bg-white">Working rhythm</span>
-            <h2 class="font-serif text-[1.72rem] md:text-5xl font-medium tracking-tight text-neutral-900 leading-tight mb-5 md:mb-6">
-              Your monthly bookkeeping process
-            </h2>
-            <p class="text-neutral-700 text-[0.98rem] sm:text-base leading-8">
-              Every month should follow the same rhythm: gather inputs, reconcile transactions, review exceptions, and close cleanly.
-            </p>
-          </div>
-
-          <div class="flex flex-wrap gap-3 max-w-md">
-            <span class="px-4 py-2 rounded-full bg-white text-[0.92rem] text-center font-medium text-neutral-700 border border-[#e6d99d] shadow-sm">Month-end cadence</span>
-            <span class="px-4 py-2 rounded-full bg-white text-[0.92rem] text-center font-medium text-neutral-700 border border-[#e5cdb1] shadow-sm">Deadline calendar</span>
-            <span class="px-4 py-2 rounded-full bg-white text-[0.92rem] text-center font-medium text-neutral-700 border border-[#dce6b5] shadow-sm">Exception review</span>
-            <span class="px-4 py-2 rounded-full bg-white text-[0.92rem] text-center font-medium text-neutral-700 border border-[#d8e5f7] shadow-sm">Decision summary</span>
-          </div>
+        <div class="mb-10 max-w-2xl">
+          <span class="eyebrow text-brand">How we work</span>
+          <h2 class="font-serif text-3xl md:text-5xl tracking-tight leading-tight mt-4 mb-5">From a pile of records<br>to a useful conversation.</h2>
+          <p class="text-neutral-700 text-base leading-7">A straightforward monthly routine, with a clear purpose at every step.</p>
         </div>
-
-        <div class="grid md:grid-cols-2 gap-6">
-          <div class="rounded-[2rem] bg-white border border-white/60 shadow-sm p-6 md:p-8">
-            <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-6">Client records</div>
-            <div class="space-y-4">
-              <div class="rounded-[1.5rem] bg-neutral-50 border border-neutral-100 p-5">
-                <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-2">1. Submitted</div>
-                <div class="font-medium text-neutral-900 mb-1">IN</div>
-                <p class="text-sm text-neutral-600">Bank feeds, invoices, payroll inputs</p>
-              </div>
-              <div class="rounded-[1.5rem] bg-neutral-50 border border-neutral-100 p-5">
-                <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-2">2. Reconciled</div>
-                <div class="font-medium text-neutral-900 mb-1">RC</div>
-                <p class="text-sm text-neutral-600">Categorised and matched correctly</p>
-              </div>
-              <div class="rounded-[1.5rem] bg-neutral-50 border border-neutral-100 p-5">
-                <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-2">3. Reviewed</div>
-                <div class="font-medium text-neutral-900 mb-1">RV</div>
-                <p class="text-sm text-neutral-600">Exceptions surfaced early</p>
-              </div>
-              <div class="rounded-[1.5rem] bg-neutral-50 border border-neutral-100 p-5">
-                <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-2">4. Reported</div>
-                <div class="font-medium text-neutral-900 mb-1">RP</div>
-                <p class="text-sm text-neutral-600">Ready for review and filing</p>
-              </div>
-            </div>
+        <div class="workflow-layout">
+          <div class="process-list">
+            <div class="process-step"><span class="process-number">01</span><div><h3>Share your records</h3><p>Connect bank feeds and send your invoices, receipts and payroll information.</p></div></div>
+            <div class="process-step"><span class="process-number">02</span><div><h3>We reconcile the details</h3><p>Transactions are categorised and matched to the supporting documents.</p></div></div>
+            <div class="process-step"><span class="process-number">03</span><div><h3>Resolve the questions</h3><p>We flag missing information and unusual items before finalising the accounts.</p></div></div>
+            <div class="process-step"><span class="process-number">04</span><div><h3>See where you stand</h3><p>Review your reports and upcoming obligations with the context to make decisions.</p></div></div>
           </div>
-
-          <div class="rounded-[2rem] relative overflow-hidden bg-white border border-white/60 shadow-sm illustration-card aspect-square md:aspect-auto">
-            <svg viewBox="0 0 500 500" class="w-full h-full">
-              <rect width="500" height="500" fill="#f9f7f4"></rect>
-              <rect x="34" y="38" width="432" height="424" rx="42" fill="#ffffff" stroke="#ece7e3"></rect>
-              <text x="64" y="86" fill="#91181a" font-family="Playfair Display, serif" font-size="28">Owner-ready outcome</text>
-              <rect x="64" y="116" width="134" height="14" rx="7" fill="#f4e8e8"></rect>
-              <path d="M92 336c54-12 94-40 130-92 24-34 54-52 98-58" fill="none" stroke="#91181a" stroke-width="8" stroke-linecap="round"></path>
-              <circle cx="232" cy="244" r="20" fill="#9ba492"></circle>
-              <circle cx="320" cy="206" r="20" fill="#e6b17e"></circle>
-              <circle cx="408" cy="186" r="20" fill="#a9b5c2"></circle>
-              <rect x="64" y="378" width="156" height="48" rx="24" fill="#eef2ee"></rect>
-              <rect x="246" y="378" width="190" height="48" rx="24" fill="#f4e8e8"></rect>
-              <text x="92" y="408" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="15" font-weight="600">Decision summary</text>
-              <text x="276" y="408" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="15" font-weight="600">Deadline queue</text>
-            </svg>
+          <div class="report-preview">
+            <div class="report-top"><span>Tallyport Accounting</span><i data-lucide="file-check-2" class="w-5 h-5"></i></div>
+            <h3>Your month,<br>made clear.</h3>
+            <p>A reporting pack built around the questions business owners actually ask.</p>
+            <div class="report-item"><span>How is the business performing?</span><i data-lucide="check"></i></div>
+            <div class="report-item"><span>What is happening with cash?</span><i data-lucide="check"></i></div>
+            <div class="report-item"><span>What needs attention next?</span><i data-lucide="check"></i></div>
+            <div class="report-bottom">Profit &amp; loss &nbsp; / &nbsp; Balance sheet &nbsp; / &nbsp; Cash flow</div>
+            <p class="ledger-foot" style="margin:16px 0 0">Illustrative reporting pack. Scope agreed with each client.</p>
           </div>
         </div>
       </div>
@@ -562,28 +439,12 @@
           </div>
         </article>
 
-        <article class="rounded-[2rem] border border-[var(--accent-sky-border)] bg-[var(--accent-sky-soft)] p-6 md:p-8 flex flex-col justify-between glow-sky">
-          <div>
-            <div class="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-4">Coverage</div>
-            <h3 class="font-serif text-[1.62rem] md:text-3xl text-neutral-900 tracking-tight mb-4">Based in the United Kingdom</h3>
-            <p class="text-sm text-neutral-700">Remote accounting support across England, Scotland, Wales and Northern Ireland.</p>
-          </div>
-          <div class="rounded-[1.5rem] border border-white/70 bg-white/70 overflow-hidden illustration-card section-image-card mb-6">
-            <svg viewBox="0 0 360 190" class="w-full h-full" aria-hidden="true">
-              <rect width="360" height="190" fill="#f9f4ef"></rect>
-              <circle cx="112" cy="98" r="58" fill="#ffffff" stroke="#eadfd7"></circle>
-              <circle cx="232" cy="98" r="58" fill="#ffffff" stroke="#eadfd7"></circle>
-              <text x="112" y="102" text-anchor="middle" fill="#91181a" font-family="Inter, sans-serif" font-size="16" font-weight="600">You</text>
-              <text x="232" y="102" text-anchor="middle" fill="#91181a" font-family="Inter, sans-serif" font-size="16" font-weight="600">Tallyport</text>
-              <rect x="98" y="140" width="164" height="26" rx="13" fill="#eef2ee"></rect>
-              <text x="142" y="157" fill="#2d2d2d" font-family="Inter, sans-serif" font-size="12" font-weight="600">Shared workflow</text>
-            </svg>
-          </div>
-          <div class="text-sm text-neutral-700 space-y-2">
-            <div>Sole traders and contractors</div>
-            <div>Limited companies and directors</div>
-            <div>UK-wide remote consultations</div>
-          </div>
+        <article class="uk-coverage">
+          <div class="eyebrow">Local understanding. Nationwide reach.</div>
+          <div class="uk-monogram" aria-hidden="true">UK.</div>
+          <h3>Based in the<br>United Kingdom.</h3>
+          <p>Work with us remotely, wherever your business calls home.</p>
+          <ul class="nation-list"><li>England</li><li>Scotland</li><li>Wales</li><li>Northern Ireland</li></ul>
         </article>
 
         <article class="rounded-[2rem] bg-white border border-neutral-100 p-6 md:p-8 md:col-span-3">
@@ -636,81 +497,39 @@
         <div class="w-full md:w-1/2 bg-[#d7bd3e] p-7 sm:p-9 md:p-20 flex flex-col justify-center">
           <span class="inline-flex w-fit border border-neutral-900/10 text-neutral-800 rounded-full px-4 py-1 text-sm font-medium mb-6 bg-white/30 backdrop-blur-sm">About Tallyport</span>
           <h2 class="font-serif text-[1.95rem] md:text-5xl font-medium tracking-tight text-neutral-900 leading-[0.94] md:leading-[0.96] mb-5 max-w-lg">
-            Tell us what your business needs.
+            Your next chapter.<br>A clearer starting point.
           </h2>
           <p class="text-neutral-800 text-base md:text-lg mb-8 max-w-md leading-7 md:leading-[1.65]">
-            Tallyport is a UK-based accounting firm. On a free discovery call, we review your current setup and agree the services your business needs.
+            Tell us where you are today and what you need help with. We will talk through your setup and the right accounting support for your business.
           </p>
-
-          <div class="space-y-5 text-neutral-900 mb-10 max-w-lg">
-            <div class="flex gap-4">
-              <div class="text-xs uppercase tracking-[0.18em] text-neutral-900/55 pt-1">01</div>
-              <p>A named contact for your accounting queries.</p>
-            </div>
-            <div class="flex gap-4">
-              <div class="text-xs uppercase tracking-[0.18em] text-neutral-900/55 pt-1">02</div>
-              <p>An agreed scope covering routine work and any overdue records.</p>
-            </div>
-            <div class="flex gap-4">
-              <div class="text-xs uppercase tracking-[0.18em] text-neutral-900/55 pt-1">03</div>
-              <p>Clear requests for documents and updates on outstanding work.</p>
-            </div>
-          </div>
-
-          <div class="space-y-4 text-neutral-900/85 mb-10 max-w-lg">
-            <div><span class="text-xs uppercase tracking-[0.18em] text-neutral-900/55 mr-3">Email</span>hello [at] tallyportaccounting.com</div>
-            <div><span class="text-xs uppercase tracking-[0.18em] text-neutral-900/55 mr-3">Serving</span>Businesses throughout the United Kingdom.</div>
-            <div><span class="text-xs uppercase tracking-[0.18em] text-neutral-900/55 mr-3">Speed</span>Response target within 24 business hours during normal operating periods.</div>
-          </div>
 
           <div>
             <a href="#contact-form" class="inline-flex items-center justify-center bg-neutral-900 text-white px-8 py-4 rounded-full text-sm font-medium hover:bg-neutral-800 transition-colors">
-              Book a Consultation
+              Let’s talk
             </a>
           </div>
+          <img class="contact-photo" src="./assets/photos/client-meeting.jpg" alt="A business owner talking through their accounts with an accountant" loading="lazy">
         </div>
 
         <div class="w-full md:w-1/2 bg-[#e8cd54] p-5 sm:p-7 md:p-12 relative flex items-center justify-center min-h-[440px]">
-          <div class="absolute top-1/2 left-1/2 -translate-x-[40%] -translate-y-[82%] w-72 bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-white/50 z-10 scale-95 opacity-80 hidden md:block">
-            <div class="h-4 w-24 bg-neutral-200 rounded mb-4"></div>
-            <div class="h-10 w-full bg-neutral-100 rounded"></div>
-          </div>
-
-          <form id="contact-form" class="space-y-4 w-full max-w-xl bg-white/90 backdrop-blur-md rounded-[2rem] p-6 md:p-7 shadow-xl border border-white z-20">
-            <div class="flex items-center gap-3 mb-2">
-              <div class="w-8 h-8 rounded-full bg-brand/10 flex items-center justify-center text-brand">
-                <i data-lucide="calendar-range" class="w-4 h-4 stroke-1-5"></i>
-              </div>
-              <div>
-                <div class="text-sm font-medium text-neutral-800">Discovery call intake</div>
-                <div class="text-xs text-neutral-500">Tell us a little about your setup</div>
-              </div>
+          <form id="contact-form" name="consultation" method="POST" data-netlify="true" netlify-honeypot="company-website" class="space-y-4 w-full max-w-xl rounded-[2rem] p-6 md:p-7 shadow-xl border border-white z-20">
+            <input type="hidden" name="form-name" value="consultation">
+            <p hidden><label>Leave this empty: <input name="company-website"></label></p>
+            <div class="mb-6"><div class="eyebrow text-brand mb-2">A free first conversation</div><h3 class="font-serif text-3xl text-neutral-900">Let us get to know you.</h3></div>
+            <div class="field-pair">
+              <label class="field-label">First name<input name="first-name" autocomplete="given-name" required class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-base"></label>
+              <label class="field-label">Last name<input name="last-name" autocomplete="family-name" required class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-base"></label>
             </div>
-            <div class="grid xl:grid-cols-2 gap-4">
-              <input type="text" placeholder="First name" class="w-full rounded-full border border-neutral-200 bg-white px-5 py-3.5 text-base text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand/30">
-              <input type="text" placeholder="Last name" class="w-full rounded-full border border-neutral-200 bg-white px-5 py-3.5 text-base text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand/30">
-            </div>
-            <input type="email" placeholder="Email address" class="w-full rounded-full border border-neutral-200 bg-white px-5 py-3.5 text-base text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand/30">
-            <div class="grid xl:grid-cols-2 gap-4">
-              <select class="w-full rounded-full border border-neutral-200 bg-white px-5 py-3.5 text-base text-neutral-700 focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand/30">
-                <option>Select your business type</option>
-                <option>Sole trader / Self-employed</option>
-                <option>Contractor / Limited company</option>
-                <option>Small business, 1 to 10 employees</option>
-                <option>Growing business, 10+ employees</option>
-              </select>
-              <select class="w-full rounded-full border border-neutral-200 bg-white px-5 py-3.5 text-base text-neutral-700 focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand/30">
-                <option>Where are you based?</option>
-                <option>England</option>
-                <option>Scotland</option>
-                <option>Wales</option>
-                <option>Northern Ireland</option>
-              </select>
-            </div>
-            <textarea placeholder="Tell us about your bookkeeping, PAYE payroll, VAT, accounts or tax returns." class="w-full rounded-[2rem] border border-neutral-200 bg-white px-5 py-4 text-base text-neutral-800 placeholder:text-neutral-400 min-h-[132px] focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand/30"></textarea>
-            <button type="button" class="bg-neutral-900 text-white px-8 py-3.5 rounded-full text-base font-medium hover:bg-neutral-800 transition-all shadow-md w-full sm:w-auto">
-              Book My Discovery Call
-            </button>
+            <label class="field-label">Email address<input type="email" name="email" autocomplete="email" required class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-base"></label>
+            <label class="field-label">Business type<select name="business-type" required class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-base">
+              <option value="">Please select</option><option>Sole trader / Self-employed</option><option>Contractor / Limited company</option><option>Small business, 1 to 10 employees</option><option>Growing business, 10+ employees</option>
+            </select></label>
+            <label class="field-label">Where are you based?<select name="location" required class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-base">
+              <option value="">Please select</option><option>England</option><option>Scotland</option><option>Wales</option><option>Northern Ireland</option>
+            </select></label>
+            <label class="field-label">What would you like help with?<textarea name="message" required placeholder="A little about your business and the support you need..." rows="3" class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-base"></textarea></label>
+            <button type="submit" class="bg-neutral-900 text-white px-7 py-4 rounded-full text-base font-medium hover:bg-neutral-800 transition-all w-full">Request a discovery call <span aria-hidden="true">↗</span></button>
+            <p class="form-note">We will use these details to respond to your enquiry.</p>
           </form>
 
         </div>
@@ -754,7 +573,13 @@
   </footer>
 
   <script>
-    lucide.createIcons();
+    if (window.lucide) lucide.createIcons();
+
+    document.querySelectorAll(".mobile-menu a").forEach((link) => {
+      link.addEventListener("click", () => {
+        link.closest("details").open = false;
+      });
+    });
 
     (function () {
       const logos = Array.from(document.querySelectorAll(".site-logo, .footer-logo"));
@@ -800,8 +625,9 @@
           push(width - 1, y);
         }
 
-        while (queue.length) {
-          const index = queue.shift();
+        let queueIndex = 0;
+        while (queueIndex < queue.length) {
+          const index = queue[queueIndex++];
           const x = index % width;
           const y = (index - x) / width;
           const offset = index * 4;
@@ -862,88 +688,17 @@
       }
     })();
 
-    (function () {
-      const cards = Array.from(document.querySelectorAll(".hero-card"));
-      const collage = document.querySelector("[data-hero-collage]");
-      if (!cards.length || !collage) return;
-
-      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (prefersReducedMotion) {
-        document.body.classList.add("hero-cards-ready");
-        return;
-      }
-
-      const shuffledDelays = cards
-        .map((_, index) => index)
-        .sort(() => Math.random() - 0.5)
-        .reduce((map, index, order) => {
-          map[index] = `${120 + order * 95}ms`;
-          return map;
-        }, {});
-
-      cards.forEach((card, index) => {
-        card.style.transitionDelay = shuffledDelays[index];
-      });
-
-      const heroImages = Array.from(collage.querySelectorAll("img"));
-      let assetsReady = heroImages.length === 0;
-      let collageVisible = false;
-      let userHasScrolled = false;
-      let animationStarted = false;
-
-      const maybeStartAnimation = () => {
-        if (animationStarted || !assetsReady || !collageVisible || !userHasScrolled) return;
-        animationStarted = true;
-        window.requestAnimationFrame(() => {
-          document.body.classList.add("hero-cards-ready");
-        });
-      };
-
-      if (!assetsReady) {
-        let loadedCount = 0;
-        const markLoaded = () => {
-          loadedCount += 1;
-          if (loadedCount >= heroImages.length) {
-            assetsReady = true;
-            maybeStartAnimation();
-          }
-        };
-
-        heroImages.forEach((image) => {
-          if (image.complete) {
-            markLoaded();
-          } else {
-            image.addEventListener("load", markLoaded, { once: true });
-            image.addEventListener("error", markLoaded, { once: true });
+    if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("section-reveal");
+            observer.unobserve(entry.target);
           }
         });
-      }
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              collageVisible = true;
-              maybeStartAnimation();
-            }
-          });
-        },
-        { threshold: 0.42, rootMargin: "0px 0px -8% 0px" }
-      );
-
-      observer.observe(collage);
-
-      window.addEventListener(
-        "scroll",
-        () => {
-          if (!userHasScrolled && window.scrollY > 18) {
-            userHasScrolled = true;
-          }
-          maybeStartAnimation();
-        },
-        { passive: true }
-      );
-    })();
+      }, { threshold: 0.12 });
+      document.querySelectorAll(".editorial-note, .report-preview, .uk-coverage").forEach((element) => observer.observe(element));
+    }
   </script>
 </body>
 </html>
