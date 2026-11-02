@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tallyport Accounting | UK Bookkeeping, Payroll &amp; Tax</title>
+  <link rel="icon" type="image/svg+xml" href="./assets/branding/decimal-icon.svg">
   <meta name="description" content="UK-based accounting firm providing bookkeeping, PAYE payroll, VAT returns, Self Assessment and year-end accounts support for sole traders and limited companies.">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -70,26 +71,26 @@
     .site-logo {
       display: block;
       height: auto;
-      width: 152px;
+      width: 178px;
       mix-blend-mode: multiply;
     }
     .footer-logo {
       display: block;
       height: auto;
-      width: 210px;
+      width: 240px;
       mix-blend-mode: multiply;
     }
     @media (min-width: 768px) {
       .site-logo {
-        width: 198px;
+        width: 220px;
       }
     }
     @media (max-width: 640px) {
       .site-logo {
-        width: 110px;
+        width: 148px;
       }
       .footer-logo {
-        width: 170px;
+        width: 200px;
       }
     }
     .hero-card {
@@ -165,7 +166,7 @@
 
   <nav class="w-full px-3 py-4 md:px-12 md:py-5 flex items-center justify-between z-50 relative bg-white/80 backdrop-blur-md sticky top-0 border-b border-neutral-100">
     <a href="#top" class="flex items-center">
-      <img src="./assets/branding/tallyport_earthy.png" alt="Tallyport Accounting logo" class="site-logo">
+      <img src="./assets/branding/tallyport-decimal.svg" alt="Tallyport Accounting logo" class="site-logo">
     </a>
 
     <div class="hidden md:flex items-center gap-8 text-[0.95rem] font-medium text-neutral-600">
@@ -195,10 +196,10 @@
 
   <main id="top">
     <header class="pt-7 pb-14 md:pt-[4.5rem] md:pb-24 px-4 md:px-12 text-center max-w-5xl mx-auto flex flex-col items-center">
-      <div class="hero-eyebrow">UK accountancy. A clearer outlook.</div>
+      <div class="hero-eyebrow">UK accountancy</div>
       <h1 class="font-serif text-[1.34rem] sm:text-[2.7rem] md:text-7xl font-medium tracking-tight text-neutral-900 leading-[1.02] sm:leading-[0.96] md:leading-tight mb-4 md:mb-6 max-w-[13ch] sm:max-w-[12ch] md:max-w-4xl">
-        <span class="hero-heading-line"><span class="hero-phrase">Clean books,</span> <span class="hero-phrase">faster closes,</span></span>
-        <span class="hero-heading-line hero-phrase">calmer finances.</span>
+        <span class="hero-heading-line">Accounting that keeps</span>
+        <span class="hero-heading-line">your business moving.</span>
       </h1>
       <div class="grid grid-cols-2 gap-x-4 gap-y-1.5 justify-items-center sm:flex sm:flex-wrap sm:items-center sm:justify-center sm:gap-x-4 text-[0.74rem] sm:text-lg md:text-xl mb-6 md:mb-8 max-w-[17.25rem] sm:max-w-3xl font-medium text-neutral-600">
         <span>Bookkeeping</span>
@@ -540,7 +541,7 @@
   <footer class="py-16 px-6 md:px-12 border-t border-neutral-100">
     <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-8">
       <div>
-        <img src="./assets/branding/tallyport_earthy.png" alt="Tallyport Accounting logo" class="footer-logo mb-4">
+        <img src="./assets/branding/tallyport-decimal.svg" alt="Tallyport Accounting logo" class="footer-logo mb-4">
         <p class="text-neutral-600 text-sm">UK-based bookkeeping, payroll and tax support for sole traders, contractors and limited companies.</p>
       </div>
       <div>
@@ -580,113 +581,6 @@
         link.closest("details").open = false;
       });
     });
-
-    (function () {
-      const logos = Array.from(document.querySelectorAll(".site-logo, .footer-logo"));
-      if (!logos.length) return;
-
-      const source = logos[0];
-
-      const applyTransparentLogo = () => {
-        const width = source.naturalWidth;
-        const height = source.naturalHeight;
-        if (!width || !height) return;
-
-        const canvas = document.createElement("canvas");
-        canvas.width = width;
-        canvas.height = height;
-
-        const context = canvas.getContext("2d", { willReadFrequently: true });
-        context.drawImage(source, 0, 0, width, height);
-
-        const imageData = context.getImageData(0, 0, width, height);
-        const data = imageData.data;
-        const seen = new Uint8Array(width * height);
-        const queue = [];
-
-        const isBackground = (r, g, b, a) =>
-          a > 0 && Math.max(r, g, b) > 208 && Math.max(r, g, b) - Math.min(r, g, b) < 42 && r + g + b > 690;
-
-        const push = (x, y) => {
-          if (x < 0 || y < 0 || x >= width || y >= height) return;
-          const index = y * width + x;
-          if (seen[index]) return;
-          seen[index] = 1;
-          queue.push(index);
-        };
-
-        for (let x = 0; x < width; x += 1) {
-          push(x, 0);
-          push(x, height - 1);
-        }
-
-        for (let y = 0; y < height; y += 1) {
-          push(0, y);
-          push(width - 1, y);
-        }
-
-        let queueIndex = 0;
-        while (queueIndex < queue.length) {
-          const index = queue[queueIndex++];
-          const x = index % width;
-          const y = (index - x) / width;
-          const offset = index * 4;
-          const r = data[offset];
-          const g = data[offset + 1];
-          const b = data[offset + 2];
-          const a = data[offset + 3];
-
-          if (!isBackground(r, g, b, a)) continue;
-
-          data[offset + 3] = 0;
-
-          push(x + 1, y);
-          push(x - 1, y);
-          push(x, y + 1);
-          push(x, y - 1);
-        }
-
-        context.putImageData(imageData, 0, 0);
-
-        let minX = width;
-        let minY = height;
-        let maxX = 0;
-        let maxY = 0;
-
-        for (let y = 0; y < height; y += 1) {
-          for (let x = 0; x < width; x += 1) {
-            if (!data[(y * width + x) * 4 + 3]) continue;
-            minX = Math.min(minX, x);
-            minY = Math.min(minY, y);
-            maxX = Math.max(maxX, x);
-            maxY = Math.max(maxY, y);
-          }
-        }
-
-        const padding = 10;
-        const cropX = Math.max(0, minX - padding);
-        const cropY = Math.max(0, minY - padding);
-        const cropWidth = Math.min(width - cropX, maxX - minX + 1 + padding * 2);
-        const cropHeight = Math.min(height - cropY, maxY - minY + 1 + padding * 2);
-
-        const croppedCanvas = document.createElement("canvas");
-        croppedCanvas.width = cropWidth;
-        croppedCanvas.height = cropHeight;
-        const croppedContext = croppedCanvas.getContext("2d");
-        croppedContext.drawImage(canvas, cropX, cropY, cropWidth, cropHeight, 0, 0, cropWidth, cropHeight);
-
-        const transparentSrc = croppedCanvas.toDataURL("image/png");
-        logos.forEach((logo) => {
-          logo.src = transparentSrc;
-        });
-      };
-
-      if (source.complete) {
-        applyTransparentLogo();
-      } else {
-        source.addEventListener("load", applyTransparentLogo, { once: true });
-      }
-    })();
 
     if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       const observer = new IntersectionObserver((entries) => {

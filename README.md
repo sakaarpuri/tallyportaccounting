@@ -8,7 +8,8 @@ UK services include bookkeeping, PAYE payroll, VAT, management accounts and year
 
 - `index.html` - main site
 - `assets/refinements.css` - responsive layout, card motion and visual refinements
-- `logo-options.html` - unindexed comparison page for three proposed vector identities; the live site retains the existing logo until a direction is chosen
+- `assets/branding/tallyport-decimal.svg` - selected Decimal logo, used in the header and footer
+- `logo-options.html` - unindexed comparison page retaining the original three identity concepts
 - `assets/branding/concepts/` - outlined SVG logo concepts and font licence
 - `Aura Code for Tallyport.rtf` - local Aura reference used during design adaptation
 
@@ -18,7 +19,7 @@ The `consultation` form uses Netlify Forms with required fields and a honeypot. 
 
 ## Visual Direction
 
-Headings use Manrope and body copy uses Source Sans 3. Mustard, deep teal, charcoal and clay colour blocks provide contrast against neutral sections. Logo concepts are kept separate from the production identity.
+Headings use Manrope and body copy uses Source Sans 3. Mustard, deep teal, charcoal and clay colour blocks provide contrast against neutral sections. The selected Decimal identity uses two forward-cut ledger lines and a decimal point. Production artwork and favicon are SVGs, with no canvas processing required.
 
 ## Local preview
 
